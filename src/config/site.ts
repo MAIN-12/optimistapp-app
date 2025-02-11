@@ -30,19 +30,11 @@ export const siteConfig = {
       mobile: 2,
     },
     {
-      id: "tickets",
-      label: "Boletas",
-      icon: Ticket,
-      path: "/ticket",
-      section: ["main", "mobile"],
-      mobile: 4,
-    },
-    {
       id: "saved",
       label: "Guardado",
       icon: BookmarkIcon,
       path: "/saved",
-      section: ["main", "mobile"],
+      section: ["bottom", "mobile"],
       mobile: 3,
     },
     {
