@@ -20,6 +20,7 @@ export const siteConfig = {
       path: "/",
       section: ["main", "mobile"],
       mobile: 1,
+      className: "bg-primary hover:bg-primary-300"
     },
     {
       id: "explore",
@@ -51,8 +52,8 @@ export const siteConfig = {
     login: "/api/auth/login",
     logout: "/api/auth/logout",
     registry: "/",
-    terms: "https://enntra.com/terminos-y-condiciones/",
-    privacy: "https://enntra.com/politicas-de-privacidad/",
+    terms: "https://main12.com/terms",
+    privacy: "http://main12.com/privacy",
     help: "/help",
     github: "/",
     sponsor: "/",
