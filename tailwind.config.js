@@ -61,9 +61,9 @@ module.exports = {
           dark: '#000000',
         },
         btnText: {
-          DEFAULT: '#000000',
-          light: '#000000',
-          dark: '#000000',
+          DEFAULT: '#fff',
+          light: '#fff',
+          dark: '#fff',
         },
       },
       backgroundColor: (theme) => ({

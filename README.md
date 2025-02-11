@@ -1,24 +1,25 @@
-# Next.js & HeroUI Template
+# 🚀 Next.js & HeroUI Template  
 
-This is a template for creating applications using Next.js 14 (app directory) and HeroUI (v2).
+A modern and highly customizable Next.js 15 template built with **HeroUI v2**, **Tailwind CSS**, and **powerful icon libraries** for a seamless development experience.  
 
-[Try it on CodeSandbox](https://githubbox.com/heroui-inc/heroui/next-app-template)
+[🌐 Try it on CodeSandbox](https://githubbox.com/heroui-inc/heroui/next-app-template)  
 
-## Technologies Used
+## ✨ Technologies Used  
 
-- [Next.js 14](https://nextjs.org/docs/getting-started)
-- [HeroUI v2](https://heroui.com/)
-- [Tailwind CSS](https://tailwindcss.com/)
-- [Tailwind Variants](https://tailwind-variants.org)
-- [TypeScript](https://www.typescriptlang.org/)
-- [Framer Motion](https://www.framer.com/motion/)
-- [next-themes](https://github.com/pacocoursey/next-themes)
+- [Next.js 14](https://nextjs.org/docs/getting-started) – App directory, server components, and more.  
+- [HeroUI v2](https://heroui.com/) – Pre-built UI components for rapid development.  
+- [Tailwind CSS](https://tailwindcss.com/) – Utility-first styling for fast and responsive design.  
+- [Tailwind Variants](https://tailwind-variants.org) – Powerful styling with variants.  
+- [TypeScript](https://www.typescriptlang.org/) – Type safety for scalable applications.  
+- [Framer Motion](https://www.framer.com/motion/) – Smooth animations and interactions.  
+- [next-themes](https://github.com/pacocoursey/next-themes) – Easy dark mode and theme switching.  
+- **Material Icons & Lucide-React Icons** – A vast collection of modern, scalable icons.  
 
-## How to Use
+## 🚀 Getting Started  
 
-### Use the template with create-next-app
+### Create a new project with create-next-app  
 
-To create a new project based on this template using `create-next-app`, run the following command:
+Run the following command to create a new project using this template:  
 
 ```bash
 npx create-next-app -e https://github.com/heroui-inc/next-app-template
@@ -26,28 +27,29 @@ npx create-next-app -e https://github.com/heroui-inc/next-app-template
 
 ### Install dependencies
 
-You can use one of them `npm`, `yarn`, `pnpm`, `bun`, Example using `npm`:
+Use your preferred package manager (`npm`, `yarn`, `pnpm`, `bun`). Example using `npm`:  
 
 ```bash
 npm install
 ```
 
-### Run the development server
+### Run the development server  
 
 ```bash
 npm run dev
 ```
 
-### Setup pnpm (optional)
+### Setup pnpm (optional)  
 
-If you are using `pnpm`, you need to add the following code to your `.npmrc` file:
+If you are using `pnpm`, add the following to your `.npmrc` file:  
 
 ```bash
 public-hoist-pattern[]=*@heroui/*
-```
+```  
 
-After modifying the `.npmrc` file, you need to run `pnpm install` again to ensure that the dependencies are installed correctly.
+Then, run `pnpm install` again to ensure proper dependency installation.  
 
-## License
+## 📜 License  
 
-Licensed under the [MIT license](https://github.com/heroui-inc/next-app-template/blob/main/LICENSE).
+This template is open-source and licensed under the [MIT License](https://github.com/heroui-inc/next-app-template/blob/main/LICENSE).  
+
