@@ -89,7 +89,7 @@ const SupportModal: React.FC<SupportModalProps> = ({ isOpen, onOpenChange }) => 
                                         variant="bordered"
                                     >
                                         <div className="flex flex-col items-center">
-                                            {React.cloneElement(button.icon, { className: "text-primary text-3xl mb-2" })}
+                                            {React.cloneElement(button.icon, { className: " text-3xl mb-2" })}
                                             <span className="text-center w-full break-words text-sm">{button.label}</span>
                                         </div>
                                     </Button>
