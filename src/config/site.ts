@@ -5,8 +5,8 @@ import { MenuItem } from "@/types";
 export type SiteConfig = typeof siteConfig;
 
 export const siteConfig = {
-  name: "ENNTRA",
-  description: "The easiest way to buy and sell concert tickets securely. Find great deals, sell effortlessly, and never miss your favorite events! ",
+  name: "Main 12",
+  description: "Main 12 Next-js Boilerplate",
   url: "app.enntra.com",
   navItems: [
     { label: "Home", href: "/", },

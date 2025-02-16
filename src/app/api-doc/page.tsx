@@ -1,12 +1,10 @@
 import ReactSwagger from "./react-swagger";
+import swaggerSpec from "@/lib/swagger-spec";
 
-import { getApiDocs } from "@/lib/swagger";
-
-export default async function IndexPage() {
-    const spec = await getApiDocs();
+export default function IndexPage() {
     return (
         <section className="container bg-white p-4 rounded mb-32 shadow-lg">
-            <ReactSwagger spec={spec} />
+            <ReactSwagger spec={swaggerSpec} />
         </section>
     );
 }
