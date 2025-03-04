@@ -5,6 +5,7 @@ import { Button, Input, Textarea, Spacer, RadioGroup, Radio } from "@heroui/reac
 import { motion } from "framer-motion"
 import { useUser } from "@auth0/nextjs-auth0/client"
 import { useTranslations } from "next-intl"
+import { Disclaimer } from "./Disclaimer"
 
 interface BugFormData {
   user?: any
@@ -111,9 +112,18 @@ const ReportBug: React.FC = () => {
           />
         )}
         <Spacer y={3} />
-        <Button type="submit" disabled={isSubmitting} fullWidth color="primary" className="text-black">
+        <Input
+          type="file"
+          // label="Add a file file"
+          // value={location}
+          // onChange={(e) => setLocation(e.target.value)}
+          fullWidth
+        />
+        <Spacer y={3} />
+        <Button type="submit" disabled={isSubmitting} fullWidth color="primary">
           {isSubmitting ? t("submitting") : t("submitButton")}
         </Button>
+        <Disclaimer />
       </form>
       {successMessage && <p className="text-green-600 mt-4">{t("successMessage")}</p>}
       {errorMessage && <p className="text-red-600 mt-4">{errorMessage}</p>}

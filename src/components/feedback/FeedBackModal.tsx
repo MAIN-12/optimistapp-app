@@ -103,7 +103,9 @@ const SupportModal: React.FC<SupportModalProps> = ({ isOpen, onOpenChange }) => 
                     {currentView === "feedback" && (<ProvideFeedback />)}
                     {currentView === "Help" && (<RequestHelp />)}
                 </ModalBody>
-                <ModalFooter />
+                <ModalFooter className="z-[1000] bg-white dark:bg-darkBackground">
+                    <p className="mt-3 text-sm text-center w-full">Powerd by <a href="https://main12.com" target="_blank" rel="noopener noreferrer" className="text-blue-500">Main 12 LLC</a></p>
+                </ModalFooter>
             </ModalContent>
         </Modal >
     );

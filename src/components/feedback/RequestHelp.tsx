@@ -5,6 +5,7 @@ import { Button, Input, Textarea, Spacer } from "@heroui/react";
 import { motion } from "framer-motion";
 import { useUser } from "@auth0/nextjs-auth0/client";
 import { useTranslations } from "next-intl";
+import { Disclaimer } from "./Disclaimer";
 
 interface HelpRequestData {
     user?: any;
@@ -92,9 +93,10 @@ const RequestHelp: React.FC = () => {
                 />
 
                 <Spacer y={3} />
-                <Button type="submit" disabled={isSubmitting} fullWidth color="primary" className="text-black">
+                <Button type="submit" disabled={isSubmitting} fullWidth color="primary">
                     {isSubmitting ? t("submitting") : t("submitButton")}
                 </Button>
+                <Disclaimer />
             </form>
             {successMessage && <p className="text-green-600 mt-4">{successMessage}</p>}
             {errorMessage && <p className="text-red-600 mt-4">{errorMessage}</p>}
