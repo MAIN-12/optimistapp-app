@@ -16,7 +16,7 @@ import BackArrowIcon from '../icons/BackArrow';
 import ReportBug from "./ReportBug";
 import ProvideFeedback from "./ProvideFeedback";
 import RequestFeature from "./RequestFeature";
-import RequestHelp from "./RequestHelp";
+import RequestSupport from "./RequestSupport";
 
 
 interface SupportModalProps {
@@ -101,7 +101,7 @@ const SupportModal: React.FC<SupportModalProps> = ({ isOpen, onOpenChange }) => 
                     {currentView === "bug" && (<ReportBug />)}
                     {currentView === "feature" && (<RequestFeature />)}
                     {currentView === "feedback" && (<ProvideFeedback />)}
-                    {currentView === "Help" && (<RequestHelp />)}
+                    {currentView === "Help" && (<RequestSupport />)}
                 </ModalBody>
                 <ModalFooter className="z-[1000] bg-white dark:bg-darkBackground">
                     <p className="mt-3 text-sm text-center w-full">Powerd by <a href="https://main12.com" target="_blank" rel="noopener noreferrer" className="text-blue-500">Main 12 LLC</a></p>

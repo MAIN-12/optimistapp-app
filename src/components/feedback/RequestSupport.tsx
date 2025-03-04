@@ -1,32 +1,27 @@
 "use client";
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Button, Input, Textarea, Spacer } from "@heroui/react";
 import { motion } from "framer-motion";
 import { useUser } from "@auth0/nextjs-auth0/client";
 import { useTranslations } from "next-intl";
 import { Disclaimer } from "./Disclaimer";
 
-interface HelpRequestData {
-    user?: any;
-    title: string;
-    description: string;
-    location: string;
-    type: string;
-}
-
-const RequestHelp: React.FC = () => {
+const RequestSupport: React.FC = () => {
     const { user } = useUser();
-    const [title, setTitle] = React.useState("");
-    const [description, setDescription] = React.useState("");
-    const [location, setLocation] = React.useState("");
-    const [isSubmitting, setIsSubmitting] = React.useState(false);
-    const [successMessage, setSuccessMessage] = React.useState("");
-    const [errorMessage, setErrorMessage] = React.useState("")
-    const t = useTranslations("RequestHelp");
+    const [title, setTitle] = useState("");
+    const [description, setDescription] = useState("");
+    const [isCurrentPage, setIsCurrentPage] = useState("yes");
+    const [location, setLocation] = useState("");
+    const [files, setFiles] = useState<File[]>([]);
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [successMessage, setSuccessMessage] = useState("");
+    const [errorMessage, setErrorMessage] = useState("");
+    const t = useTranslations("FeedBackModal.RequestFeature");
     const type = "Support Request";
+    const app_name = process.env.NEXT_PUBLIC_APP_NAME || globalThis.location?.origin || "Not defined";
 
-    React.useEffect(() => {
+    useEffect(() => {
         setLocation(window.location.href);
     }, []);
 
@@ -35,31 +30,42 @@ const RequestHelp: React.FC = () => {
         setIsSubmitting(true);
         setErrorMessage("");
 
-        const formData: HelpRequestData = { title, user, description, location, type };
+        const formData = new FormData();
+        formData.append("app_name", app_name)
+        formData.append("title", title);
+        formData.append("description", description);
+        formData.append("location", location);
+        formData.append("type", type);
+        if (user) {
+            formData.append("user", JSON.stringify(user));
+        }
+        files.forEach(file => formData.append("files", file));
 
         try {
             const response = await fetch("/api/support/feedback", {
                 method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(formData),
+                body: formData,
             });
 
             const result = await response.json();
 
             if (response.ok) {
                 setSuccessMessage(t("successMessage"));
-                setErrorMessage("");
+                if (result.fileUploads) {
+                    const failedUploads = result.fileUploads.filter((upload: any) => !upload.success);
+                    if (failedUploads.length > 0) {
+                        setErrorMessage(`Some files failed to upload: ${failedUploads.map((u: any) => u.name).join(", ")}`);
+                    }
+                }
                 resetForm();
             } else {
                 throw new Error(result.error || "Failed to submit feature request");
             }
         } catch (error) {
             if (error instanceof Error) {
-                setErrorMessage(`An error occurred: ${error.message}`)
+                setErrorMessage(`An error occurred: ${error.message}`);
             } else {
-                setErrorMessage("An unknown error occurred. Please try again.")
+                setErrorMessage("An unknown error occurred. Please try again.");
             }
         } finally {
             setIsSubmitting(false);
@@ -70,6 +76,11 @@ const RequestHelp: React.FC = () => {
         setTitle("");
         setDescription("");
         setLocation(window.location.href);
+        setIsCurrentPage("yes");
+        setFiles([]);
+        // Reset file input by clearing its value
+        const fileInput = document.querySelector('input[type="file"]') as HTMLInputElement;
+        if (fileInput) fileInput.value = "";
     };
 
     return (
@@ -82,7 +93,7 @@ const RequestHelp: React.FC = () => {
             <h1 className="text-2xl font-bold">{t("title")}</h1>
             <p className="mb-3">{t("description")}</p>
             <form onSubmit={handleSubmit}>
-                <Input label={t("helpTitle")} value={title} onChange={(e) => setTitle(e.target.value)} required fullWidth />
+                <Input label={t("title")} value={title} onChange={(e) => setTitle(e.target.value)} required fullWidth />
                 <Spacer y={3} />
                 <Textarea
                     label={t("descriptionLabel")}
@@ -104,4 +115,4 @@ const RequestHelp: React.FC = () => {
     );
 };
 
-export default RequestHelp;
+export default RequestSupport;
