@@ -1,14 +1,14 @@
 "use client"
 
-import type React from "react"
-import { useState, useEffect } from "react"
+import React, { useState, useEffect } from "react"
 import { Button, Input, Textarea, Spacer, RadioGroup, Radio } from "@heroui/react"
 import { motion } from "framer-motion"
-import { useUser } from "@auth0/nextjs-auth0/client"
-import { useTranslations } from "next-intl"
-import { Disclaimer } from "./Disclaimer"
 
-const ProvideFeedback: React.FC = () => {
+import { useUser } from "../auth/useUser";
+import { useTranslations } from "../locales/getTranslations";
+import { Disclaimer } from "../Disclaimer"
+
+const ReportBug: React.FC = () => {
   const { user } = useUser()
   const [title, setTitle] = useState("")
   const [description, setDescription] = useState("")
@@ -18,8 +18,7 @@ const ProvideFeedback: React.FC = () => {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [successMessage, setSuccessMessage] = useState("")
   const [errorMessage, setErrorMessage] = useState("")
-  const t = useTranslations("FeedBackModal.ProvideFeedback")
-  const type = "Feedback"
+  const t = useTranslations("ReportBug")
   const app_name = process.env.NEXT_PUBLIC_APP_NAME || globalThis.location?.origin || "Not defined";
 
   useEffect(() => {
@@ -47,14 +46,13 @@ const ProvideFeedback: React.FC = () => {
     formData.append("title", title)
     formData.append("description", description)
     formData.append("location", location)
-    formData.append("type", type)
     if (user) {
       formData.append("user", JSON.stringify(user))
     }
     files.forEach((file) => formData.append("files", file))
 
     try {
-      const response = await fetch("/api/support/feedback", {
+      const response = await fetch("/api/support/report-bug", {
         method: "POST",
         body: formData,
       })
@@ -62,7 +60,7 @@ const ProvideFeedback: React.FC = () => {
       const result = await response.json()
 
       if (response.ok) {
-        setSuccessMessage("Feedback submitted successfully.")
+        setSuccessMessage("Bug report submitted successfully.")
         if (result.fileUploads) {
           const failedUploads = result.fileUploads.filter((upload: any) => !upload.success)
           if (failedUploads.length > 0) {
@@ -71,7 +69,7 @@ const ProvideFeedback: React.FC = () => {
         }
         resetForm()
       } else {
-        throw new Error(result.error || "Failed to submit feedback")
+        throw new Error(result.error || "Failed to submit bug report")
       }
     } catch (error) {
       if (error instanceof Error) {
@@ -105,7 +103,7 @@ const ProvideFeedback: React.FC = () => {
       <h1 className="text-2xl font-bold">{t("title")}</h1>
       <p className="mb-3">{t("description")}</p>
       <form onSubmit={handleSubmit}>
-        <Input label={t("feedbackTitle")} value={title} onChange={(e) => setTitle(e.target.value)} required fullWidth />
+        <Input label={t("bugTitle")} value={title} onChange={(e) => setTitle(e.target.value)} required fullWidth />
         <Spacer y={3} />
         <Textarea
           label={t("descriptionLabel")}
@@ -127,7 +125,7 @@ const ProvideFeedback: React.FC = () => {
         <Spacer y={3} />
         {isCurrentPage === "no" && (
           <Input
-            label={t("feedbackLocation")}
+            label={t("bugLocation")}
             value={location}
             onChange={(e) => setLocation(e.target.value)}
             required
@@ -146,7 +144,7 @@ const ProvideFeedback: React.FC = () => {
           </ul>
         )}
         <Spacer y={3} />
-        <Button type="submit" disabled={isSubmitting} fullWidth color="primary">
+        <Button type="submit" isLoading={isSubmitting} fullWidth color="primary" className="text-primary-foreground">
           {isSubmitting ? t("submitting") : t("submitButton")}
         </Button>
         <Disclaimer />
@@ -157,5 +155,5 @@ const ProvideFeedback: React.FC = () => {
   )
 }
 
-export default ProvideFeedback
+export default ReportBug
 

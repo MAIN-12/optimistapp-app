@@ -1,23 +1,23 @@
-import { useTranslations } from "next-intl";
+import { useTranslations } from "./locales/getTranslations";
 
 export const Disclaimer = () => {
-    const t = useTranslations('FeedBackModal');
+    const t = useTranslations("disclaimer")
 
     return (
         <p className="text-xs mt-6">
-            {t("disclaimer.text")} &nbsp;
+            {t('text')} &nbsp;
             <a href="https://main12.com" target="_blank" rel="noopener noreferrer" className="text-gray-500 font-bold">
-                {t("disclaimer.company")}
+                {t('company')}
             </a>.
-            {t("disclaimer.moreInfo")} &nbsp;
+            {t('moreInfo')} &nbsp;
             <a href="/privacy" target="_blank" rel="noopener noreferrer" className="text-gray-500 font-bold">
-                {t("disclaimer.privacyPolicy")}
+                {t('privacyPolicy')}
             </a>&nbsp;
-            {t("disclaimer.and")}&nbsp;
+            {t('and')}&nbsp;
             <a href="/terms" target="_blank" rel="noopener noreferrer" className="text-gray-500 font-bold">
-                {t("disclaimer.termsOfService")}
+                {t('termsOfService')}
             </a>.&nbsp;
-            {t("disclaimer.contactInfo")}
+            {t('contactInfo')}
         </p>
     );
 };

@@ -1,13 +1,14 @@
-"use client";
+"use client"
 
-import React, { useState, useEffect } from "react";
-import { Button, Input, Textarea, Spacer } from "@heroui/react";
-import { motion } from "framer-motion";
-import { useUser } from "@auth0/nextjs-auth0/client";
-import { useTranslations } from "next-intl";
-import { Disclaimer } from "./Disclaimer";
+import React, { useState, useEffect } from "react"
+import { Button, Input, Textarea, Spacer, RadioGroup, Radio } from "@heroui/react"
+import { motion } from "framer-motion"
 
-const RequestSupport: React.FC = () => {
+import { useUser } from "../auth/useUser";
+import { useTranslations } from "../locales/getTranslations";
+import { Disclaimer } from "../Disclaimer"
+
+const RequestFeature: React.FC = () => {
     const { user } = useUser();
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
@@ -17,13 +18,28 @@ const RequestSupport: React.FC = () => {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [successMessage, setSuccessMessage] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
-    const t = useTranslations("FeedBackModal.RequestFeature");
-    const type = "Support Request";
+    const t = useTranslations("RequestFeature");
+    const type = "Feature Request";
     const app_name = process.env.NEXT_PUBLIC_APP_NAME || globalThis.location?.origin || "Not defined";
 
     useEffect(() => {
         setLocation(window.location.href);
     }, []);
+
+    const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        if (e.target.files) {
+            const newFiles = Array.from(e.target.files);
+            const validFiles = newFiles.filter(file => file.size <= 20 * 1024 * 1024); // 20MB limit
+            setFiles(prevFiles => [...prevFiles, ...validFiles]);
+            if (newFiles.length !== validFiles.length) {
+                setErrorMessage("Some files exceeded the 20MB size limit and were not added.");
+            }
+        }
+    };
+
+    const removeFile = (index: number) => {
+        setFiles(prevFiles => prevFiles.filter((_, i) => i !== index));
+    };
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -93,7 +109,7 @@ const RequestSupport: React.FC = () => {
             <h1 className="text-2xl font-bold">{t("title")}</h1>
             <p className="mb-3">{t("description")}</p>
             <form onSubmit={handleSubmit}>
-                <Input label={t("title")} value={title} onChange={(e) => setTitle(e.target.value)} required fullWidth />
+                <Input label={t("featureTitle")} value={title} onChange={(e) => setTitle(e.target.value)} required fullWidth />
                 <Spacer y={3} />
                 <Textarea
                     label={t("descriptionLabel")}
@@ -102,9 +118,39 @@ const RequestSupport: React.FC = () => {
                     required
                     fullWidth
                 />
-
                 <Spacer y={3} />
-                <Button type="submit" disabled={isSubmitting} fullWidth color="primary">
+                <RadioGroup
+                    label={t("currentPageQuestion")}
+                    value={isCurrentPage}
+                    onValueChange={setIsCurrentPage}
+                    orientation="horizontal"
+                >
+                    <Radio value="yes">{t("yes")}</Radio>
+                    <Radio value="no">{t("no")}</Radio>
+                </RadioGroup>
+                <Spacer y={3} />
+                {isCurrentPage === "no" && (
+                    <Input
+                        label={t("FeatureLocation")}
+                        value={location}
+                        onChange={(e) => setLocation(e.target.value)}
+                        required
+                        fullWidth
+                    />
+                )}
+                <Spacer y={3} />
+                <Input type="file" label={t("attachFiles")} onChange={handleFileChange} multiple fullWidth />
+                {files.length > 0 && (
+                    <ul className="text-sm text-gray-600 mt-1">
+                        {files.map((file, index) => (
+                            <li key={index}>
+                                {file.name} ({(file.size / 1024).toFixed(2)} KB)
+                            </li>
+                        ))}
+                    </ul>
+                )}
+                <Spacer y={3} />
+                <Button type="submit" isLoading={isSubmitting} fullWidth color="primary" className="text-primary-foreground">
                     {isSubmitting ? t("submitting") : t("submitButton")}
                 </Button>
                 <Disclaimer />
@@ -115,4 +161,4 @@ const RequestSupport: React.FC = () => {
     );
 };
 
-export default RequestSupport;
+export default RequestFeature;

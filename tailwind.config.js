@@ -19,6 +19,7 @@ module.exports = {
           DEFAULT: '#015a86',
           light: '#0280B8',
           dark: '#01466A',
+          foreground: "#fff",
           50: '#E0F2FC',
           100: '#B3DCF6',
           200: '#80C2F0',
@@ -50,20 +51,15 @@ module.exports = {
           DEFAULT: '#df1259'
         },
         dark: {
-          DEFAULT: '#1c1b1b',
+          DEFAULT: '#18181b',
         },
         light: {
-          DEFAULT: '#F2F2EA',
+          DEFAULT: '#fff',
         },
         primaryText: {
           DEFAULT: '#000000',
           light: '#000000',
           dark: '#000000',
-        },
-        btnText: {
-          DEFAULT: '#fff',
-          light: '#fff',
-          dark: '#fff',
         },
       },
       backgroundColor: (theme) => ({
