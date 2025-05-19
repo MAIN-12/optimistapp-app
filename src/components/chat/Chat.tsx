@@ -43,27 +43,27 @@ export const agents = [
     },
     {
         key: "gpt",
-        label: "Chat GPT",
+        label: "Chat GPT 4o",
         icon_url: "https://cdn-icons-png.flaticon.com/512/11865/11865313.png",
-        chat_url: "https://example.com/chat/elephant",
+        chat_url: "https://n8n.main12.com/webhook/3134e9ea-57c4-4c21-905b-21900ec13bef",
     },
     {
         key: "gemini",
         label: "Gemini",
         icon_url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcThr7qrIazsvZwJuw-uZCtLzIjaAyVW_ZrlEQ&s",
-        chat_url: "https://example.com/chat/elephant",
+        chat_url: "https://n8n.main12.com/webhook/3134e9ea-57c4-4c21-905b-21900ec13bef",
     },
     {
         key: "ollama  ",
         label: "Ollama  ",
         icon_url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTXeShWylhBDyM2zXYUZeB_qWE_G3Ehi4_WfQ&s",
-        chat_url: "https://example.com/chat/elephant",
+        chat_url: "https://n8n.main12.com/webhook/3134e9ea-57c4-4c21-905b-21900ec13bef",
     },
     {
         key: "deepseek ",
         label: "Deepseek ",
         icon_url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1FtoIs7pLGQzDJTbB33U9DaXZj3Pn-6c6uA&s",
-        chat_url: "https://example.com/chat/elephant",
+        chat_url: "https://n8n.main12.com/webhook/3134e9ea-57c4-4c21-905b-21900ec13bef",
     },
 ];
 
