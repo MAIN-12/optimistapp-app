@@ -48,9 +48,7 @@ export default async function RootLayout({
         <NextIntlClientProvider messages={messages}>
           <Providers themeProps={{ attribute: "class", defaultTheme: "dark" }}>
             <SideBarWrapper>
-              <main className="container mx-auto max-w-7xl pt-16 px-6 flex-grow">
-                {children}
-              </main>
+              <main>{children}</main>
             </SideBarWrapper>
           </Providers>
         </NextIntlClientProvider>

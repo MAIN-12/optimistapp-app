@@ -33,11 +33,26 @@ export default function ChatInterface() {
     const [input, setInput] = React.useState("");
     const [isLoading, setIsLoading] = React.useState(false);
     const [isKeyboardVisible, setIsKeyboardVisible] = React.useState(false);
+    const [currentThinkingIndex, setCurrentThinkingIndex] = React.useState(0);
     const messagesEndRef = React.useRef<HTMLDivElement>(null);
     const inputRef = React.useRef<HTMLTextAreaElement>(null);
 
     const randomNumber = Math.floor(Math.random() * thinkingMessages.length);
     const randomThinkingMessage = thinkingMessages[randomNumber];
+
+    React.useEffect(() => {
+        if (!isLoading) {
+            setCurrentThinkingIndex(0);
+            return;
+        }
+        const interval = setInterval(() => {
+            setCurrentThinkingIndex((prev) => (prev + 1) % thinkingMessages.length);
+        }, 3000);
+        return () => clearInterval(interval);
+    }, [isLoading, thinkingMessages.length]);
+
+
+
     const isFirstMessage = messages.length === 1;
     const chatWithBackground = false;
     const controllWithBackground = false;
@@ -51,7 +66,6 @@ export default function ChatInterface() {
         "Can you create a detailed buyer persona for my target audience?",
     ];
     const placeholder = ["Ask something", "Ask something"];
-
 
     React.useEffect(() => {
         const handleResize = () => {
@@ -182,9 +196,9 @@ export default function ChatInterface() {
     };
 
     return (
-        <div className="flex items-center justify-center min-h-screen sm:p-4 w-full max-w-3xl mx-auto">
+        <div className="flex items-center justify-center min-h-screen sm:px-4 w-full max-w-3xl mx-auto">
             <div
-                className={`w-full ${!isFirstMessage && "sm:h-[700px] h-screen"
+                className={`w-full ${!isFirstMessage && "h-screen"
                     } transition-all duration-500 flex flex-col overflow-hidden ${chatWithBackground &&
                     "sm:shadow-lg sm:rounded-lg bg-content1 dark:bg-content1"
                     }`}
@@ -203,7 +217,7 @@ export default function ChatInterface() {
                                 {message.role === "user" ? (
                                     <UserAvatar className="mx-2 min-w-10" />
                                 ) : (
-                                    <Avatar showFallback src="/assets/pictures/capivara.jpg" className="mx-2 min-w-10" />
+                                    <Avatar showFallback src="/assets/pictures/eagle.png" className="mx-2 min-w-10" />
                                 )}
                                 <div
                                     className={`px-4 py-2 rounded-lg ${message.role === "user"
@@ -230,7 +244,7 @@ export default function ChatInterface() {
                         {isLoading && (
                             <div className="absolute bottom-full left-0 w-full flex p-4">
                                 <div className="flex flex-row items-start">
-                                    <Avatar showFallback src="/assets/pictures/capivara.jpg" className="mx-2 min-w-10" />
+                                    <Avatar showFallback src="/assets/pictures/eagle.png" className="mx-2 min-w-10" />
 
                                     <motion.h2
                                         className="text-default-500 flex items-center h-10"
@@ -240,7 +254,7 @@ export default function ChatInterface() {
                                             repeat: Number.POSITIVE_INFINITY,
                                         }}
                                     >
-                                        {randomThinkingMessage}
+                                        {thinkingMessages[currentThinkingIndex]}
                                     </motion.h2>
                                 </div>
                             </div>

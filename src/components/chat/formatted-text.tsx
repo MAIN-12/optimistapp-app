@@ -11,12 +11,15 @@ export const FormattedText: React.FC<FormattedTextProps> = ({ text }) => {
     const hasMultipleParagraphs = paragraphs.length > 1;
 
     return paragraphs.map((paragraph, index) => {
+      const trimmed = paragraph.trim();
+
       // Check if the paragraph is a subtitle
-      if (paragraph.trim().startsWith("#")) {
+      if (trimmed.startsWith("#")) {
         return formatSubtitle(paragraph, index)
       }
-      // Check if the paragraph is a list
-      else if (paragraph.trim().startsWith("- ")) {
+
+      // Check if the paragraph is a bullet list
+      if (trimmed.startsWith("- ")) {
         const listItems = paragraph.split("- ").filter((item) => item.trim() !== "")
         return (
           <ul key={index} className="list-disc list-inside mb-4">
@@ -25,17 +28,34 @@ export const FormattedText: React.FC<FormattedTextProps> = ({ text }) => {
             ))}
           </ul>
         )
-      } else {
-        // Regular paragraph
+      }
+
+      // Check if the paragraph is a numbered list (e.g., 1. ...)
+      if (/^\d+\.\s/.test(trimmed)) {
+        // Split into lines, filter out empty, and only lines that start with number-dot-space
+        const listItems = paragraph
+          .split("\n")
+          .map(line => line.trim())
+          .filter(line => /^\d+\.\s/.test(line));
         return (
-          <p key={index} className={hasMultipleParagraphs ? "mb-4" : ""}>
-            {formatInlineBold(paragraph)}
-          </p>
+          <ol key={index} className="list-decimal list-inside mb-4">
+            {listItems.map((item, itemIndex) => (
+              <li key={itemIndex}>
+                {formatInlineBold(item.replace(/^\d+\.\s/, ""))}
+              </li>
+            ))}
+          </ol>
         )
       }
+
+      // Regular paragraph
+      return (
+        <p key={index} className={hasMultipleParagraphs ? "mb-4" : ""}>
+          {formatInlineBold(paragraph)}
+        </p>
+      )
     })
   }
-
   const formatSubtitle = (text: string, key: number) => {
     const trimmedText = text.trim()
     if (trimmedText.startsWith("### ")) {
