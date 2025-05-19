@@ -86,12 +86,44 @@ export const FormattedText: React.FC<FormattedTextProps> = ({ text }) => {
   }
 
   const formatInlineBold = (text: string) => {
-    const parts = text.split(/(\*\*.*?\*\*)/g)
-    return parts.map((part, index) => {
+    // First, split by bold (**...**)
+    const boldParts = text.split(/(\*\*.*?\*\*)/g)
+    return boldParts.map((part, index) => {
       if (part.startsWith("**") && part.endsWith("**")) {
         return <strong key={index}>{part.slice(2, -2)}</strong>
       }
-      return part
+      // Now, handle links inside non-bold parts
+      // Markdown link: [text](url)
+      const linkRegex = /\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g
+      const segments: React.ReactNode[] = []
+      let lastIndex = 0
+      let match: RegExpExecArray | null
+      let segIndex = 0
+      while ((match = linkRegex.exec(part)) !== null) {
+        // Text before the link
+        if (match.index > lastIndex) {
+          segments.push(part.slice(lastIndex, match.index))
+        }
+        // The link itself
+        segments.push(
+          <a
+            key={`link-${index}-${segIndex++}`}
+            href={match[2]}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-blue-600 underline"
+          >
+            {match[1]}
+          </a>
+        )
+        lastIndex = match.index + match[0].length
+      }
+      // Any remaining text after the last link
+      if (lastIndex < part.length) {
+        segments.push(part.slice(lastIndex))
+      }
+      // If no links, just return the part as is
+      return segments.length > 0 ? segments : part
     })
   }
 

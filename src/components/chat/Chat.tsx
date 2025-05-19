@@ -25,6 +25,8 @@ const thinkingMessages = [
     "Preparing an answer...",
 ];
 
+// const CHAT_URL = "https://n8n.main12.com/webhook/c2763337-5186-420d-8068-9f0e7563d0be";
+const CHAT_URL = "https://n8n.main12.com/webhook/c2763337-5186-420d-8068-9f0e7563d0be";
 
 export default function ChatInterface() {
     const [messages, setMessages] = React.useState<Message[]>([
@@ -39,6 +41,12 @@ export default function ChatInterface() {
 
     const randomNumber = Math.floor(Math.random() * thinkingMessages.length);
     const randomThinkingMessage = thinkingMessages[randomNumber];
+
+    const [sessionId] = React.useState(() =>
+        typeof crypto !== "undefined" && crypto.randomUUID
+            ? crypto.randomUUID()
+            : Math.random().toString(36).substring(2) + Date.now().toString(36)
+    );
 
     React.useEffect(() => {
         if (!isLoading) {
@@ -105,8 +113,7 @@ export default function ChatInterface() {
                     sessionId: "123"
                 });
 
-                const response = await fetch(
-                    "https://n8n.main12.com/webhook/4ff22a73-1d19-4c85-9e02-abc5ede8660a",
+                const response = await fetch(CHAT_URL,
                     {
                         method: "POST",
                         headers: {
@@ -114,7 +121,7 @@ export default function ChatInterface() {
                         },
                         body: JSON.stringify({
                             message: input,
-                            sessionId: "123" // Fixed sessionId as requested
+                            sessionId: sessionId
                         }),
                     }
                 );
