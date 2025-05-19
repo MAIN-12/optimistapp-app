@@ -36,8 +36,8 @@ export const agents = [
         chat_url: "https://n8n.main12.com/webhook/4ff22a73-1d19-4c85-9e02-abc5ede8660a",
     },
     {
-        key: "capivara",
-        label: "Capivara",
+        key: "capybara",
+        label: "Capybara",
         icon_url: "/assets/pictures/capivara.jpg",
         chat_url: "https://n8n.main12.com/webhook/c2763337-5186-420d-8068-9f0e7563d0be",
     },
@@ -57,6 +57,12 @@ export const agents = [
         key: "deepseek ",
         label: "Deepseek ",
         icon_url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1FtoIs7pLGQzDJTbB33U9DaXZj3Pn-6c6uA&s",
+        chat_url: "https://example.com/chat/elephant",
+    },
+    {
+        key: "ollama  ",
+        label: "Ollama  ",
+        icon_url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTXeShWylhBDyM2zXYUZeB_qWE_G3Ehi4_WfQ&s",
         chat_url: "https://example.com/chat/elephant",
     },
 ];
