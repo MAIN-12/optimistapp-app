@@ -5,8 +5,6 @@ import { motion } from "framer-motion";
 
 import { FormattedText } from "./formatted-text";
 import { PlaceholdersAndVanishInput } from "@/components/ui/placeholders-and-vanish-text-area"
-// import { PlaceholdersAndVanishInput } from "./placeholders-and-vanish-input"
-
 
 import UserAvatar from "@/components/Auth/Avatar"
 
