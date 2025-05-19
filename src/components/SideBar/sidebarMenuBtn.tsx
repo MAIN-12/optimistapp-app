@@ -32,7 +32,7 @@ const MenuButtonWithIcon: React.FC<ButtonWithIconProps> = (
     };
 
     return (
-        <div className="flex justify-center items-center mx-auto w-full px-2 py-1">
+        <div suppressHydrationWarning className="flex justify-center items-center mx-auto w-full px-2 py-1">
             <Button
                 as={as}
                 onPress={handleClick}

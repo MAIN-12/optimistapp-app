@@ -25,6 +25,7 @@ const thinkingMessages = [
     "Preparing an answer...",
 ];
 
+
 export default function ChatInterface() {
     const [messages, setMessages] = React.useState<Message[]>([
         { role: "assistant", content: "Hello! How can I help you today?" },
@@ -49,6 +50,8 @@ export default function ChatInterface() {
         "What are some strategies to increase customer engagement?",
         "Can you create a detailed buyer persona for my target audience?",
     ];
+    const placeholder = "Ask something";
+
 
     React.useEffect(() => {
         const handleResize = () => {

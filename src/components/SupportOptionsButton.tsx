@@ -27,6 +27,7 @@ const SupportOptionsButton = () => {
                     <button
                         className="w-10 h-10 rounded-full bg-primary-500 text-primary-foreground shadow-lg hover:bg-secondary-500 transition"
                         aria-label={t('openSupportOptions')}
+                        suppressHydrationWarning
                     >+</button>
                 </DropdownTrigger>
                 <DropdownMenu aria-label={t('supportActions')}>

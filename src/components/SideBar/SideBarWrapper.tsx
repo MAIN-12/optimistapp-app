@@ -28,14 +28,12 @@ const SideBarWrapper = ({ children }: { children: React.ReactNode }) => {
                 <Sidebar />
             </div>
             <div className="relative flex flex-col flex-1 lg:overflow-y-auto lg:overflow-x-hidden">
-                {isMobile ? (<>
-                    <MobileBottomMenu />
-                </>
-                ) : (
-                    <div className="fixed bottom-4 right-4 flex items-center justify-center m-4 z-30">
-                        <SupportOptionsButton />
-                    </div>
-                )
+                {isMobile ? <MobileBottomMenu />
+                    : (
+                        <div className="fixed bottom-4 right-4 flex items-center justify-center m-4 z-30">
+                            <SupportOptionsButton />
+                        </div>
+                    )
                 }
                 {children}
             </div>

@@ -10,7 +10,7 @@ const MobileBottomMenu: React.FC = () => {
     .sort((a, b) => (a.mobile ?? 0) - (b.mobile ?? 0)); // Sort by mobile order
 
   return (
-    <nav className="fixed bottom-0 left-0 right-0 bg-lightBackground dark:bg-darkBackground border-t border-gray-200 px-4 py-2">
+    <nav suppressHydrationWarning className="fixed bottom-0 left-0 right-0 bg-lightBackground dark:bg-darkBackground border-t border-gray-200 px-4 py-2">
       <ul className="flex justify-between items-center">
         {mobileMenuItems.map((item) => (
           <li key={item.id} className="flex flex-col items-center">

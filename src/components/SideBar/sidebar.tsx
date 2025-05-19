@@ -59,6 +59,7 @@ export default function Sidebar() {
   return (
     <>
       <aside
+        suppressHydrationWarning
         className="h-screen p-6"
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
