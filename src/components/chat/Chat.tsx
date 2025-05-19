@@ -7,6 +7,8 @@ import { FormattedText } from "./formatted-text";
 import { PlaceholdersAndVanishInput } from "@/components/ui/placeholders-and-vanish-text-area"
 
 import UserAvatar from "@/components/Auth/Avatar"
+import { Button } from "@heroui/button";
+import { Plus, TvIcon } from "lucide-react";
 
 type Message = {
     role: "user" | "assistant";
@@ -272,7 +274,14 @@ export default function ChatInterface() {
                                 onChange={handleChange}
                                 onSubmit={onSubmit}
                                 delay={isFirstMessage ? 3000 : 15000}
-                            />
+                            >
+                                {
+                                    !isFirstMessage && <div className="p-2">
+                                        <Button startContent={<Plus />} isIconOnly variant="bordered" radius="full" />
+                                    </div>
+
+                                }
+                            </PlaceholdersAndVanishInput>
                         </div>
                     </div>
                 </div>

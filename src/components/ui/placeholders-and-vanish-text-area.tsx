@@ -3,12 +3,14 @@
 import { AnimatePresence, motion } from "framer-motion"
 import { useCallback, useEffect, useRef, useState } from "react"
 import { cn } from "../../utils/mergeClasses";
+import { Button } from "@heroui/react";
 
 interface Probes {
     placeholders: string[]
     onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void
     onSubmit: (e: React.FormEvent<HTMLFormElement>) => void
     delay?: number;
+    children?: React.ReactNode
 }
 
 export function PlaceholdersAndVanishInput({
@@ -16,6 +18,7 @@ export function PlaceholdersAndVanishInput({
     onChange,
     onSubmit,
     delay = 3000,
+    children
 }: Probes) {
     const [currentPlaceholder, setCurrentPlaceholder] = useState(0)
 
@@ -229,7 +232,13 @@ export function PlaceholdersAndVanishInput({
             <button
                 disabled={!value}
                 type="submit"
-                className="absolute right-2 bottom-2 z-50 h-8 w-8 rounded-full disabled:bg-gray-100 bg-black dark:bg-zinc-900 dark:disabled:bg-zinc-800 transition duration-200 flex items-center justify-center"
+                // Light: bg-black, icon white; Dark: bg-white, icon black
+                className={cn(
+                    "absolute right-5 bottom-3 z-50 h-8 w-8 rounded-full transition duration-200 flex items-center justify-center",
+                    !value
+                        ? "disabled:bg-white dark:disabled:bg-zinc-800"
+                        : "bg-gray-800 dark:bg-white "
+                )}
             >
                 <motion.svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -237,11 +246,17 @@ export function PlaceholdersAndVanishInput({
                     height="24"
                     viewBox="0 0 24 24"
                     fill="none"
+                    // Use currentColor for stroke, so it follows text color
                     stroke="currentColor"
                     strokeWidth="2"
                     strokeLinecap="round"
                     strokeLinejoin="round"
-                    className="text-gray-300 h-4 w-4"
+                    className={cn(
+                        "h-4 w-4",
+                        !value
+                            ? "text-gray-300 dark:text-zinc-500"
+                            : "text-white dark:text-black"
+                    )}
                 >
                     <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                     <motion.path
@@ -263,6 +278,7 @@ export function PlaceholdersAndVanishInput({
                 </motion.svg>
             </button>
 
+            {children}
             <div className="absolute inset-0 flex items-start pt-4 rounded-full pointer-events-none">
                 <AnimatePresence mode="wait">
                     {!value && (
