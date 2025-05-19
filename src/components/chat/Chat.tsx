@@ -12,6 +12,7 @@ import { Plus, TvIcon } from "lucide-react";
 
 type Message = {
     role: "user" | "assistant";
+    agentKey?: string;
     content: string;
 };
 
@@ -27,10 +28,19 @@ const thinkingMessages = [
     "Preparing an answer...",
 ];
 
-// const CHAT_URL = "https://n8n.main12.com/webhook/c2763337-5186-420d-8068-9f0e7563d0be";
-const CHAT_URL = "https://n8n.main12.com/webhook/c2763337-5186-420d-8068-9f0e7563d0be";
-
 export const agents = [
+    {
+        key: "eagle",
+        label: "Eagle",
+        icon_url: "/assets/pictures/eagle.png",
+        chat_url: "https://n8n.main12.com/webhook/4ff22a73-1d19-4c85-9e02-abc5ede8660a",
+    },
+    {
+        key: "capivara",
+        label: "Capivara",
+        icon_url: "/assets/pictures/capivara.jpg",
+        chat_url: "https://n8n.main12.com/webhook-test/c2763337-5186-420d-8068-9f0e7563d0be",
+    },
     {
         key: "gpt",
         label: "Chat GPT",
@@ -49,18 +59,6 @@ export const agents = [
         icon_url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1FtoIs7pLGQzDJTbB33U9DaXZj3Pn-6c6uA&s",
         chat_url: "https://example.com/chat/elephant",
     },
-    {
-        key: "eagle",
-        label: "Eagle",
-        icon_url: "/assets/pictures/eagle.png",
-        chat_url: "https://example.com/chat/elephant",
-    },
-    {
-        key: "capivara",
-        label: "Capivara",
-        icon_url: "/assets/pictures/capivara.jpg",
-        chat_url: "https://example.com/chat/lion",
-    },
 ];
 
 
@@ -72,6 +70,9 @@ export default function ChatInterface() {
     const [isLoading, setIsLoading] = React.useState(false);
     const [isKeyboardVisible, setIsKeyboardVisible] = React.useState(false);
     const [currentThinkingIndex, setCurrentThinkingIndex] = React.useState(0);
+
+    const [currentChatModel, setCurrentChatModel] = React.useState(agents[0]);
+
     const messagesEndRef = React.useRef<HTMLDivElement>(null);
     const inputRef = React.useRef<HTMLTextAreaElement>(null);
     const [isOpen, setIsOpen] = React.useState(false);
@@ -150,7 +151,7 @@ export default function ChatInterface() {
                     sessionId: "123"
                 });
 
-                const response = await fetch(CHAT_URL,
+                const response = await fetch(currentChatModel.chat_url,
                     {
                         method: "POST",
                         headers: {
@@ -214,7 +215,8 @@ export default function ChatInterface() {
 
                 const assistantMessage: Message = {
                     role: "assistant",
-                    content: messageContent || "I received your message but there was no response content."
+                    content: messageContent || "I received your message but there was no response content.",
+                    agentKey: currentChatModel.key
                 };
                 setMessages((prev) => [...prev, assistantMessage]);
             } catch (error) {
@@ -222,6 +224,7 @@ export default function ChatInterface() {
                 const errorMessage: Message = {
                     role: "assistant",
                     content: "Sorry, I encountered an error. Please try again.",
+                    agentKey: currentChatModel.key
                 };
                 setMessages((prev) => [...prev, errorMessage]);
             } finally {
@@ -248,33 +251,42 @@ export default function ChatInterface() {
                     }`}
             >
                 <div id="main-chat" className={`${!isFirstMessage && "flex-grow"} overflow-y-auto p-4 scrollbar-hide`}>
-                    {messages.map((message, index) => (
-                        <div
-                            key={index}
-                            className={`flex ${message.role === "user" ? "justify-end" : "justify-start"
-                                } mb-4`}
-                        >
+                    {messages.map((message, index) => {
+
+                        const agent = message.role === "assistant"
+                            ? agents.find(a => a.key === message.agentKey) || agents[0]
+                            : null;
+                        return (
                             <div
-                                className={`flex ${message.role === "user" ? "flex-row-reverse" : "flex-row"
-                                    } items-start`}
+                                key={index}
+                                className={`flex ${message.role === "user" ? "justify-end" : "justify-start"
+                                    } mb-4`}
                             >
-                                {message.role === "user" ? (
-                                    <UserAvatar className="mx-2 min-w-10" />
-                                ) : (
-                                    <Avatar showFallback src="/assets/pictures/eagle.png" className="mx-2 min-w-10" />
-                                )}
                                 <div
-                                    className={`px-4 py-2 rounded-lg ${message.role === "user"
-                                        ? "bg-blue-500 text-white"
-                                        : "bg-gray-200 dark:bg-gray-800 text-gray-800 dark:text-gray-100"
-                                        }`}
+                                    className={`flex ${message.role === "user" ? "flex-row-reverse" : "flex-row"
+                                        } items-start`}
                                 >
-                                    <FormattedText text={message.content} />
+                                    {message.role === "user" ? (
+                                        <UserAvatar className="mx-2 min-w-10" />
+                                    ) : (
+                                        <Avatar
+                                            showFallback
+                                            src={agent?.icon_url || "/assets/pictures/eagle.png"}
+                                            className="mx-2 min-w-10"
+                                        />)}
+                                    <div
+                                        className={`px-4 py-2 rounded-lg ${message.role === "user"
+                                            ? "bg-blue-500 text-white"
+                                            : "bg-gray-200 dark:bg-gray-800 text-gray-800 dark:text-gray-100"
+                                            }`}
+                                    >
+                                        <FormattedText text={message.content} />
+                                    </div>
+                                    <div className="w-[150px]" />
                                 </div>
-                                <div className="w-[150px]" />
                             </div>
-                        </div>
-                    ))}
+                        );
+                    })}
                     <div ref={messagesEndRef} />
                 </div>
                 <div
@@ -288,7 +300,7 @@ export default function ChatInterface() {
                         {isLoading && (
                             <div className="absolute bottom-full left-0 w-full flex p-4">
                                 <div className="flex flex-row items-start">
-                                    <Avatar showFallback src="/assets/pictures/eagle.png" className="mx-2 min-w-10" />
+                                    <Avatar showFallback src={currentChatModel.icon_url} className="mx-2 min-w-10" />
 
                                     <motion.h2
                                         className="text-default-500 flex items-center h-10"
@@ -317,6 +329,14 @@ export default function ChatInterface() {
                                         // label="Favorite Animal"
                                         variant="flat"
                                         onOpenChange={setIsOpen}
+                                        selectedKeys={[currentChatModel.key]}
+                                        selectionMode="single"
+                                        defaultSelectedKeys={agents[0].key}
+                                        onSelectionChange={(keys) => {
+                                            const selectedKey = Array.from(keys)[0];
+                                            const selectedAgent = agents.find(agent => agent.key === selectedKey);
+                                            if (selectedAgent) setCurrentChatModel(selectedAgent);
+                                        }}
                                         renderValue={(items) => {
                                             const item = items[0];
                                             return item ? (
