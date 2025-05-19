@@ -54,15 +54,15 @@ export const agents = [
         chat_url: "https://example.com/chat/elephant",
     },
     {
-        key: "deepseek ",
-        label: "Deepseek ",
-        icon_url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1FtoIs7pLGQzDJTbB33U9DaXZj3Pn-6c6uA&s",
-        chat_url: "https://example.com/chat/elephant",
-    },
-    {
         key: "ollama  ",
         label: "Ollama  ",
         icon_url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTXeShWylhBDyM2zXYUZeB_qWE_G3Ehi4_WfQ&s",
+        chat_url: "https://example.com/chat/elephant",
+    },
+    {
+        key: "deepseek ",
+        label: "Deepseek ",
+        icon_url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1FtoIs7pLGQzDJTbB33U9DaXZj3Pn-6c6uA&s",
         chat_url: "https://example.com/chat/elephant",
     },
 ];
