@@ -39,7 +39,7 @@ export const agents = [
         key: "capivara",
         label: "Capivara",
         icon_url: "/assets/pictures/capivara.jpg",
-        chat_url: "https://n8n.main12.com/webhook-test/c2763337-5186-420d-8068-9f0e7563d0be",
+        chat_url: "https://n8n.main12.com/webhook/c2763337-5186-420d-8068-9f0e7563d0be",
     },
     {
         key: "gpt",
