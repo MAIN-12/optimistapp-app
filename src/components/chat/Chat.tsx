@@ -1,6 +1,6 @@
 "use client"
 import React from "react";
-import { Avatar } from "@heroui/react";
+import { Avatar, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger, Select, SelectItem } from "@heroui/react";
 import { motion } from "framer-motion";
 
 import { FormattedText } from "./formatted-text";
@@ -30,6 +30,40 @@ const thinkingMessages = [
 // const CHAT_URL = "https://n8n.main12.com/webhook/c2763337-5186-420d-8068-9f0e7563d0be";
 const CHAT_URL = "https://n8n.main12.com/webhook/c2763337-5186-420d-8068-9f0e7563d0be";
 
+export const agents = [
+    {
+        key: "gpt",
+        label: "Chat GPT",
+        icon_url: "https://cdn-icons-png.flaticon.com/512/11865/11865313.png",
+        chat_url: "https://example.com/chat/elephant",
+    },
+    {
+        key: "gemini",
+        label: "Gemini",
+        icon_url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcThr7qrIazsvZwJuw-uZCtLzIjaAyVW_ZrlEQ&s",
+        chat_url: "https://example.com/chat/elephant",
+    },
+    {
+        key: "deepseek ",
+        label: "Deepseek ",
+        icon_url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1FtoIs7pLGQzDJTbB33U9DaXZj3Pn-6c6uA&s",
+        chat_url: "https://example.com/chat/elephant",
+    },
+    {
+        key: "eagle",
+        label: "Eagle",
+        icon_url: "/assets/pictures/eagle.png",
+        chat_url: "https://example.com/chat/elephant",
+    },
+    {
+        key: "capivara",
+        label: "Capivara",
+        icon_url: "/assets/pictures/capivara.jpg",
+        chat_url: "https://example.com/chat/lion",
+    },
+];
+
+
 export default function ChatInterface() {
     const [messages, setMessages] = React.useState<Message[]>([
         { role: "assistant", content: "Hello! How can I help you today?" },
@@ -40,6 +74,7 @@ export default function ChatInterface() {
     const [currentThinkingIndex, setCurrentThinkingIndex] = React.useState(0);
     const messagesEndRef = React.useRef<HTMLDivElement>(null);
     const inputRef = React.useRef<HTMLTextAreaElement>(null);
+    const [isOpen, setIsOpen] = React.useState(false);
 
     const randomNumber = Math.floor(Math.random() * thinkingMessages.length);
     const randomThinkingMessage = thinkingMessages[randomNumber];
@@ -275,12 +310,37 @@ export default function ChatInterface() {
                                 onSubmit={onSubmit}
                                 delay={isFirstMessage ? 3000 : 15000}
                             >
-                                {
-                                    !isFirstMessage && <div className="p-2">
-                                        <Button startContent={<Plus />} isIconOnly variant="bordered" radius="full" />
-                                    </div>
-
-                                }
+                                <div className="p-2">
+                                    <Select
+                                        className={`transition-all duration-200 ${isOpen ? "w-[200px]" : "w-[80px]"}`}
+                                        items={agents}
+                                        // label="Favorite Animal"
+                                        variant="flat"
+                                        onOpenChange={setIsOpen}
+                                        renderValue={(items) => {
+                                            const item = items[0];
+                                            return item ? (
+                                                <div className="flex items-center py-2">
+                                                    <Avatar
+                                                        showFallback
+                                                        src={item.data?.icon_url}
+                                                        size="sm"
+                                                        className="shrink-0"
+                                                    />
+                                                </div>
+                                            ) : null;
+                                        }}
+                                    >
+                                        {(agent) =>
+                                            <SelectItem key={agent.key} textValue={agent.label} >
+                                                <div className="flex flex-row gap-3">
+                                                    <Avatar showFallback src={agent.icon_url} size="sm" />
+                                                    {agent.label}
+                                                </div>
+                                            </SelectItem>
+                                        }
+                                    </Select>
+                                </div>
                             </PlaceholdersAndVanishInput>
                         </div>
                     </div>

@@ -220,7 +220,7 @@ export function PlaceholdersAndVanishInput({
                 ref={inputRef as React.RefObject<HTMLTextAreaElement>}
                 value={value}
                 className={cn(
-                    "w-full relative text-sm sm:text-base z-50 border-none dark:text-white bg-transparent text-black focus:outline-none focus:ring-0 pl-4 sm:pl-10 pr-20 pt-3 resize-none overflow-y-auto transition-all duration-300 ease-in-out",
+                    "w-full relative text-sm sm:text-base z-50 border-none dark:text-white bg-transparent text-black focus:outline-none focus:ring-0 pl-4 sm:pl-10 pr-20 pt-3 resize-none overflow-y-auto ",
                     animating && "text-transparent dark:text-transparent",
                 )}
                 style={{
