@@ -4,22 +4,28 @@ import { AnimatePresence, motion } from "framer-motion"
 import { useCallback, useEffect, useRef, useState } from "react"
 import { cn } from "../../utils/mergeClasses";
 
+interface Probes {
+    placeholders: string[]
+    onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void
+    onSubmit: (e: React.FormEvent<HTMLFormElement>) => void
+    delay?: number;
+}
+
 export function PlaceholdersAndVanishInput({
     placeholders,
     onChange,
     onSubmit,
-}: {
-    placeholders: string[]
-    onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void
-    onSubmit: (e: React.FormEvent<HTMLFormElement>) => void
-}) {
+    delay = 3000,
+}: Probes) {
     const [currentPlaceholder, setCurrentPlaceholder] = useState(0)
 
     const intervalRef = useRef<NodeJS.Timeout | null>(null)
     const startAnimation = useCallback(() => {
+
         intervalRef.current = setInterval(() => {
             setCurrentPlaceholder((prev) => (prev + 1) % placeholders.length)
-        }, 3000)
+        }, delay)
+
     }, [placeholders])
     const handleVisibilityChange = useCallback(() => {
         if (document.visibilityState !== "visible" && intervalRef.current) {

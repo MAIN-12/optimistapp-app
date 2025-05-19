@@ -50,7 +50,7 @@ export default function ChatInterface() {
         "What are some strategies to increase customer engagement?",
         "Can you create a detailed buyer persona for my target audience?",
     ];
-    const placeholder = "Ask something";
+    const placeholder = ["Ask something", "Ask something"];
 
 
     React.useEffect(() => {
@@ -247,9 +247,10 @@ export default function ChatInterface() {
                         )}
                         <div className="pb-3">
                             <PlaceholdersAndVanishInput
-                                placeholders={placeholders}
+                                placeholders={isFirstMessage ? placeholders : placeholder}
                                 onChange={handleChange}
                                 onSubmit={onSubmit}
+                                delay={isFirstMessage ? 3000 : 15000}
                             />
                         </div>
                     </div>
