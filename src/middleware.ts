@@ -21,6 +21,7 @@ export const config = {
     matcher: [
         '/admin/:path*',
         '/home/:path*',
+        '/chat/:path*',
         '/api/chat/:path*',
         '/api-doc/:path*',
     ],
