@@ -5,7 +5,8 @@ export default function Home() {
   // const t = useTranslations('HomePage');
   return (
     <section className="container mx-auto max-w-7xl pt-16 px-6 flex-grow">
-      <Hero />
+      {/* <Hero /> */}
+      <h1 className="text-3xl text-primary">optimist app</h1>
     </section>
   );
 }

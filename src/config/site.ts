@@ -1,6 +1,7 @@
-import { BookmarkIcon, HomeIcon, SearchIcon, Ticket, User } from "lucide-react"
+import { BookmarkIcon, HomeIcon, SearchIcon, Ticket, User, MessageCircle, Star, StarIcon, Grid, Users } from "lucide-react"
 
 import { MenuItem } from "@/types";
+import { Add } from "@mui/icons-material";
 
 export type SiteConfig = typeof siteConfig;
 
@@ -18,34 +19,68 @@ export const siteConfig = {
       label: "Inicio",
       icon: HomeIcon,
       path: "/",
+      section: ["main"],
+      // mobile: 1,
+      className: "bg-primary hover:bg-primary-300"
+    },
+    {
+      id: "new",
+      label: "Add New",
+      icon: Add,
+      path: "/",
       section: ["main", "mobile"],
       mobile: 1,
       className: "bg-primary hover:bg-primary-300"
     },
+
+    // {
+    //   id: "chat",
+    //   label: "Chat",
+    //   icon: MessageCircle,
+    //   path: "/chat",
+    //   section: ["mobile"],
+    //   mobile: 2,
+    // },
     {
-      id: "explore",
-      label: "Explorar",
-      icon: SearchIcon,
-      path: "/explore",
-      section: ["main", "mobile"],
+      id: "messages",
+      label: "Messages",
+      icon: MessageCircle,
+      path: "/messages",
+      section: ["mobile"],
       mobile: 2,
     },
     {
-      id: "saved",
-      label: "Guardado",
-      icon: BookmarkIcon,
-      path: "/saved",
-      section: ["bottom", "mobile"],
+      id: "categories",
+      label: "Categories",
+      icon: Grid,
+      path: "/categories",
+      section: ["main", "mobile"],
       mobile: 3,
     },
     {
-      id: "profile",
-      label: "profile",
-      icon: User,
-      path: "/saved",
+      id: "favorites",
+      label: "Favorites",
+      icon: StarIcon,
+      path: "/favorites",
+      section: ["bottom", "mobile"],
+      mobile: 4,
+    },
+    {
+      id: "circles",
+      label: "Circles",
+      icon: Users,
+      path: "/circles",
       section: ["mobile"],
       mobile: 5,
     },
+    // {
+    //   id: "profile",
+    //   label: "Profile",
+    //   icon: User,
+    //   path: "/profile",
+    //   section: ["mobile"],
+    //   mobile: 5,
+    // },
   ] as MenuItem[],
 
   links: {

@@ -3,7 +3,9 @@
 import type { ThemeProviderProps } from "next-themes";
 
 import * as React from "react";
-import { HeroUIProvider } from "@heroui/system";
+import { HeroUIProvider } from '@heroui/react'
+import { ToastProvider } from "@heroui/toast";
+
 import { useRouter } from "next/navigation";
 import { ThemeProvider as NextThemesProvider } from "next-themes";
 import { UserProvider } from '@auth0/nextjs-auth0/client';
@@ -28,6 +30,7 @@ export function Providers({ children, themeProps }: ProvidersProps) {
     <React.StrictMode>
       <UserProvider>
         <HeroUIProvider navigate={router.push}>
+          <ToastProvider />
           <NextThemesProvider {...themeProps}>{children}</NextThemesProvider>
         </HeroUIProvider>
       </UserProvider>
