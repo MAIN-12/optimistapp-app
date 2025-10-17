@@ -29,19 +29,16 @@ const SideBarWrapper = ({ children }: { children: React.ReactNode }) => {
                 <Sidebar />
             </div>
             <div className="relative flex flex-col flex-1 lg:overflow-y-auto lg:overflow-x-hidden">
-                {isMobile ? (
-                    // New center highlight mobile menu
-                    <MobileMenuCenterHighlight />
-                    // Old mobile menu (commented out for easy switching)
-                    // <MobileBottomMenu />
-                ) : (
-                    <div className="fixed bottom-4 right-4 flex items-center justify-center m-4 z-30">
-                        <SupportOptionsButton />
-                    </div>
-                )}
                 {children}
+                <div className="flex md:hidden ">
+                    <MobileMenuCenterHighlight />
+                    {/* <MobileBottomMenu /> */}
+                </div>
+                <div className="hidden md:block fixed bottom-4 right-4 flex items-center justify-center m-4 z-30">
+                    <SupportOptionsButton />
+                </div>
             </div>
-        </div>
+        </div >
     )
 }
 
