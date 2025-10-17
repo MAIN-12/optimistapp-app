@@ -1,0 +1,77 @@
+// hero.ts
+import { heroui } from "@heroui/react";
+
+export default heroui({
+    themes: {
+        light: {
+            colors: {
+                primary: {
+                    50: '#E0F2FC',
+                    100: '#B3DCF6',
+                    200: '#80C2F0',
+                    300: '#4DA7E9',
+                    400: '#1A8CE2',
+                    500: '#015a86',
+                    600: '#014F76',
+                    700: '#014466',
+                    800: '#013856',
+                    900: '#012D46',
+                    foreground: "#fff",
+                    DEFAULT: '#015a86',
+                },
+                secondary: {
+                    50: '#f8f9fa',
+                    100: '#e9ecef',
+                    200: '#dee2e6',
+                    300: '#ced4da',
+                    400: '#adb5bd',
+                    500: '#6c757d',
+                    600: '#4e5357',
+                    700: '#495057',
+                    800: '#343a40',
+                    900: '#212529',
+                    DEFAULT: '#4e5357',
+                    foreground: "#fff",
+                },
+                background: {
+                    DEFAULT: "#f9f9f9"
+                },
+            },
+        },
+        dark: {
+            colors: {
+                primary: {
+                    50: '#E0F2FC',
+                    100: '#B3DCF6',
+                    200: '#80C2F0',
+                    300: '#4DA7E9',
+                    400: '#1A8CE2',
+                    500: '#015a86',
+                    600: '#014F76',
+                    700: '#014466',
+                    800: '#013856',
+                    900: '#012D46',
+                    foreground: "#fff",
+                    DEFAULT: '#015a86',
+                },
+                secondary: {
+                    50: '#212529',
+                    100: '#343a40',
+                    200: '#495057',
+                    300: '#4e5357',
+                    400: '#6c757d',
+                    500: '#adb5bd',
+                    600: '#ced4da',
+                    700: '#dee2e6',
+                    800: '#e9ecef',
+                    900: '#f8f9fa',
+                    DEFAULT: '#4e5357',
+                    foreground: "#fff",
+                },
+                background: {
+                    DEFAULT: "#111111"
+                },
+            },
+        },
+    },
+});

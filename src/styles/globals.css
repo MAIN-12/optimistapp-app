@@ -1,3 +1,37 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+/* Plugin and source imports for Tailwind v4 */
+@plugin '../../hero.ts';
+@source '../../node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx}';
+
+/* Custom variant for dark mode */
+@custom-variant dark (&:is(.dark *));
+
+/* Font family configuration - Montserrat as default */
+@theme {
+  --font-family-sans: var(--font-montserrat), var(--font-sans), system-ui, -apple-system, sans-serif;
+  --font-family-mono: var(--font-mono), monospace;
+  --font-family-montserrat: var(--font-montserrat), sans-serif;
+
+  /* Custom colors from the old config */
+  --color-muted: #AEC3CD;
+  --color-muted-foreground: #AEC3CD;
+
+  /* Background colors */
+  --color-pagelightBackground: #fff;
+  --color-pageDarkBackground: #04203F;
+  --color-lightBackground: #f7f7ef;
+  --color-darkBackground: #0f172a;
+  --color-sidebarlightBackground: #fff;
+  --color-sidebardarkBackground: #04203F;
+
+  /* Border radius configuration */
+  --radius-DEFAULT: 0.8rem;
+  --radius-none: 0;
+  --radius-sm: 0.5rem;
+  --radius-md: 0.8rem;
+  --radius-lg: 0.8rem;
+  --radius-xl: 1rem;
+  --radius-2xl: 1.5rem;
+  --radius-full: 9999px;
+}
