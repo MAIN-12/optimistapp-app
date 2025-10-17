@@ -59,7 +59,7 @@ const MobileMenuCenterHighlight: React.FC = () => {
                 className={`
                   flex flex-col items-center justify-center transition-all duration-300 ease-in-out
                   ${isCenter 
-                    ? 'relative -top-4 bg-green-500 hover:bg-green-600 text-white rounded-full p-4 shadow-lg transform hover:scale-105' 
+                    ? 'relative -top-4 bg-primary-500 hover:bg-primary-600 text-white rounded-full p-4 shadow-lg transform hover:scale-105' 
                     : 'p-2 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white'
                   }
                 `}

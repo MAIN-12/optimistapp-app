@@ -1,0 +1,176 @@
+{
+  "categories": [
+    {
+      "id": "motivation",
+      "name": "Motivation",
+      "messageCount": 4,
+      "icon": "⭐",
+      "gradient": "from-purple-500 to-purple-600",
+      "bgColor": "#8B5CF6",
+      "description": "Inspiring messages to fuel your drive and determination",
+      "messages": [
+        {
+          "id": 1,
+          "content": "Every challenge is an opportunity to grow stronger. You've got this! 💪",
+          "author": "John Smith",
+          "timestamp": "3 days ago",
+          "likes": 8,
+          "favorited": false
+        },
+        {
+          "id": 2,
+          "content": "Take a moment to appreciate how far you've come. Your progress matters, no matter how small! 🌟",
+          "author": "Juan Botero",
+          "timestamp": "6 days ago",
+          "likes": 20,
+          "favorited": true
+        },
+        {
+          "id": 3,
+          "content": "Your dreams are valid and achievable. Take one small step today towards making them reality! ✨",
+          "author": "Juan Botero",
+          "timestamp": "2 weeks ago",
+          "likes": 18,
+          "favorited": true
+        },
+        {
+          "id": 4,
+          "content": "Success is not final, failure is not fatal. It's the courage to continue that counts! 🚀",
+          "author": "Hannah White",
+          "timestamp": "3 weeks ago",
+          "likes": 16,
+          "favorited": true
+        }
+      ]
+    },
+    {
+      "id": "gratitude",
+      "name": "Gratitude",
+      "messageCount": 4,
+      "icon": "🙏",
+      "gradient": "from-green-500 to-teal-600",
+      "bgColor": "#10B981",
+      "description": "Messages of thankfulness and appreciation for life's blessings",
+      "messages": [
+        {
+          "id": 5,
+          "content": "Gratitude transforms what we have into enough. What are you grateful for today?",
+          "author": "Thomas Brown",
+          "timestamp": "1 week ago",
+          "likes": 11,
+          "favorited": false
+        },
+        {
+          "id": 6,
+          "content": "Today's a great day to be thankful! 😊",
+          "author": "Conrad Deas",
+          "timestamp": "67 days ago",
+          "likes": 5,
+          "favorited": false
+        },
+        {
+          "id": 7,
+          "content": "Take a moment to appreciate the small things that bring you joy today",
+          "author": "Maria Garcia",
+          "timestamp": "2 days ago",
+          "likes": 14,
+          "favorited": true
+        },
+        {
+          "id": 8,
+          "content": "Gratitude is the foundation of abundance. Count your blessings, not your troubles.",
+          "author": "David Williams",
+          "timestamp": "5 days ago",
+          "likes": 9,
+          "favorited": false
+        }
+      ]
+    },
+    {
+      "id": "love",
+      "name": "Love",
+      "messageCount": 4,
+      "icon": "💝",
+      "gradient": "from-orange-400 to-orange-600",
+      "bgColor": "#F97316",
+      "description": "Messages of love, care, and compassion for yourself and others",
+      "messages": [
+        {
+          "id": 9,
+          "content": "You are worthy of all the good things coming your way. Open your heart to receive them! 💖",
+          "author": "Anna Rodriguez",
+          "timestamp": "1 week ago",
+          "likes": 14,
+          "favorited": true
+        },
+        {
+          "id": 10,
+          "content": "Sending you love and positive energy for whatever you're facing today. You are loved! ❤️",
+          "author": "Lisa Chen",
+          "timestamp": "4 days ago",
+          "likes": 15,
+          "favorited": true
+        },
+        {
+          "id": 11,
+          "content": "Your presence is a gift to this world. Thank you for being you, exactly as you are. 🎁",
+          "author": "Grace Wilson",
+          "timestamp": "1 month ago",
+          "likes": 22,
+          "favorited": true
+        },
+        {
+          "id": 12,
+          "content": "Have an awesome day",
+          "author": "Juan Botero",
+          "timestamp": "1 day ago",
+          "likes": 0,
+          "favorited": false
+        }
+      ]
+    },
+    {
+      "id": "celebration",
+      "name": "Celebration",
+      "messageCount": 4,
+      "icon": "🎉",
+      "gradient": "from-blue-500 to-teal-500",
+      "bgColor": "#3B82F6",
+      "description": "Messages to celebrate achievements, milestones, and joyful moments",
+      "messages": [
+        {
+          "id": 13,
+          "content": "Celebrate every small victory on your journey. You're making amazing progress! 🎊",
+          "author": "Emma Thompson",
+          "timestamp": "2 days ago",
+          "likes": 12,
+          "favorited": false
+        },
+        {
+          "id": 14,
+          "content": "Today is a day worth celebrating - you made it through another day of growth! 🌟",
+          "author": "Kevin Lee",
+          "timestamp": "4 days ago",
+          "likes": 8,
+          "favorited": true
+        },
+        {
+          "id": 15,
+          "content": "Your achievements, big or small, deserve recognition. Be proud of yourself! 🏆",
+          "author": "Sofia Martinez",
+          "timestamp": "1 week ago",
+          "likes": 16,
+          "favorited": false
+        },
+        {
+          "id": 16,
+          "content": "Life is a series of moments worth celebrating. Embrace the joy in today! ✨",
+          "author": "Robert Davis",
+          "timestamp": "10 days ago",
+          "likes": 7,
+          "favorited": true
+        }
+      ]
+    }
+  ]
+}

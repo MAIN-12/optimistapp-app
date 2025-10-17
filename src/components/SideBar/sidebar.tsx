@@ -144,21 +144,21 @@ export default function Sidebar() {
                         </span>
                       </DropdownTrigger>
                       <DropdownMenu aria-label="Static Actions">
-                        <DropdownItem
+                        {/* <DropdownItem
                           key="settings"
                           onPress={handleOpenSettingsModal}
                           startContent={<SettingsIcon />}
                         >
                           {t("settings")}
-                        </DropdownItem>
+                        </DropdownItem> */}
 
-                        <DropdownItem
+                        {/* <DropdownItem
                           key="theme"
                           onPress={switchTheme}
                           startContent={theme === "light" ? <MoonFilledIcon /> : <SunFilledIcon />}
                         >
                           {theme === "light" ? t("darkMode") : t("lightMode")}
-                        </DropdownItem>
+                        </DropdownItem> */}
 
                         <DropdownItem
                           key="help"

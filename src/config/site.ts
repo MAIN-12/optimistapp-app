@@ -14,15 +14,15 @@ export const siteConfig = {
     { label: "Pricing", href: "/pricing", },
   ],
   menuItems: [
-    {
-      id: "home",
-      label: "Inicio",
-      icon: HomeIcon,
-      path: "/",
-      section: ["main"],
-      // mobile: 1,
-      className: "bg-primary hover:bg-primary-300"
-    },
+    // {
+    //   id: "home",
+    //   label: "Inicio",
+    //   icon: HomeIcon,
+    //   path: "/",
+    //   section: ["main"],
+    //   // mobile: 1,
+    //   className: "bg-primary hover:bg-primary-300"
+    // },
     {
       id: "new",
       label: "Add New",
@@ -46,7 +46,7 @@ export const siteConfig = {
       label: "Messages",
       icon: MessageCircle,
       path: "/messages",
-      section: ["mobile"],
+      section: ["main", "mobile"],
       mobile: 2,
     },
     {
@@ -62,7 +62,7 @@ export const siteConfig = {
       label: "Favorites",
       icon: StarIcon,
       path: "/favorites",
-      section: ["bottom", "mobile"],
+      section: ["main", "mobile"],
       mobile: 4,
     },
     {
@@ -70,7 +70,7 @@ export const siteConfig = {
       label: "Circles",
       icon: Users,
       path: "/circles",
-      section: ["mobile"],
+      section: ["main", "mobile"],
       mobile: 5,
     },
     // {

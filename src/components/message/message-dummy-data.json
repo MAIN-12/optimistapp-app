@@ -1,0 +1,373 @@
+{
+  "dailyMessage": {
+    "text": "Today is full of endless possibilities! ✨",
+    "icon": "☀️"
+  },
+  "userMood": {
+    "question": "How are you feeling?",
+    "averageRating": 5.0,
+    "buttonText": "Log Mood"
+  },
+  "messages": [
+    {
+      "id": 1,
+      "authorInitial": "A",
+      "authorName": "Anonymous",
+      "content": "Testing audio upload",
+      "category": "💡",
+      "categoryName": "Motivation",
+      "timestamp": "23 hr ago",
+      "avatar": {
+        "backgroundColor": "#8B5CF6",
+        "textColor": "#FFFFFF"
+      },
+      "interactions": {
+        "likes": 0,
+        "favorites": false,
+        "shared": false
+      }
+    },
+    {
+      "id": 2,
+      "authorInitial": "J",
+      "authorName": "Juan Botero",
+      "content": "Have an awesome day",
+      "category": "💝",
+      "categoryName": "Love & Care",
+      "timestamp": "1 day ago",
+      "avatar": {
+        "backgroundColor": "#10B981",
+        "textColor": "#FFFFFF"
+      },
+      "interactions": {
+        "likes": 0,
+        "favorites": false,
+        "shared": false
+      }
+    },
+    {
+      "id": 3,
+      "authorInitial": "M",
+      "authorName": "Maria Garcia",
+      "content": "Remember to take deep breaths and stay present in this moment. You are exactly where you need to be. 🌸",
+      "category": "🧘",
+      "categoryName": "Mindfulness",
+      "timestamp": "2 days ago",
+      "avatar": {
+        "backgroundColor": "#F59E0B",
+        "textColor": "#FFFFFF"
+      },
+      "interactions": {
+        "likes": 12,
+        "favorites": true,
+        "shared": false
+      }
+    },
+    {
+      "id": 4,
+      "authorInitial": "J",
+      "authorName": "John Smith",
+      "content": "Every challenge is an opportunity to grow stronger. You've got this! 💪",
+      "category": "💡",
+      "categoryName": "Motivation",
+      "timestamp": "3 days ago",
+      "avatar": {
+        "backgroundColor": "#3B82F6",
+        "textColor": "#FFFFFF"
+      },
+      "interactions": {
+        "likes": 8,
+        "favorites": false,
+        "shared": true
+      }
+    },
+    {
+      "id": 5,
+      "authorInitial": "L",
+      "authorName": "Lisa Chen",
+      "content": "Sending you love and positive energy for whatever you're facing today. You are loved! ❤️",
+      "category": "💝",
+      "categoryName": "Love & Care",
+      "timestamp": "4 days ago",
+      "avatar": {
+        "backgroundColor": "#EC4899",
+        "textColor": "#FFFFFF"
+      },
+      "interactions": {
+        "likes": 15,
+        "favorites": true,
+        "shared": false
+      }
+    },
+    {
+      "id": 6,
+      "authorInitial": "D",
+      "authorName": "David Williams",
+      "content": "Trust in the divine plan. Everything happens for a reason, and you are being guided. 🙏",
+      "category": "🙏",
+      "categoryName": "Spiritual",
+      "timestamp": "5 days ago",
+      "avatar": {
+        "backgroundColor": "#8B5CF6",
+        "textColor": "#FFFFFF"
+      },
+      "interactions": {
+        "likes": 6,
+        "favorites": false,
+        "shared": false
+      }
+    },
+    {
+      "id": 7,
+      "authorInitial": "J",
+      "authorName": "Juan Botero",
+      "content": "Take a moment to appreciate how far you've come. Your progress matters, no matter how small! 🌟",
+      "category": "💡",
+      "categoryName": "Motivation",
+      "timestamp": "6 days ago",
+      "avatar": {
+        "backgroundColor": "#10B981",
+        "textColor": "#FFFFFF"
+      },
+      "interactions": {
+        "likes": 20,
+        "favorites": true,
+        "shared": true
+      }
+    },
+    {
+      "id": 8,
+      "authorInitial": "R",
+      "authorName": "Robert Davis",
+      "content": "Nature has so much wisdom to offer. Spend some time outdoors today if you can. 🌳",
+      "category": "🧘",
+      "categoryName": "Mindfulness",
+      "timestamp": "1 week ago",
+      "avatar": {
+        "backgroundColor": "#059669",
+        "textColor": "#FFFFFF"
+      },
+      "interactions": {
+        "likes": 9,
+        "favorites": false,
+        "shared": false
+      }
+    },
+    {
+      "id": 9,
+      "authorInitial": "A",
+      "authorName": "Anna Rodriguez",
+      "content": "You are worthy of all the good things coming your way. Open your heart to receive them! �",
+      "category": "💝",
+      "categoryName": "Love & Care",
+      "timestamp": "1 week ago",
+      "avatar": {
+        "backgroundColor": "#DC2626",
+        "textColor": "#FFFFFF"
+      },
+      "interactions": {
+        "likes": 14,
+        "favorites": true,
+        "shared": false
+      }
+    },
+    {
+      "id": 10,
+      "authorInitial": "T",
+      "authorName": "Thomas Brown",
+      "content": "Gratitude transforms what we have into enough. What are you grateful for today?",
+      "category": "🙏",
+      "categoryName": "Spiritual",
+      "timestamp": "1 week ago",
+      "avatar": {
+        "backgroundColor": "#7C3AED",
+        "textColor": "#FFFFFF"
+      },
+      "interactions": {
+        "likes": 11,
+        "favorites": false,
+        "shared": true
+      }
+    },
+    {
+      "id": 11,
+      "authorInitial": "J",
+      "authorName": "Juan Botero",
+      "content": "Your dreams are valid and achievable. Take one small step today towards making them reality! ✨",
+      "category": "💡",
+      "categoryName": "Motivation",
+      "timestamp": "2 weeks ago",
+      "avatar": {
+        "backgroundColor": "#F59E0B",
+        "textColor": "#FFFFFF"
+      },
+      "interactions": {
+        "likes": 18,
+        "favorites": true,
+        "shared": true
+      }
+    },
+    {
+      "id": 12,
+      "authorInitial": "K",
+      "authorName": "Kevin Lee",
+      "content": "Peace begins with a smile. Share your light with the world today. �😊",
+      "category": "🧘",
+      "categoryName": "Mindfulness",
+      "timestamp": "2 weeks ago",
+      "avatar": {
+        "backgroundColor": "#06B6D4",
+        "textColor": "#FFFFFF"
+      },
+      "interactions": {
+        "likes": 7,
+        "favorites": false,
+        "shared": false
+      }
+    },
+    {
+      "id": 13,
+      "authorInitial": "N",
+      "authorName": "Nina Patel",
+      "content": "You are braver than you believe, stronger than you seem, and more loved than you know. 🌈",
+      "category": "💝",
+      "categoryName": "Love & Care",
+      "timestamp": "2 weeks ago",
+      "avatar": {
+        "backgroundColor": "#EF4444",
+        "textColor": "#FFFFFF"
+      },
+      "interactions": {
+        "likes": 25,
+        "favorites": true,
+        "shared": true
+      }
+    },
+    {
+      "id": 14,
+      "authorInitial": "C",
+      "authorName": "Carlos Mendez",
+      "content": "Let go of what no longer serves you. Make space for new blessings to enter your life. 🕊️",
+      "category": "🙏",
+      "categoryName": "Spiritual",
+      "timestamp": "3 weeks ago",
+      "avatar": {
+        "backgroundColor": "#8B5CF6",
+        "textColor": "#FFFFFF"
+      },
+      "interactions": {
+        "likes": 13,
+        "favorites": false,
+        "shared": false
+      }
+    },
+    {
+      "id": 15,
+      "authorInitial": "H",
+      "authorName": "Hannah White",
+      "content": "Success is not final, failure is not fatal. It's the courage to continue that counts! 🚀",
+      "category": "💡",
+      "categoryName": "Motivation",
+      "timestamp": "3 weeks ago",
+      "avatar": {
+        "backgroundColor": "#10B981",
+        "textColor": "#FFFFFF"
+      },
+      "interactions": {
+        "likes": 16,
+        "favorites": true,
+        "shared": true
+      }
+    },
+    {
+      "id": 16,
+      "authorInitial": "O",
+      "authorName": "Oliver Johnson",
+      "content": "In the midst of chaos, find stillness. In the midst of noise, find silence. You have that power within you. 🧘‍♂️",
+      "category": "🧘",
+      "categoryName": "Mindfulness",
+      "timestamp": "3 weeks ago",
+      "avatar": {
+        "backgroundColor": "#0891B2",
+        "textColor": "#FFFFFF"
+      },
+      "interactions": {
+        "likes": 10,
+        "favorites": false,
+        "shared": false
+      }
+    },
+    {
+      "id": 17,
+      "authorInitial": "G",
+      "authorName": "Grace Wilson",
+      "content": "Your presence is a gift to this world. Thank you for being you, exactly as you are. 🎁",
+      "category": "💝",
+      "categoryName": "Love & Care",
+      "timestamp": "1 month ago",
+      "avatar": {
+        "backgroundColor": "#F97316",
+        "textColor": "#FFFFFF"
+      },
+      "interactions": {
+        "likes": 22,
+        "favorites": true,
+        "shared": false
+      }
+    },
+    {
+      "id": 18,
+      "authorInitial": "B",
+      "authorName": "Benjamin Clark",
+      "content": "Faith is taking the first step even when you don't see the whole staircase. Keep climbing! ⛰️",
+      "category": "🙏",
+      "categoryName": "Spiritual",
+      "timestamp": "1 month ago",
+      "avatar": {
+        "backgroundColor": "#7C3AED",
+        "textColor": "#FFFFFF"
+      },
+      "interactions": {
+        "likes": 8,
+        "favorites": false,
+        "shared": true
+      }
+    },
+    {
+      "id": 19,
+      "authorInitial": "Z",
+      "authorName": "Zoe Anderson",
+      "content": "The only impossible journey is the one you never begin. Start where you are, use what you have! 🌱",
+      "category": "💡",
+      "categoryName": "Motivation",
+      "timestamp": "1 month ago",
+      "avatar": {
+        "backgroundColor": "#059669",
+        "textColor": "#FFFFFF"
+      },
+      "interactions": {
+        "likes": 19,
+        "favorites": true,
+        "shared": true
+      }
+    },
+    {
+      "id": 20,
+      "authorInitial": "I",
+      "authorName": "Isaac Taylor",
+      "content": "Breathe in peace, breathe out stress. This moment is all we truly have. Make it beautiful. 🌸",
+      "category": "🧘",
+      "categoryName": "Mindfulness",
+      "timestamp": "1 month ago",
+      "avatar": {
+        "backgroundColor": "#DC2626",
+        "textColor": "#FFFFFF"
+      },
+      "interactions": {
+        "likes": 12,
+        "favorites": false,
+        "shared": false
+      }
+    }
+  ]
+}
