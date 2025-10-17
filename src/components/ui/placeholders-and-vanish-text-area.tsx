@@ -2,7 +2,7 @@
 
 import { AnimatePresence, motion } from "framer-motion"
 import { useCallback, useEffect, useRef, useState } from "react"
-import { cn } from "../../utils/mergeClasses";
+import { cn } from "@heroui/theme";
 import { Button } from "@heroui/react";
 
 interface Probes {
