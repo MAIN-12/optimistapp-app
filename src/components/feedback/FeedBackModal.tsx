@@ -26,8 +26,8 @@ const SupportModal: React.FC<SupportModalProps> = ({ isOpen, onOpenChange }) => 
     const t = useTranslations('FeedBackModal');
     const [currentView, setCurrentView] = useState<string>("");
 
-    const handleButtonClick = (view: string) => {setCurrentView(view);};
-    const handleBackClick = () => {setCurrentView("");};
+    const handleButtonClick = (view: string) => { setCurrentView(view); };
+    const handleBackClick = () => { setCurrentView(""); };
 
     const buttons = [
         {
@@ -53,7 +53,7 @@ const SupportModal: React.FC<SupportModalProps> = ({ isOpen, onOpenChange }) => 
     ];
 
     return (
-        <Modal isOpen={isOpen} onOpenChange={onOpenChange} className="bg-light dark:bg-dark">
+        <Modal isOpen={isOpen} scrollBehavior="inside" onOpenChange={onOpenChange} >
             <ModalContent>
                 <ModalHeader className="flex flex-col">
                     {currentView !== "" ? (
@@ -96,8 +96,8 @@ const SupportModal: React.FC<SupportModalProps> = ({ isOpen, onOpenChange }) => 
                     {currentView === "feedback" && (<ProvideFeedback />)}
                     {currentView === "Help" && (<RequestSupport />)}
                 </ModalBody>
-                <ModalFooter className="z-[1000] bg-light dark:bg-dark">
-                    <p className="mt-3 text-sm text-center w-full">Powerd by <a href="https://main12.com" target="_blank" rel="noopener noreferrer" className="text-blue-500">Main 12 LLC</a></p>
+                <ModalFooter className="z-[1000] bg-light dark:bg-dark rounded">
+                    <p className="mt-3 text-sm text-center w-full">Powered by <a href="https://main12.com/" className="text-blue-500">Main 12</a></p>
                 </ModalFooter>
             </ModalContent>
         </Modal >
