@@ -35,3 +35,54 @@
   --radius-2xl: 1.5rem;
   --radius-full: 9999px;
 }
+
+/* Hide scrollbars on mobile devices */
+@media (max-width: 767px) {
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  *::-webkit-scrollbar {
+    display: none;
+  }
+  
+  /* Hide scrollbar for IE, Edge and Firefox */
+  * {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;     /* Firefox */
+  }
+  
+  /* Ensure body and html can still scroll */
+  html, body {
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  /* Apply to main containers */
+  .hidden-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  .hidden-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* Desktop scrollbar styling (optional - keeps scrollbars on desktop) */
+@media (min-width: 768px) {
+  /* Custom scrollbar for desktop */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 4px;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
+  }
+}

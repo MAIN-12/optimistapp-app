@@ -79,7 +79,7 @@ export default function ProfilePage() {
                 {user.email}
               </p>
               <p className="text-gray-500 text-xs mt-2">
-                Member since {new Date(user.created_at || Date.now()).toLocaleDateString()}
+                Member since {new Date().toLocaleDateString()}
               </p>
             </div>
 
