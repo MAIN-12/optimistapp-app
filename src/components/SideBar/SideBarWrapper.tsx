@@ -35,7 +35,7 @@ const SideBarWrapper = ({ children }: { children: React.ReactNode }) => {
                     {/* <MobileBottomMenu /> */}
                 </div>
                 <div className="hidden md:block fixed bottom-4 right-4 flex items-center justify-center m-4 z-30">
-                    <SupportOptionsButton />
+                    {/* <SupportOptionsButton /> */}
                 </div>
             </div>
         </div >
