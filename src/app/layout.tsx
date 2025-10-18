@@ -37,11 +37,11 @@ export default async function RootLayout({
   const locale = await getLocale();
   const messages = await getMessages();
   return (
-    <html suppressHydrationWarning lang={locale}>
+    <html suppressHydrationWarning lang={locale} className="hidden-scrollbar">
       <head />
       <body
         className={clsx(
-          "min-h-screen bg-background font-sans antialiased",
+          "min-h-screen bg-background font-sans antialiased hidden-scrollbar",
           fontSans.variable,
         )}
       >
@@ -52,7 +52,7 @@ export default async function RootLayout({
             forcedTheme: "light"
           }}>
             <SideBarWrapper>
-              <main>{children}</main>
+              <main className="hidden-scrollbar">{children}</main>
             </SideBarWrapper>
           </Providers>
         </NextIntlClientProvider>
