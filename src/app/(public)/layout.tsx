@@ -6,9 +6,13 @@ export default function Layout({
     children: React.ReactNode;
 }) {
     return (
-        <section className="container mx-auto max-w-4xl pt-16 px-6 flex-grow min-h-screen bg-gray-50 mb-32">
-            <OptimistHeader />
-            {children}
-        </section>
+        <div id="public-layout" className="w-full max-w-4xl mx-auto px-2 sm:px-6 pt-16 flex-grow min-h-screen mb-32 overflow-x-hidden">
+            <div className="w-full max-w-full">
+                <OptimistHeader />
+                <div className="w-full max-w-full overflow-x-hidden">
+                    {children}
+                </div>
+            </div>
+        </div>
     );
 }

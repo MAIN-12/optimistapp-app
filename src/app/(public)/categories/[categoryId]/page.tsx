@@ -3,12 +3,14 @@ import { ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
 
 interface CategoryPageProps {
-  params: {
+  params: Promise<{
     categoryId: string;
-  };
+  }>;
 }
 
-export default function CategoryPage({ params }: CategoryPageProps) {
+export default async function CategoryPage({ params }: CategoryPageProps) {
+  const { categoryId } = await params;
+  
   return (
     <div className="space-y-4">
       {/* Back button */}
@@ -20,7 +22,7 @@ export default function CategoryPage({ params }: CategoryPageProps) {
         <span>Back to Categories</span>
       </Link>
 
-      <CategoryMessages categoryId={params.categoryId} />
+      <CategoryMessages categoryId={categoryId} />
     </div>
   );
 }

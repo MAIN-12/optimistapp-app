@@ -1,9 +1,11 @@
 
 
+import { Circles } from '@/components/circles';
+
 export default function Page() {
     return (
         <>
-            <h1>circles</h1>
+            <Circles />
         </>
     );
 }

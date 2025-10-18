@@ -27,7 +27,7 @@ export const siteConfig = {
       id: "new",
       label: "Add New",
       icon: Add,
-      path: "/",
+      path: "/send-vives",
       section: ["main", "mobile"],
       mobile: 1,
       className: "bg-primary hover:bg-primary-300"

@@ -1,0 +1,260 @@
+{
+  "circles": [
+    {
+      "id": "encourage-circle",
+      "name": "Encourage Circle",
+      "description": "Share your heart, find support",
+      "icon": "🙏",
+      "gradient": "from-purple-500 to-teal-600",
+      "bgColor": "#8B5CF6",
+      "type": "public",
+      "memberCount": 2847,
+      "isJoined": false,
+      "category": "Support",
+      "tags": ["encouragement", "support", "community"],
+      "about": "This is a sacred space where our community comes together to support one another through prayer and encouragement. Share your heart, find hope, and discover the power of collective faith.",
+      "rules": [
+        "Be respectful and kind to all members",
+        "Share encouragement and positive support",
+        "No negative or harmful content",
+        "Respect privacy and confidentiality"
+      ],
+      "members": [
+        {
+          "id": 1,
+          "name": "Sarah Johnson",
+          "avatar": "#10B981",
+          "role": "Admin",
+          "joinDate": "2024-01-15"
+        },
+        {
+          "id": 2,
+          "name": "Juan Botero",
+          "avatar": "#F59E0B",
+          "role": "Moderator",
+          "joinDate": "2024-02-20"
+        },
+        {
+          "id": 3,
+          "name": "Maria Garcia",
+          "avatar": "#EC4899",
+          "role": "Member",
+          "joinDate": "2024-03-10"
+        }
+      ],
+      "recentActivity": [
+        {
+          "id": 1,
+          "author": "Sarah Johnson",
+          "content": "Sending prayers and positive energy to everyone going through difficult times. You are not alone! 🙏",
+          "timestamp": "2 hours ago",
+          "likes": 24
+        },
+        {
+          "id": 2,
+          "author": "Juan Botero",
+          "content": "Grateful for this amazing community. Your support means everything! ❤️",
+          "timestamp": "5 hours ago",
+          "likes": 18
+        }
+      ]
+    },
+    {
+      "id": "mindful-meditation",
+      "name": "Mindful Meditation",
+      "description": "Daily meditation and mindfulness practices",
+      "icon": "🧘",
+      "gradient": "from-blue-500 to-purple-600",
+      "bgColor": "#3B82F6",
+      "type": "public",
+      "memberCount": 1523,
+      "isJoined": true,
+      "category": "Wellness",
+      "tags": ["meditation", "mindfulness", "peace"],
+      "about": "Join our daily meditation sessions and mindfulness practices. Find inner peace, reduce stress, and connect with like-minded individuals on a journey of self-discovery.",
+      "rules": [
+        "Maintain a peaceful and respectful environment",
+        "Share meditation tips and experiences",
+        "No promotional content",
+        "Support each other's journey"
+      ],
+      "members": [
+        {
+          "id": 4,
+          "name": "David Chen",
+          "avatar": "#7C3AED",
+          "role": "Admin",
+          "joinDate": "2024-01-10"
+        },
+        {
+          "id": 5,
+          "name": "Emma Wilson",
+          "avatar": "#059669",
+          "role": "Member",
+          "joinDate": "2024-02-15"
+        }
+      ],
+      "recentActivity": [
+        {
+          "id": 3,
+          "author": "David Chen",
+          "content": "Today's meditation focus: Gratitude. Take 5 minutes to appreciate the small joys in your life 🌸",
+          "timestamp": "1 hour ago",
+          "likes": 32
+        }
+      ]
+    },
+    {
+      "id": "fitness-warriors",
+      "name": "Fitness Warriors",
+      "description": "Motivate each other to stay healthy and strong",
+      "icon": "💪",
+      "gradient": "from-orange-500 to-red-600",
+      "bgColor": "#F97316",
+      "type": "private",
+      "memberCount": 892,
+      "isJoined": false,
+      "category": "Health",
+      "tags": ["fitness", "health", "motivation"],
+      "about": "A private community for fitness enthusiasts to share workout routines, healthy recipes, and motivate each other on our wellness journey.",
+      "rules": [
+        "Members must be approved by admins",
+        "Share fitness tips and healthy lifestyle content",
+        "Be supportive and motivational",
+        "No body shaming or negative comments"
+      ],
+      "members": [
+        {
+          "id": 6,
+          "name": "Mike Rodriguez",
+          "avatar": "#DC2626",
+          "role": "Admin",
+          "joinDate": "2024-01-05"
+        }
+      ],
+      "recentActivity": [
+        {
+          "id": 4,
+          "author": "Mike Rodriguez",
+          "content": "30-day push-up challenge starts tomorrow! Who's in? 💪",
+          "timestamp": "3 hours ago",
+          "likes": 15
+        }
+      ]
+    },
+    {
+      "id": "creative-souls",
+      "name": "Creative Souls",
+      "description": "Share art, music, and creative inspiration",
+      "icon": "🎨",
+      "gradient": "from-pink-500 to-violet-600",
+      "bgColor": "#EC4899",
+      "type": "public",
+      "memberCount": 3201,
+      "isJoined": false,
+      "category": "Arts",
+      "tags": ["art", "creativity", "inspiration"],
+      "about": "A vibrant community for artists, musicians, writers, and all creative minds to share their work, get feedback, and inspire each other.",
+      "rules": [
+        "Share original creative content",
+        "Provide constructive feedback",
+        "Respect all forms of artistic expression",
+        "No plagiarism or stolen content"
+      ],
+      "members": [
+        {
+          "id": 7,
+          "name": "Luna Martinez",
+          "avatar": "#8B5CF6",
+          "role": "Admin",
+          "joinDate": "2024-01-20"
+        }
+      ],
+      "recentActivity": [
+        {
+          "id": 5,
+          "author": "Luna Martinez",
+          "content": "Just finished this watercolor piece inspired by today's sunset. Art heals the soul! 🎨✨",
+          "timestamp": "4 hours ago",
+          "likes": 67
+        }
+      ]
+    },
+    {
+      "id": "parents-support",
+      "name": "Parents Support Network",
+      "description": "Supporting parents through the journey",
+      "icon": "👨‍👩‍👧‍👦",
+      "gradient": "from-green-500 to-blue-600",
+      "bgColor": "#10B981",
+      "type": "private",
+      "memberCount": 567,
+      "isJoined": false,
+      "category": "Family",
+      "tags": ["parenting", "support", "family"],
+      "about": "A private, safe space for parents to share experiences, ask for advice, and support each other through the beautiful and challenging journey of parenthood.",
+      "rules": [
+        "Verification required for membership",
+        "Respect privacy and confidentiality",
+        "Share parenting tips and experiences",
+        "No judgment, only support"
+      ],
+      "members": [
+        {
+          "id": 8,
+          "name": "Jennifer Lee",
+          "avatar": "#0891B2",
+          "role": "Admin",
+          "joinDate": "2024-01-12"
+        }
+      ],
+      "recentActivity": [
+        {
+          "id": 6,
+          "author": "Jennifer Lee",
+          "content": "Remember: You're doing better than you think. Parenting is the hardest job, but you've got this! 💕",
+          "timestamp": "6 hours ago",
+          "likes": 42
+        }
+      ]
+    },
+    {
+      "id": "book-lovers",
+      "name": "Book Lovers Unite",
+      "description": "Discover, discuss, and share great reads",
+      "icon": "📚",
+      "gradient": "from-amber-500 to-orange-600",
+      "bgColor": "#F59E0B",
+      "type": "public",
+      "memberCount": 4156,
+      "isJoined": true,
+      "category": "Literature",
+      "tags": ["books", "reading", "literature"],
+      "about": "A community for bibliophiles to share book recommendations, discuss favorite reads, and discover new authors and genres.",
+      "rules": [
+        "Share book recommendations and reviews",
+        "Respect different reading preferences",
+        "Use spoiler warnings when necessary",
+        "Support authors and reading culture"
+      ],
+      "members": [
+        {
+          "id": 9,
+          "name": "Alex Thompson",
+          "avatar": "#7C3AED",
+          "role": "Admin",
+          "joinDate": "2024-01-08"
+        }
+      ],
+      "recentActivity": [
+        {
+          "id": 7,
+          "author": "Alex Thompson",
+          "content": "This month's book club selection: 'The Power of Now' by Eckhart Tolle. Join our discussion! 📖",
+          "timestamp": "1 day ago",
+          "likes": 28
+        }
+      ]
+    }
+  ]
+}
