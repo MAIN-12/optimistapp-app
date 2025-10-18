@@ -2,6 +2,7 @@
 
 import { Music, Bell, Settings } from 'lucide-react';
 import UserDropdown from './UserDropdown';
+import { Button } from '@heroui/button';
 
 export default function OptimistHeader() {
 
@@ -14,15 +15,18 @@ export default function OptimistHeader() {
 
             {/* Right side - Action buttons */}
             <div className="flex items-center gap-4">
-                <button className="p-2 hover:bg-gray-100 rounded-lg transition-colors">
-                    <Music className="w-5 h-5 text-gray-600" />
-                </button>
-                <button className="p-2 hover:bg-gray-100 rounded-lg transition-colors">
-                    <Bell className="w-5 h-5 text-gray-600" />
-                </button>
-                <button className="p-2 hover:bg-gray-100 rounded-lg transition-colors">
-                    <Settings className="w-5 h-5 text-gray-600" />
-                </button>
+                <Button
+                    startContent={<Music className="w-5 h-5 text-gray-600" />}
+                    variant='light'
+                    isIconOnly
+                    radius='full'
+                />
+                <Button
+                    startContent={<Bell className="w-5 h-5 text-gray-600" />}
+                    variant='light'
+                    isIconOnly
+                    radius='full'
+                />
                 <UserDropdown />
             </div>
         </div>

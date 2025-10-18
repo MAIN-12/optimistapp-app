@@ -9,6 +9,7 @@ import { ToastProvider } from "@heroui/toast";
 import { useRouter } from "next/navigation";
 import { ThemeProvider as NextThemesProvider } from "next-themes";
 import { UserProvider } from '@auth0/nextjs-auth0/client';
+import { SupportModalProvider } from "@/components/feedback/FeedBackProvider";
 
 export interface ProvidersProps {
   children: React.ReactNode;
@@ -31,7 +32,11 @@ export function Providers({ children, themeProps }: ProvidersProps) {
       <UserProvider>
         <HeroUIProvider navigate={router.push}>
           <ToastProvider />
-          <NextThemesProvider {...themeProps}>{children}</NextThemesProvider>
+          <NextThemesProvider {...themeProps}>
+            <SupportModalProvider>
+              {children}
+            </SupportModalProvider>
+          </NextThemesProvider>
         </HeroUIProvider>
       </UserProvider>
     </React.StrictMode>
