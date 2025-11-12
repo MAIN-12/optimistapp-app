@@ -24,5 +24,11 @@
         "colapseSidebar": "Colapsar barra lateral",
         "expandSidebar": "Expandir barra lateral",
         "pinSidebar": "Fijar barra lateral"
+    },
+    "PWAInstall": {
+        "installApp": "Instalar App",
+        "iosInstructions": "Para instalar esta aplicación en tu dispositivo iOS:\n1. Toca el botón Compartir (□↗)\n2. Desplázate hacia abajo y toca \"Añadir a pantalla de inicio\"\n3. Toca \"Añadir\" para confirmar",
+        "androidInstructions": "Para instalar esta aplicación en tu dispositivo Android:\n1. Toca el botón de menú (⋮)\n2. Toca \"Añadir a pantalla de inicio\" o \"Instalar aplicación\"\n3. Sigue las instrucciones para instalar",
+        "desktopInstructions": "Para instalar esta aplicación:\n1. Busca un icono de instalación en la barra de direcciones de tu navegador\n2. O ve al menú del navegador > \"Instalar Optimist\"\n3. Sigue las instrucciones para instalar"
     }
 }

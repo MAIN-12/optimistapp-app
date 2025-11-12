@@ -24,5 +24,11 @@
         "colapseSidebar": "Collapse Sidebar",
         "expandSidebar": "Expand Sidebar",
         "pinSidebar": "Pin Sidebar"
+    },
+    "PWAInstall": {
+        "installApp": "Install App",
+        "iosInstructions": "To install this app on your iOS device:\n1. Tap the Share button (□↗)\n2. Scroll down and tap \"Add to Home Screen\"\n3. Tap \"Add\" to confirm",
+        "androidInstructions": "To install this app on your Android device:\n1. Tap the menu button (⋮)\n2. Tap \"Add to Home screen\" or \"Install app\"\n3. Follow the prompts to install",
+        "desktopInstructions": "To install this app:\n1. Look for an install icon in your browser address bar\n2. Or go to browser menu > \"Install Optimist\"\n3. Follow the prompts to install"
     }
 }

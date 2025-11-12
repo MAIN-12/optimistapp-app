@@ -3,6 +3,7 @@ import { Metadata, Viewport } from "next";
 import clsx from "clsx";
 import { NextIntlClientProvider } from 'next-intl';
 import { getLocale, getMessages } from 'next-intl/server';
+import Script from 'next/script';
 
 import { Providers } from "./providers";
 
@@ -20,6 +21,7 @@ export const metadata: Metadata = {
   icons: {
     icon: "/favicon.ico",
   },
+  manifest: "/site.webmanifest",
 };
 
 export const viewport: Viewport = {
@@ -45,6 +47,22 @@ export default async function RootLayout({
           fontSans.variable,
         )}
       >
+        <Script id="sw-register" strategy="afterInteractive">
+          {`
+            if ('serviceWorker' in navigator) {
+              window.addEventListener('load', function() {
+                navigator.serviceWorker.register('/sw.js').then(
+                  function(registration) {
+                    console.log('SW registration successful');
+                  },
+                  function(err) {
+                    console.log('SW registration failed');
+                  }
+                );
+              });
+            }
+          `}
+        </Script>
         <NextIntlClientProvider messages={messages}>
           <Providers themeProps={{
             attribute: "class",

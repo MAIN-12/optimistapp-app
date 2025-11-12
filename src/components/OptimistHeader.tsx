@@ -2,6 +2,7 @@
 
 import { Music, Bell, Settings } from 'lucide-react';
 import UserDropdown from './UserDropdown';
+import PWAInstallButton from './PWAInstallButton';
 import { Button } from '@heroui/button';
 
 export default function OptimistHeader() {
@@ -15,6 +16,7 @@ export default function OptimistHeader() {
 
             {/* Right side - Action buttons */}
             <div className="flex items-center gap-4">
+                <PWAInstallButton />
                 <Button
                     startContent={<Music className="w-5 h-5 text-gray-600" />}
                     variant='light'
