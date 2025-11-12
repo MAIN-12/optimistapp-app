@@ -1,51 +1,72 @@
-# 🚀 Main 12 - Next.js Boilerplate  
+# 🌟 Optimist App - Positive Community & Personal Wellness Platform
 
-A comprehensive and production-ready Next.js 15 boilerplate featuring **authentication**, **internationalization**, **database integration**, **API documentation**, **real-time chat**, and **modern UI components** for rapid full-stack development.
+A comprehensive mental wellness and positive community platform built with Next.js 15, featuring **community circles**, **positive messaging**, **personal journaling**, **mood tracking**, and **real-time engagement** to foster mental health and meaningful connections.
 
 ## ✨ Key Features
 
-- 🔐 **Authentication** - Complete Auth0 integration with protected routes
-- 🌍 **Internationalization** - Multi-language support with next-intl
-- 📊 **Database Ready** - Prisma ORM with PostgreSQL/Supabase integration
-- 💬 **Real-time Chat** - Built-in chat functionality
-- 📚 **API Documentation** - Swagger/OpenAPI integration
-- � **Modern UI** - HeroUI v2 components with Tailwind CSS
-- 🔔 **Push Notifications** - Web push notifications support
-- 📝 **Feedback System** - Integrated feedback collection
-- 🎭 **Theme Support** - Dark/light mode switching
-- 📱 **Responsive Design** - Mobile-first approach with sidebar navigation
+### 🏠 Community Engagement
+- 🔗 **Circles** - Create and join supportive community groups (Public/Private/Invite-Only)
+- 💬 **Positive Messaging** - Share encouragement, gratitude, prayers, and motivation
+- ⚡ **Real-time Reactions** - Express support with 6 positive reaction types (LIKE, LOVE, PRAY, GRATEFUL, INSPIRE, SUPPORT)
+- � **Comments & Discussions** - Build meaningful conversations around positive content
+
+### 📝 Personal Wellness
+- � **Private Journaling** - Secure, encrypted personal reflection space with auto-save
+- 🎯 **Guided Prompts** - 10 categories of reflective writing prompts (Gratitude, Growth, Mindfulness, etc.)
+- 😊 **Mood Tracking** - 10-point mood scale with correlation to journal entries
+- 🏆 **Wellness Streaks** - Track journaling habits and celebrate milestones
+
+### 🔔 Smart Notifications
+- 📱 **Real-time Updates** - Live notifications for community engagement
+- ⏰ **Wellness Reminders** - Gentle prompts for journaling and mood check-ins
+- � **Milestone Celebrations** - Achievement notifications for positive reinforcement
+
+### 🛡️ Safety & Moderation
+- � **Community Moderation** - Role-based content management (Owner/Admin/Moderator/Member)
+- 🚫 **Content Filtering** - Automated and human moderation for positive environment
+- 🔒 **Privacy Controls** - Granular privacy settings for personal content
 
 ## 🛠️ Technology Stack
 
 ### Core Framework
 - [Next.js 15](https://nextjs.org/docs/getting-started) – React framework with App Router and Turbopack
 - [TypeScript](https://www.typescriptlang.org/) – Type-safe development
-- [React 18](https://reactjs.org/) – Latest React features
+- [React 18](https://reactjs.org/) – Latest React features with Suspense
 
 ### UI & Styling
-- [HeroUI v2](https://heroui.com/) – Modern React UI components
-- [Tailwind CSS](https://tailwindcss.com/) – Utility-first CSS framework
-- [Tailwind Variants](https://tailwind-variants.org) – Component variants
-- [Framer Motion](https://www.framer.com/motion/) – Smooth animations
-- [Material-UI Icons](https://mui.com/material-ui/material-icons/) & [Lucide React](https://lucide.dev/) – Icon libraries
+- [HeroUI v2](https://heroui.com/) – Modern React UI components optimized for wellness apps
+- [Tailwind CSS](https://tailwindcss.com/) – Utility-first CSS framework with custom theme
+- [Framer Motion](https://www.framer.com/motion/) – Smooth animations for positive UX
+- [Material-UI Icons](https://mui.com/material-ui/material-icons/) & [Lucide React](https://lucide.dev/) – Comprehensive icon libraries
 
 ### Authentication & Security
-- [Auth0](https://auth0.com/) – Complete authentication solution
+- [Auth0](https://auth0.com/) – Enterprise-grade authentication with social logins
+- JWT-based session management
 - Protected routes with middleware
+- Privacy-first user data handling
 
-### Database & Backend
-- [Prisma](https://prisma.io/) – Next-generation ORM
-- [PostgreSQL](https://postgresql.org/) – Robust relational database
-- [Supabase](https://supabase.com/) – Open source Firebase alternative
+### Database Architecture (Hybrid)
+- [Prisma](https://prisma.io/) – Type-safe ORM with PostgreSQL
+- [PostgreSQL](https://postgresql.org/) – Primary database for persistent data
+- [Redis](https://redis.io/) – High-performance caching and real-time features
+- Hybrid data strategy for optimal performance
+
+### Real-time Features
+- WebSocket integration for live messaging
+- Redis-powered real-time notifications
+- Live presence indicators
+- Auto-save functionality for journaling
 
 ### Internationalization
 - [next-intl](https://next-intl-docs.vercel.app/) – Type-safe internationalization
-- Support for multiple languages (EN/ES included)
+- Multi-language support for global wellness community
+- RTL language support
 
-### Additional Features
-- [Swagger UI](https://swagger.io/tools/swagger-ui/) – API documentation
-- [Web Push](https://web-push-libs.github.io/web-push/) – Push notifications
-- ESLint & Prettier – Code quality and formatting
+### Developer Experience
+- [Swagger UI](https://swagger.io/tools/swagger-ui/) – Comprehensive API documentation
+- [ESLint](https://eslint.org/) & [Prettier](https://prettier.io/) – Code quality and formatting
+- [Husky](https://typicode.github.io/husky/) – Git hooks for quality assurance
+- TypeScript strict mode for type safety
 
 ## 🚀 Getting Started
 
@@ -59,8 +80,8 @@ Make sure you have the following installed:
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/MAIN-12/next-boilerplate.git
-   cd next-boilerplate
+   git clone https://github.com/MAIN-12/optimistapp-app.git
+   cd optimistapp-app
    ```
 
 2. **Install dependencies**
@@ -74,16 +95,31 @@ Make sure you have the following installed:
    ```
    
    Edit `.env.local` and fill in your configuration values:
-   - Auth0 credentials
-   - Database connection strings
-   - Supabase keys
-   - VAPID keys for push notifications
-   - Monday.com API key (for feedback system)
+   - **Auth0 credentials** (AUTH0_SECRET, AUTH0_BASE_URL, AUTH0_ISSUER_BASE_URL, etc.)
+   - **PostgreSQL connection** (DATABASE_URL)
+   - **Redis connection** (REDIS_URL) for caching and real-time features
+   - **VAPID keys** for push notifications (wellness reminders)
+   - **Encryption keys** for secure journaling (JOURNAL_ENCRYPTION_KEY)
 
 4. **Set up the database**
    ```bash
+   # Generate Prisma client
    pnpm dlx prisma generate
+   
+   # Apply database schema
    pnpm dlx prisma db push
+   
+   # (Optional) Seed with sample data
+   pnpm dlx prisma db seed
+   ```
+
+5. **Set up Redis (for real-time features)**
+   ```bash
+   # Local Redis installation (macOS)
+   brew install redis
+   redis-server
+   
+   # Or use Redis Cloud/Docker for development
    ```
 
 ### Development
@@ -106,86 +142,196 @@ pnpm start
 ## 📁 Project Structure
 
 ```
+├── docs/                   # Project documentation
+│   ├── business-rules-and-functionality.md
+│   └── hybrid-architecture-guidelines.md
 ├── prisma/                 # Database schema and migrations
-├── public/                 # Static assets
+│   └── schema.prisma      # Comprehensive data model
+├── public/                 # Static assets and PWA files
 ├── src/
 │   ├── app/               # Next.js App Router
-│   │   ├── (admin)/       # Admin routes (protected)
-│   │   ├── (public)/      # Public routes
+│   │   ├── (admin)/       # Admin routes (circle management)
+│   │   ├── (public)/      # Public routes (circles, messages, journaling)
+│   │   │   ├── circles/   # Circle discovery and management
+│   │   │   ├── messages/  # Message feeds and interactions
+│   │   │   ├── journal/   # Personal journaling interface
+│   │   │   └── profile/   # User profile and settings
 │   │   ├── api/           # API routes
-│   │   └── ...            # Layout, providers, etc.
+│   │   │   ├── circles/   # Circle management APIs
+│   │   │   ├── messages/  # Message CRUD and reactions
+│   │   │   ├── journal/   # Journaling and mood tracking
+│   │   │   └── notifications/ # Real-time notification system
+│   │   └── ...            # Layout, providers, middleware
 │   ├── components/        # Reusable UI components
 │   │   ├── Auth/          # Authentication components
-│   │   ├── chat/          # Chat components
-│   │   ├── feedback/      # Feedback system
-│   │   ├── SideBar/       # Navigation components
+│   │   ├── circles/       # Circle-related components
+│   │   ├── message/       # Message display and interaction
+│   │   ├── journal/       # Journaling interface components
+│   │   ├── SideBar/       # Navigation with wellness focus
 │   │   └── ui/            # Base UI components
 │   ├── config/            # Configuration files
 │   ├── i18n/              # Internationalization
 │   ├── lib/               # Utility libraries
-│   ├── styles/            # Global styles
-│   ├── types/             # TypeScript type definitions
+│   │   ├── prisma.ts      # Database client
+│   │   ├── redis.ts       # Cache client
+│   │   └── auth.ts        # Auth configuration
+│   ├── styles/            # Global styles and themes
+│   ├── types/             # TypeScript definitions
 │   └── utils/             # Helper functions
-├── messages/              # Translation files
+├── messages/              # Translation files (EN/ES)
 └── ...configuration files
 ```
 
 ## 🔗 API Routes
 
-The application includes several API endpoints:
+The application includes comprehensive API endpoints following RESTful principles:
 
+### Authentication & Users
 - `/api/auth/[auth0]` - Auth0 authentication handlers
-- `/api/chat` - Chat functionality
-- `/api/user` - User management
-- `/api/swagger-spec` - API documentation
+- `/api/users` - User profile management
+- `/api/users/[id]/circles` - User's joined circles
+- `/api/users/[id]/mood` - Mood tracking endpoints
 
-Access the API documentation at `/api-doc` (requires authentication).
+### Community Features
+- `/api/circles` - Circle discovery and management
+- `/api/circles/[id]/members` - Circle membership management
+- `/api/circles/[id]/messages` - Circle message feeds
+- `/api/messages` - Global positive message feed
+- `/api/messages/[id]/reactions` - Message reaction system
+- `/api/comments` - Comment system for messages
+
+### Personal Wellness
+- `/api/journal/entries` - Private journaling system
+- `/api/journal/prompts` - Guided prompt delivery
+- `/api/mood` - Mood tracking and analytics
+- `/api/wellness/streaks` - Habit tracking
+
+### Real-time & Notifications
+- `/api/notifications` - Notification management
+- `/api/websocket` - Real-time communication
+- `/api/push` - Push notification registration
+
+### System
+- `/api/swagger-spec` - Comprehensive API documentation
+- `/api/health` - System health checks
+
+Access the interactive API documentation at `/api-doc` (requires authentication).
 
 ## 🌐 Internationalization
 
-The application supports multiple languages:
-- English (en)
-- Spanish (es)
+The application supports multiple languages for global wellness community:
+- **English (en)** - Primary language
+- **Spanish (es)** - Full Spanish localization
+- **Expandable** - Ready for additional languages
+
+### Wellness-Focused Localization
+- Culturally sensitive wellness terminology
+- Region-appropriate mental health resources
+- Localized journaling prompts and categories
+- Time zone aware features (mood tracking, reminders)
 
 Add new languages by:
-1. Creating translation files in `/messages/`
-2. Updating the locale configuration
+1. Creating translation files in `/messages/[locale].json`
+2. Adding wellness-specific terminology
+3. Updating locale configuration in `i18n/request.ts`
 
-## 🔐 Authentication
+## 🔐 Authentication & Privacy
 
-This boilerplate uses Auth0 for authentication with the following features:
-- Login/logout functionality
-- Protected routes via middleware
-- User profile management
-- Role-based access control
+Optimist App uses Auth0 for secure, privacy-focused authentication:
 
-Protected routes are defined in `src/middleware.ts` and include:
-- `/admin/*` - Admin dashboard
-- `/chat/*` - Chat functionality
-- `/api/chat/*` - Chat API
-- `/api-doc/*` - API documentation
+### Authentication Features
+- **Social & Email Login** - Multiple authentication options
+- **Secure Sessions** - JWT-based with automatic refresh
+- **Privacy Controls** - Granular user data visibility settings
+- **Safe Onboarding** - Guided setup for wellness features
 
-## 🗄️ Database
+### Privacy & Security
+- **Journal Encryption** - End-to-end encryption for personal content
+- **Anonymous Posting** - Option to share messages anonymously
+- **Data Minimization** - Collect only essential wellness data
+- **GDPR Compliance** - Full data export and deletion rights
 
-The application uses Prisma ORM with PostgreSQL:
+### Protected Routes
+All wellness features require authentication for safety:
+- `/circles/*` - Community circle access
+- `/messages/*` - Positive messaging features
+- `/journal/*` - Private journaling interface
+- `/profile/*` - Personal wellness dashboard
+- `/admin/*` - Circle moderation tools
+- `/api/*` - All API endpoints (except health checks)
 
+## 🗄️ Database Architecture
+
+Optimist App uses a **hybrid database approach** for optimal performance and user experience:
+
+### PostgreSQL (Primary Storage)
+- **User profiles** and authentication data
+- **Circles** and community membership
+- **Messages** and persistent content
+- **Journal entries** with encryption
+- **Mood tracking** and wellness analytics
+- **Notifications** for audit and history
+
+### Redis (Performance Layer)
+- **Real-time features** (live reactions, presence)
+- **Caching** frequently accessed data
+- **Session management** and temporary data
+- **Rate limiting** for spam prevention
+- **Draft auto-save** for journaling
+
+### Database Commands
 ```bash
-# Generate Prisma client
+# Generate Prisma client with wellness models
 pnpm dlx prisma generate
 
-# Push schema changes to database
+# Apply schema changes (includes wellness tables)
 pnpm dlx prisma db push
 
-# Open Prisma Studio
+# Seed with sample wellness data
+pnpm dlx prisma db seed
+
+# Open Prisma Studio for data management
 pnpm dlx prisma studio
+
+# Database migration for production
+pnpm dlx prisma migrate deploy
 ```
+
+### Schema Highlights
+- **13 comprehensive models** for wellness features
+- **UUID primary keys** for security and scalability
+- **Soft deletes** for data recovery and audit trails
+- **Optimized indexes** for real-time queries
+- **Privacy-first design** with encryption support
 
 ## 🔧 Available Scripts
 
-- `pnpm dev` - Start development server with Turbopack
-- `pnpm build` - Build for production
+### Development
+- `pnpm dev` - Start development server with Turbopack and Redis
+- `pnpm dev:db` - Start with database seeding for wellness data
+- `pnpm dev:clean` - Clean development with fresh Redis cache
+
+### Production
+- `pnpm build` - Build optimized production bundle
 - `pnpm start` - Start production server
-- `pnpm lint` - Run ESLint with auto-fix
+- `pnpm preview` - Preview production build locally
+
+### Database Management
+- `pnpm db:generate` - Generate Prisma client
+- `pnpm db:push` - Apply schema changes to database
+- `pnpm db:seed` - Seed with sample wellness data
+- `pnpm db:studio` - Open Prisma Studio
+- `pnpm db:migrate` - Run database migrations
+
+### Code Quality
+- `pnpm lint` - Run ESLint with wellness-focused rules
+- `pnpm lint:fix` - Auto-fix linting issues
+- `pnpm type-check` - TypeScript type checking
+- `pnpm test` - Run test suite (unit + integration)
+
+### Deployment
+- `pnpm build:analyze` - Analyze bundle size
+- `pnpm build:docker` - Build Docker container
 
 ## 🚀 Deployment
 
@@ -195,38 +341,128 @@ pnpm dlx prisma studio
 2. Set environment variables in Vercel dashboard
 3. Deploy automatically on push to main branch
 
-### Other Platforms
+### Other Platforms (Railway, DigitalOcean, AWS)
 
 Ensure you set all required environment variables:
-- Auth0 configuration
-- Database connection strings
-- API keys for external services
+- **Auth0 configuration** - Authentication and user management
+- **PostgreSQL & Redis URLs** - Database and caching connections  
+- **Encryption keys** - Journal content security
+- **VAPID keys** - Push notification system
+- **Monitoring keys** - Performance and error tracking
 
-## 🔔 Push Notifications
+### Performance Considerations
+- Enable Redis for optimal real-time features
+- Configure CDN for static assets
+- Set up database connection pooling
+- Enable compression and caching headers
 
-The application includes web push notification support:
+## 🔔 Wellness-Focused Notifications
 
-1. Generate VAPID keys
-2. Set `NEXT_PUBLIC_VAPID_PUBLIC_KEY` and `VAPID_PRIVATE_KEY`
-3. Use the `PushNotificationManager` component
+Smart notification system designed to support mental wellness without overwhelming users:
 
-## 📝 Feedback System
+### Notification Types
+- **🎉 Positive Reinforcement** - Celebrate streaks and achievements
+- **💭 Gentle Reminders** - Optional journaling and mood check-ins
+- **🤗 Community Support** - New reactions and supportive comments
+- **📅 Wellness Milestones** - Weekly reflections and progress
+- **⚡ Real-time Engagement** - Live circle activity (if enabled)
 
-Integrated feedback collection using Monday.com:
-- Bug reports
-- Feature requests
-- General feedback
+### User Control & Wellness
+- **Smart Scheduling** - Respect quiet hours and user preferences
+- **Frequency Limits** - Prevent notification overwhelm
+- **Positive Focus** - Only uplifting and supportive notifications
+- **Easy Opt-out** - Granular control over notification types
 
-Configure Monday.com integration in your environment variables.
+### Setup
+```bash
+# Generate VAPID keys for push notifications
+npx web-push generate-vapid-keys
 
-## 🤝 Contributing
+# Set environment variables
+NEXT_PUBLIC_VAPID_PUBLIC_KEY=your_public_key
+VAPID_PRIVATE_KEY=your_private_key
+```
 
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Add tests if applicable
-5. Submit a pull request
+### Implementation
+- Use `PushNotificationManager` component for registration
+- Wellness-focused notification scheduling
+- Offline notification queuing with Redis
+
+## � Wellness Analytics & Insights
+
+Comprehensive analytics focused on user wellness and positive community impact:
+
+### Personal Wellness Metrics
+- **📈 Mood Trends** - Track emotional patterns over time
+- **📝 Journaling Insights** - Writing frequency and reflection patterns  
+- **🎯 Goal Progress** - Achievement tracking and milestone celebration
+- **🔗 Social Impact** - Positive interactions given and received
+
+### Community Health Metrics
+- **💝 Positivity Metrics** - Measure supportive interactions
+- **🌱 Growth Tracking** - Circle engagement and member retention
+- **🛡️ Safety Monitoring** - Content moderation effectiveness
+- **🌍 Global Impact** - Aggregate wellness improvements
+
+### Privacy-First Analytics
+- **Anonymized Data** - Personal insights without privacy compromise
+- **Opt-in Sharing** - Users choose what to share for research
+- **Transparent Reporting** - Clear data usage policies
+- **User Control** - Export or delete analytics data anytime
+
+### Research Partnerships
+- **Academic Collaboration** - Mental health research (anonymized)
+- **Wellness Organizations** - Community impact studies
+- **Open Source Insights** - Contribute to wellness tech research
+
+## 🤝 Contributing to Mental Wellness
+
+We welcome contributions that enhance the positive impact of our platform:
+
+### Ways to Contribute
+1. **🐛 Bug Fixes** - Help maintain a stable wellness platform
+2. **✨ Feature Development** - Add new wellness-focused features
+3. **🌍 Localization** - Translate for global mental health access
+4. **📚 Documentation** - Improve setup and usage guides
+5. **🧪 Testing** - Ensure reliability for users' mental health tools
+6. **🎨 Design** - Enhance UI/UX for better wellness experience
+
+### Contribution Guidelines
+1. Fork the repository and create a feature branch
+2. Follow our wellness-focused coding standards
+3. Add tests for new functionality
+4. Update documentation for wellness features
+5. Ensure accessibility compliance
+6. Submit pull request with detailed description
+
+### Code of Conduct
+- **Positive Communication** - Maintain supportive, encouraging interactions
+- **Inclusive Environment** - Welcome contributors from all backgrounds
+- **Mental Health Awareness** - Consider wellness impact in all decisions
+- **Privacy Respect** - Prioritize user data protection and privacy
+
+## 📖 Documentation
+
+- **[Business Rules & Functionality](docs/business-rules-and-functionality.md)** - Complete feature specification
+- **[Hybrid Architecture Guidelines](docs/hybrid-architecture-guidelines.md)** - Technical implementation guide
+- **[API Documentation](https://app.example.com/api-doc)** - Interactive API reference
+- **[Deployment Guide](docs/deployment.md)** - Production setup instructions
+
+## 🌟 Mission Statement
+
+**Optimist App exists to create a safer, more supportive digital space where individuals can:**
+- Build meaningful connections through positive messaging
+- Develop sustainable mental wellness habits through guided journaling
+- Find community support during challenging times
+- Celebrate personal growth and achievements
+- Access mental health resources and professional support when needed
+
+*Together, we're building a platform that prioritizes mental wellness, genuine human connection, and positive social impact.*
 
 ## 📜 License  
 
 This project is licensed under the [MIT License](LICENSE).
+
+---
+
+**Built with ❤️ for mental wellness and positive community impact.**

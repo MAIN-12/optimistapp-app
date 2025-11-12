@@ -26,7 +26,7 @@ const SideBarWrapper = ({ children }: { children: React.ReactNode }) => {
     return (
         <div className="flex h-screen hidden-scrollbar">
             <div className="hidden md:block">
-                <Sidebar />
+                {/* <Sidebar /> */}
             </div>
             <div className="relative flex flex-col flex-1 lg:overflow-y-auto lg:overflow-x-hidden hidden-scrollbar">
                 {children}

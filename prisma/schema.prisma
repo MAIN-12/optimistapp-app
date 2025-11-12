@@ -13,3 +13,363 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+// ===============================
+// USER MODELS
+// ===============================
+
+model User {
+  id        String   @id @default(uuid()) @db.Uuid
+  sub       String   @unique // Auth0 user ID
+  email     String   @unique
+  name      String?
+  nickname  String?
+  picture   String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Profile fields
+  bio       String?
+  location  String?
+  website   String?
+
+  // Relations
+  ownedCircles    Circle[]         @relation("CircleOwner")
+  circleMembers   CircleMember[]
+  messages        Message[]
+  comments        Comment[]
+  messageReacts   MessageReact[]
+  commentReacts   CommentReact[]
+  favorites       FavoriteMessage[]
+  moods           MoodLog[]
+  journalEntries  JournalEntry[]
+  notifications   Notification[]   @relation("NotificationRecipient")
+  sentNotifications Notification[] @relation("NotificationSender")
+
+  @@map("users")
+}
+
+// ===============================
+// CIRCLE MODELS
+// ===============================
+
+model Circle {
+  id          String   @id @default(uuid()) @db.Uuid
+  name        String
+  description String?
+  icon        String?  // Emoji or icon identifier
+  gradient    String?  // CSS gradient for UI
+  bgColor     String?  // Background color for UI
+  type        CircleType @default(PUBLIC)
+  ownerId     String   @db.Uuid
+  categoryId  String?  @db.Uuid
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Circle settings
+  rules       String[] // Array of circle rules
+  about       String?  // Extended description
+  tags        String[] // Searchable tags
+
+  // Relations
+  owner    User           @relation("CircleOwner", fields: [ownerId], references: [id], onDelete: Cascade)
+  category Category?      @relation(fields: [categoryId], references: [id], onDelete: SetNull)
+  members  CircleMember[]
+  messages Message[]
+
+  @@map("circles")
+}
+
+model CircleMember {
+  id       String          @id @default(uuid()) @db.Uuid
+  userId   String          @db.Uuid
+  circleId String          @db.Uuid
+  role     CircleMemberRole @default(MEMBER)
+  joinedAt DateTime        @default(now())
+
+  // Relations
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  circle Circle @relation(fields: [circleId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, circleId])
+  @@map("circle_members")
+}
+
+// ===============================
+// CATEGORY MODELS
+// ===============================
+
+model Category {
+  id          String   @id @default(uuid()) @db.Uuid
+  name        String   @unique
+  description String?
+  icon        String?  // Emoji or icon identifier
+  gradient    String?  // CSS gradient for UI
+  bgColor     String?  // Background color for UI
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relations
+  messages Message[]
+  circles  Circle[]
+
+  @@map("categories")
+}
+
+// ===============================
+// MESSAGE MODELS
+// ===============================
+
+model Message {
+  id        String      @id @default(uuid()) @db.Uuid
+  content   String
+  type      MessageType @default(POSITIVE)
+  authorId  String      @db.Uuid
+  circleId  String?     @db.Uuid // Optional for global messages
+  categoryId String?    @db.Uuid
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+
+  // Message metadata
+  isAnonymous Boolean @default(false)
+  isDaily     Boolean @default(false) // For daily inspirational messages
+  isPinned    Boolean @default(false)
+
+  // Relations
+  author    User              @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  circle    Circle?           @relation(fields: [circleId], references: [id], onDelete: Cascade)
+  category  Category?         @relation(fields: [categoryId], references: [id], onDelete: SetNull)
+  comments  Comment[]
+  reacts    MessageReact[]
+  favorites FavoriteMessage[]
+
+  @@map("messages")
+}
+
+model Comment {
+  id        String   @id @default(uuid()) @db.Uuid
+  content   String
+  authorId  String   @db.Uuid
+  messageId String   @db.Uuid
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  author  User           @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  message Message        @relation(fields: [messageId], references: [id], onDelete: Cascade)
+  reacts  CommentReact[]
+
+  @@map("comments")
+}
+
+model MessageReact {
+  id        String    @id @default(uuid()) @db.Uuid
+  type      ReactType
+  userId    String    @db.Uuid
+  messageId String    @db.Uuid
+  createdAt DateTime  @default(now())
+
+  // Relations
+  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  message Message @relation(fields: [messageId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, messageId]) // One react per user per message
+  @@map("message_reacts")
+}
+
+model CommentReact {
+  id        String    @id @default(uuid()) @db.Uuid
+  type      ReactType
+  userId    String    @db.Uuid
+  commentId String    @db.Uuid
+  createdAt DateTime  @default(now())
+
+  // Relations
+  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  comment Comment @relation(fields: [commentId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, commentId]) // One react per user per comment
+  @@map("comment_reacts")
+}
+
+model FavoriteMessage {
+  id        String   @id @default(uuid()) @db.Uuid
+  userId    String   @db.Uuid
+  messageId String   @db.Uuid
+  createdAt DateTime @default(now())
+
+  // Relations
+  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  message Message @relation(fields: [messageId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, messageId])
+  @@map("favorite_messages")
+}
+
+// ===============================
+// MOOD & WELLNESS MODELS
+// ===============================
+
+model MoodLog {
+  id        String   @id @default(uuid()) @db.Uuid
+  userId    String   @db.Uuid
+  rating    Int      // 1-5 mood rating
+  note      String?  // Optional mood note
+  createdAt DateTime @default(now())
+
+  // Relations
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("mood_logs")
+}
+
+// ===============================
+// JOURNALING MODELS
+// ===============================
+
+model JournalEntry {
+  id        String   @id @default(uuid()) @db.Uuid
+  title     String?  // Optional title for the entry
+  content   String   // Main journal content
+  mood      JournalMood? // Optional mood association
+  tags      String[] // Tags for categorization and search
+  isPrivate Boolean  @default(true) // Privacy setting
+  authorId  String   @db.Uuid
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Gratitude and reflection fields
+  gratefulFor    String[] // Things user is grateful for
+  dailyWins      String[] // Daily accomplishments
+  reflectionPrompt String? // Optional prompt that inspired the entry
+  
+  // Relations
+  author User @relation(fields: [authorId], references: [id], onDelete: Cascade)
+
+  @@map("journal_entries")
+}
+
+model JournalPrompt {
+  id          String     @id @default(uuid()) @db.Uuid
+  title       String
+  content     String     // The actual prompt question
+  category    PromptCategory @default(REFLECTION)
+  isActive    Boolean    @default(true)
+  difficulty  PromptDifficulty @default(BEGINNER)
+  tags        String[]   // Tags for categorization
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+
+  @@map("journal_prompts")
+}
+
+// ===============================
+// NOTIFICATION MODELS
+// ===============================
+
+model Notification {
+  id          String           @id @default(uuid()) @db.Uuid
+  type        NotificationType
+  title       String
+  message     String
+  recipientId String           @db.Uuid
+  senderId    String?          @db.Uuid
+  entityId    String?          @db.Uuid // ID of related entity (message, circle, etc.)
+  entityType  String?          // Type of entity (message, circle, comment, etc.)
+  status      NotificationStatus @default(PENDING)
+  isRead      Boolean          @default(false)
+  createdAt   DateTime         @default(now())
+  deliveredAt DateTime?
+  readAt      DateTime?
+
+  // Relations
+  recipient User  @relation("NotificationRecipient", fields: [recipientId], references: [id], onDelete: Cascade)
+  sender    User? @relation("NotificationSender", fields: [senderId], references: [id], onDelete: SetNull)
+
+  @@map("notifications")
+}
+
+// ===============================
+// ENUMS
+// ===============================
+
+enum CircleType {
+  PUBLIC
+  PRIVATE
+  INVITE_ONLY
+}
+
+enum CircleMemberRole {
+  OWNER
+  ADMIN
+  MODERATOR
+  MEMBER
+}
+
+enum MessageType {
+  POSITIVE
+  PRAYER
+  ENCOURAGEMENT
+  GRATITUDE
+  MOTIVATION
+  SUPPORT
+  ANNOUNCEMENT
+}
+
+enum ReactType {
+  LIKE
+  LOVE
+  PRAY
+  GRATEFUL
+  INSPIRE
+  SUPPORT
+}
+
+enum NotificationType {
+  MESSAGE_LIKE
+  MESSAGE_COMMENT
+  CIRCLE_INVITATION
+  CIRCLE_JOIN_REQUEST
+  DAILY_REMINDER
+  WEEKLY_SUMMARY
+  SYSTEM_ANNOUNCEMENT
+}
+
+enum NotificationStatus {
+  PENDING
+  DELIVERED
+  READ
+  FAILED
+}
+
+enum JournalMood {
+  VERY_HAPPY
+  HAPPY
+  NEUTRAL
+  SAD
+  VERY_SAD
+  ANXIOUS
+  PEACEFUL
+  GRATEFUL
+  EXCITED
+  REFLECTIVE
+}
+
+enum PromptCategory {
+  REFLECTION
+  GRATITUDE
+  GOALS
+  RELATIONSHIPS
+  GROWTH
+  MINDFULNESS
+  CREATIVITY
+  CHALLENGES
+  SUCCESS
+  SPIRITUALITY
+}
+
+enum PromptDifficulty {
+  BEGINNER
+  INTERMEDIATE
+  ADVANCED
+}

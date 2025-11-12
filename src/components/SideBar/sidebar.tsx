@@ -140,7 +140,6 @@ export default function Sidebar() {
                               )
                             )
                           }
-
                         </span>
                       </DropdownTrigger>
                       <DropdownMenu aria-label="Static Actions">

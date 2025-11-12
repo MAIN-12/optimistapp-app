@@ -6,8 +6,8 @@ import { Add } from "@mui/icons-material";
 export type SiteConfig = typeof siteConfig;
 
 export const siteConfig = {
-  name: "Main 12",
-  description: "Main 12 Next-js Boilerplate",
+  name: "Optimist app",
+  description: "A positive social platform where users share encouraging messages, inspirational content, and connect through circles of support. Spread optimism and build meaningful connections in a community focused on positivity.",
   url: "app.enntra.com",
   navItems: [
     { label: "Home", href: "/", },
