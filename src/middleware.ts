@@ -19,10 +19,10 @@ export async function middleware(req: NextRequest) {
 // Protect both pages and API routes
 export const config = {
     matcher: [
-        '/admin/:path*',
-        '/home/:path*',
-        '/chat/:path*',
-        '/api/chat/:path*',
-        '/api-doc/:path*',
+        // '/admin/:path*',
+        // '/home/:path*',
+        // '/chat/:path*',
+        // '/api/chat/:path*',
+        // '/api-doc/:path*',
     ],
 };
