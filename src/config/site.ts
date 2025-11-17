@@ -1,4 +1,4 @@
-import { BookmarkIcon, HomeIcon, SearchIcon, Ticket, User, MessageCircle, Star, StarIcon, Grid, Users } from "lucide-react"
+import { BookmarkIcon, HomeIcon, SearchIcon, Ticket, User, MessageCircle, Star, StarIcon, Grid, Users, BookOpen } from "lucide-react"
 
 import { MenuItem } from "@/types";
 import { Add } from "@mui/icons-material";
@@ -49,13 +49,21 @@ export const siteConfig = {
       section: ["main", "mobile"],
       mobile: 2,
     },
+    // {
+    //   id: "journal",
+    //   label: "Journal",
+    //   icon: BookOpen,
+    //   path: "/journal",
+    //   section: ["main", "mobile"],
+    //   mobile: 3,
+    // },
     {
       id: "categories",
       label: "Categories",
       icon: Grid,
       path: "/categories",
       section: ["main", "mobile"],
-      mobile: 3,
+      mobile: 4,
     },
     {
       id: "favorites",
@@ -63,7 +71,7 @@ export const siteConfig = {
       icon: StarIcon,
       path: "/favorites",
       section: ["main", "mobile"],
-      mobile: 4,
+      mobile: 5,
     },
     {
       id: "circles",
@@ -71,7 +79,7 @@ export const siteConfig = {
       icon: Users,
       path: "/circles",
       section: ["main", "mobile"],
-      mobile: 5,
+      mobile: 6,
     },
     // {
     //   id: "profile",

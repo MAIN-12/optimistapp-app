@@ -20,7 +20,8 @@ export async function middleware(req: NextRequest) {
 export const config = {
     matcher: [
         // '/admin/:path*',
-        // '/home/:path*',
+        '/home/:path*',
+        '/messages/:path*',
         // '/chat/:path*',
         // '/api/chat/:path*',
         // '/api-doc/:path*',

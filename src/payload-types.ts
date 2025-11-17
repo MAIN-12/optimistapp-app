@@ -453,9 +453,9 @@ export interface JournalEntry {
       }[]
     | null;
   /**
-   * Keep this entry private (only you can see it)
+   * Keep this entry private (only you can see it) - Default: Private
    */
-  isPrivate?: boolean | null;
+  isPrivate: boolean;
   /**
    * Things you are grateful for today
    */

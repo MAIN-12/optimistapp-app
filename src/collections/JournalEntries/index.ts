@@ -125,8 +125,9 @@ export const JournalEntries: CollectionConfig = {
       name: 'isPrivate',
       type: 'checkbox',
       defaultValue: true,
+      required: true,
       admin: {
-        description: 'Keep this entry private (only you can see it)',
+        description: 'Keep this entry private (only you can see it) - Default: Private',
       },
     },
     {
