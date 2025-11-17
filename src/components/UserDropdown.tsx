@@ -1,6 +1,6 @@
 'use client';
 
-import { User, Settings, LogOut, LogOutIcon, SettingsIcon } from 'lucide-react';
+import { User, Settings, LogOut, LogOutIcon, SettingsIcon, BookOpen } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useUser } from "@auth0/nextjs-auth0/client";
 import {
@@ -48,7 +48,13 @@ export default function UserDropdown({ children }: { children?: React.ReactNode 
                 >
                     {t("profile")}
                 </DropdownItem>
-
+                <DropdownItem
+                    key="journal"
+                    onPress={() => router.push('/journal')}
+                    startContent={<BookOpen />}
+                >
+                    {t("journal")}
+                </DropdownItem>
                 {/* <DropdownItem
                           key="theme"
                           onPress={switchTheme}

@@ -310,6 +310,10 @@ export interface Circle {
     | {
         user: number | User;
         role: 'owner' | 'admin' | 'moderator' | 'member';
+        /**
+         * Membership status - pending requests need admin approval
+         */
+        status: 'active' | 'pending' | 'rejected';
         joinedAt: string;
         id?: string | null;
       }[]
@@ -839,6 +843,7 @@ export interface CirclesSelect<T extends boolean = true> {
     | {
         user?: T;
         role?: T;
+        status?: T;
         joinedAt?: T;
         id?: T;
       };

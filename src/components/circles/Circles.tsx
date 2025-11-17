@@ -1,28 +1,41 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { Users, Lock, Shield, Search } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { Input, Button, Chip } from '@heroui/react';
-import circlesData from './circles-data.json';
+import type { Circle, Category, User as PayloadUser } from '@/payload-types';
 import CategoryFilter from './CategoryFilter';
 
-export default function Circles() {
+interface CirclesProps {
+    circles: Circle[];
+    categories: Category[];
+    userId?: number;
+}
+
+export default function Circles({ circles, categories, userId }: CirclesProps) {
     const [searchTerm, setSearchTerm] = useState('');
     const [selectedCategory, setSelectedCategory] = useState('All');
     const router = useRouter();
-    const { circles } = circlesData;
 
-    const categories = ['All', 'Support', 'Wellness', 'Health', 'Arts', 'Family', 'Literature'];
+    // Extract category names for filter
+    const categoryNames = useMemo(() => {
+        return ['All', ...categories.map(cat => cat.name)];
+    }, [categories]);
 
-    const filteredCircles = circles.filter(circle => {
-        const matchesSearch = circle.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-            circle.description.toLowerCase().includes(searchTerm.toLowerCase());
-        const matchesCategory = selectedCategory === 'All' || circle.category === selectedCategory;
-        return matchesSearch && matchesCategory;
-    });
+    const filteredCircles = useMemo(() => {
+        return circles.filter(circle => {
+            const matchesSearch = circle.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                (circle.description && circle.description.toLowerCase().includes(searchTerm.toLowerCase()));
+            
+            const matchesCategory = selectedCategory === 'All' || 
+                (typeof circle.category === 'object' && circle.category?.name === selectedCategory);
+            
+            return matchesSearch && matchesCategory;
+        });
+    }, [circles, searchTerm, selectedCategory]);
 
-    const handleCircleClick = (circleId: string) => {
+    const handleCircleClick = (circleId: number) => {
         router.push(`/circles/${circleId}`);
     };
 
@@ -31,6 +44,18 @@ export default function Circles() {
             return `${(count / 1000).toFixed(1)}k`;
         }
         return count.toString();
+    };
+
+    const isUserMember = (circle: Circle) => {
+        if (!userId || !circle.members) return false;
+        return circle.members.some(member => {
+            const memberId = typeof member.user === 'number' ? member.user : member.user?.id;
+            return memberId === userId;
+        });
+    };
+
+    const getMemberCount = (circle: Circle) => {
+        return circle.members?.length || 0;
     };
 
     return (
@@ -54,7 +79,7 @@ export default function Circles() {
             </div>
 
             <CategoryFilter
-                categories={categories}
+                categories={categoryNames}
                 selectedCategory={selectedCategory}
                 onCategorySelect={setSelectedCategory}
             />
@@ -68,14 +93,14 @@ export default function Circles() {
                         className={`
               relative overflow-hidden rounded-2xl p-4 sm:p-6 cursor-pointer
               transform transition-all duration-200 hover:scale-101 hover:shadow-lg
-              bg-gradient-to-br ${circle.gradient} text-white
+              bg-gradient-to-br ${circle.gradient || 'from-blue-500 to-purple-600'} text-white
               min-h-[180px] sm:min-h-[200px] flex flex-col justify-between
               w-full max-w-full
             `}
                     >
                         {/* Circle Type Indicator */}
                         <div className="absolute top-4 right-4">
-                            {circle.type === 'private' ? (
+                            {circle.type === 'private' || circle.type === 'invite_only' ? (
                                 <Lock className="w-4 h-4 text-white/80" />
                             ) : (
                                 <Users className="w-4 h-4 text-white/80" />
@@ -85,7 +110,7 @@ export default function Circles() {
                         {/* Circle Icon */}
                         <div className="flex justify-center mb-4">
                             <div className="w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center backdrop-blur-sm">
-                                <span className="text-3xl">{circle.icon}</span>
+                                <span className="text-3xl">{circle.icon || '👥'}</span>
                             </div>
                         </div>
 
@@ -93,17 +118,17 @@ export default function Circles() {
                         <div className="text-center">
                             <h3 className="text-xl font-semibold mb-2">{circle.name}</h3>
                             <p className="text-white/90 text-sm mb-4 leading-relaxed">
-                                {circle.description}
+                                {circle.description || 'No description available'}
                             </p>
 
                             {/* Member Count and Join Status */}
                             <div className="flex items-center justify-between">
                                 <div className="flex items-center gap-1 text-white/80 text-sm">
                                     <Users className="w-4 h-4" />
-                                    <span>{formatMemberCount(circle.memberCount)} members</span>
+                                    <span>{formatMemberCount(getMemberCount(circle))} members</span>
                                 </div>
 
-                                {circle.isJoined ? (
+                                {isUserMember(circle) ? (
                                     <Chip
                                         size="sm"
                                         variant="solid"
@@ -117,7 +142,7 @@ export default function Circles() {
                                         variant="solid"
                                         className="bg-white/20 text-white"
                                     >
-                                        {circle.type === 'private' ? 'Request' : 'Join'}
+                                        {circle.type === 'private' || circle.type === 'invite_only' ? 'Request' : 'Join'}
                                     </Chip>
                                 )}
                             </div>

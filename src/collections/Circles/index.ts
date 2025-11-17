@@ -135,6 +135,29 @@ export const Circles: CollectionConfig = {
           ],
         },
         {
+          name: 'status',
+          type: 'select',
+          required: true,
+          defaultValue: 'active',
+          options: [
+            {
+              label: 'Active',
+              value: 'active',
+            },
+            {
+              label: 'Pending',
+              value: 'pending',
+            },
+            {
+              label: 'Rejected',
+              value: 'rejected',
+            },
+          ],
+          admin: {
+            description: 'Membership status - pending requests need admin approval',
+          },
+        },
+        {
           name: 'joinedAt',
           type: 'date',
           required: true,
