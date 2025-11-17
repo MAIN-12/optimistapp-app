@@ -9,7 +9,8 @@
         "start": "next start",
         "lint": "eslint . --fix",
         "payload": "payload",
-        "generate:types": "payload generate:types"
+        "generate:types": "payload generate:types",
+        "seed": "cross-env PAYLOAD_SEED=true payload migrate"
     },
     "dependencies": {
         "@auth0/nextjs-auth0": "^3.6.0",
@@ -81,6 +82,7 @@
         "@typescript-eslint/eslint-plugin": "8.11.0",
         "@typescript-eslint/parser": "8.11.0",
         "autoprefixer": "10.4.19",
+        "cross-env": "^10.1.0",
         "eslint": "^9.20.1",
         "eslint-config-next": "^15.2.3",
         "eslint-config-prettier": "9.1.0",

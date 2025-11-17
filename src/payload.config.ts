@@ -19,6 +19,7 @@ import { JournalPrompts } from './collections/JournalPrompts'
 import { MoodLogs } from './collections/MoodLogs'
 import { Notifications } from './collections/Notifications'
 import brevoAdapter from './utilities/brevoAdapter'
+import { seed } from './seed'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -105,5 +106,19 @@ export default buildConfig({
   sharp,
   typescript: {
     outputFile: path.resolve(dirname, 'payload-types.ts'),
+  },
+  async onInit(payload) {
+    const circles = await payload.find({
+      collection: 'circles',
+      limit: 1,
+    })
+
+    // Seed only if there are no users AND no circles
+    if (circles.totalDocs === 0) {
+      payload.logger.info('Database is empty. Running seed...')
+      await seed(payload)
+    } else {
+      payload.logger.info('Database already has data. Skipping seed.')
+    }
   },
 })
