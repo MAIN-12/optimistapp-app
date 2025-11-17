@@ -1,5 +1,5 @@
 "use client";
 import AppLogoExpanded from "./AppLogoExpanded";
 
-const PayloadLogo = () => <AppLogoExpanded height={18} width={18} />;
+const PayloadLogo = () => <AppLogoExpanded height={80} />;
 export default PayloadLogo;

@@ -108,17 +108,19 @@ export default buildConfig({
     outputFile: path.resolve(dirname, 'payload-types.ts'),
   },
   async onInit(payload) {
-    const circles = await payload.find({
-      collection: 'circles',
-      limit: 1,
+    const users = await payload.find({
+      collection: 'users',
+      limit: 2,
     })
 
-    // Seed only if there are no users AND no circles
-    if (circles.totalDocs === 0) {
-      payload.logger.info('Database is empty. Running seed...')
+    // Only seed when there is exactly 1 user (the initial admin)
+    if (users.totalDocs === 1) {
+      payload.logger.info('Initial user created. Running seed to populate database...')
       await seed(payload)
+    } else if (users.totalDocs === 0) {
+      payload.logger.info('No users yet. Waiting for initial user creation before seeding.')
     } else {
-      payload.logger.info('Database already has data. Skipping seed.')
+      payload.logger.info('Database already seeded. Skipping.')
     }
   },
 })

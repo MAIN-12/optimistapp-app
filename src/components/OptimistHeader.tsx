@@ -4,8 +4,8 @@ import { Music, Bell, Settings } from 'lucide-react';
 import UserDropdown from './UserDropdown';
 import PWAInstallButton from './PWAInstallButton';
 import { Button } from '@heroui/button';
-import LogoCompact from '@/config/logo/AppLogoCompact ';
-import Logo from '@/config/logo/AppLogoExpanded';
+import LogoCompact from '@/components/logo/AppLogoCompact';
+import Logo from '@/components/logo/AppLogoExpanded';
 import { Link } from '@heroui/link';
 
 export default function OptimistHeader() {
