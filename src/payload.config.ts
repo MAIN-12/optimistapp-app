@@ -35,10 +35,10 @@ export default buildConfig({
       //   // '@/components/BeforeDashboard',
       //   '@/components/AdminFavicon'
       // ],
-      // graphics: {
-      //   Logo: '@/components/Logo/AppLogoExpanded',
-      //   Icon: '@/components/Logo/AppLogoCompact ',
-      // },
+      graphics: {
+        Logo: '@/components/logo/PayloadLogo',
+        Icon: '@/components/logo/PayloadIcon',
+      },
     },
     meta: {
       titleSuffix: '- Main 12 Admin Panel',
