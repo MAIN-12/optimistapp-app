@@ -92,9 +92,9 @@ export const siteConfig = {
   ] as MenuItem[],
 
   links: {
-    login: "/api/auth/login",
-    logout: "/api/auth/logout",
-    registry: "/",
+    login: "/login",
+    logout: "/logout",
+    registry: "/signup",
     terms: "https://main12.com/terms",
     privacy: "http://main12.com/privacy",
     help: "/help",

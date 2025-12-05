@@ -1,7 +1,7 @@
-"use-client"
+"use client"
 
 import { Link } from "@heroui/react";
-import { button as buttonStyles } from "@heroui/react";;
+import { button as buttonStyles } from "@heroui/react";
 // import { useTranslations } from 'next-intl';
 
 const LoginBtn = () => {
@@ -15,7 +15,7 @@ const LoginBtn = () => {
                 fullWidth: true,
             })}
             style={{ background: 'black', color: 'white' }}
-            href="/api/auth/login"
+            href="/login"
         >
             login
             {/* {t('login')} */}

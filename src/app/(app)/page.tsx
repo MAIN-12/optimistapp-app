@@ -4,7 +4,7 @@ import { useTranslations } from "next-intl";
 import Loading from "./loading";
 
 import { redirect } from "next/navigation"
-import { useUser } from '@auth0/nextjs-auth0/client';
+import { useUser } from '@/providers/AuthProvider';
 import { DailyMessage, Messages } from "@/components/message";
 import OptimistHeader from "@/components/OptimistHeader";
 

@@ -51,8 +51,8 @@ export async function POST(
       ...(circle.members || []),
       {
         user: user.id,
-        role: 'member',
-        status,
+        role: 'member' as const,
+        status: status as 'active' | 'pending',
         joinedAt: new Date().toISOString(),
       },
     ]

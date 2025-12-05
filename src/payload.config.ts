@@ -18,6 +18,7 @@ import { JournalEntries } from './collections/JournalEntries'
 import { JournalPrompts } from './collections/JournalPrompts'
 import { MoodLogs } from './collections/MoodLogs'
 import { Notifications } from './collections/Notifications'
+import { Posts } from './collections/Posts'
 import brevoAdapter from './utilities/brevoAdapter'
 import { seed } from './seed'
 
@@ -89,6 +90,7 @@ export default buildConfig({
     JournalPrompts,
     MoodLogs,
     Notifications,
+    Posts,
   ],
   // globals: [Header, Footer, SiteSettings],
   plugins: [

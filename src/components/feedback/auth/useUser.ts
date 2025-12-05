@@ -1,4 +1,4 @@
-import { useUser as auth0UseUser } from "@auth0/nextjs-auth0/client";
+import { useAuth } from "@/providers/AuthProvider";
 
 interface User {
     id: string;
@@ -9,13 +9,13 @@ interface User {
 
 export function useUser() {
     try {
-        const auth0User = auth0UseUser();
-        if (auth0User?.user) {
+        const { user, isLoading, error } = useAuth();
+        if (user) {
             return {
                 user: {
-                    id: auth0User.user.sub || "unknown",
-                    name: auth0User.user.name || "Guest User",
-                    email: auth0User.user.email || "guest@example.com",
+                    id: String(user.id) || "unknown",
+                    name: user.name || "Guest User",
+                    email: user.email || "guest@example.com",
                     isAnonymous: false,
                 },
             };

@@ -2,7 +2,7 @@
 
 import { User, Settings, LogOut, LogOutIcon, SettingsIcon, BookOpen } from 'lucide-react';
 import { useRouter } from 'next/navigation';
-import { useUser } from "@auth0/nextjs-auth0/client";
+import { useAuth } from "@/providers/AuthProvider";
 import {
     Dropdown, DropdownTrigger, DropdownMenu,
     DropdownItem, Skeleton, Tooltip,
@@ -21,8 +21,15 @@ import { useTranslations } from 'next-intl';
 export default function UserDropdown({ children }: { children?: React.ReactNode }) {
     const { openSupportModal } = useSupportModal();
     const t = useTranslations("sidebar");
+    const { logout } = useAuth();
 
     const router = useRouter();
+
+    const handleLogout = async () => {
+        await logout();
+        router.push('/');
+        router.refresh();
+    };
 
 
     return (
@@ -74,7 +81,7 @@ export default function UserDropdown({ children }: { children?: React.ReactNode 
                     key="logout"
                     className="text-danger"
                     color="danger"
-                    href={siteConfig.links.logout}
+                    onPress={handleLogout}
                     startContent={<LogOutIcon />}
                     showDivider
                 >

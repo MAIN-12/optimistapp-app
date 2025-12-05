@@ -1,14 +1,15 @@
 import type { NextRequest } from 'next/server';
 
 import { NextResponse } from 'next/server';
-import { getSession } from '@auth0/nextjs-auth0/edge';
 
 export async function middleware(req: NextRequest) {
     const res = NextResponse.next();
-    const session = await getSession(req, res);
+    
+    // Check for Payload auth token in cookies
+    const token = req.cookies.get('payload-token')?.value;
 
-    if (!session || !session.user) {
-        const loginUrl = new URL('/api/auth/login', req.url);
+    if (!token) {
+        const loginUrl = new URL('/login', req.url);
         loginUrl.searchParams.set('returnTo', req.nextUrl.pathname);
         return NextResponse.redirect(loginUrl);
     }
@@ -20,7 +21,7 @@ export async function middleware(req: NextRequest) {
 export const config = {
     matcher: [
         // '/admin/:path*',
-        '/home/:path*',
+        // '/home/:path*',
         '/messages/:path*',
         // '/chat/:path*',
         // '/api/chat/:path*',

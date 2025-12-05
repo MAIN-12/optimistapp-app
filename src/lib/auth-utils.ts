@@ -1,32 +1,28 @@
-import { getSession } from '@auth0/nextjs-auth0';
-import { prisma } from '@/lib/prisma';
+import { cookies } from 'next/headers';
+import { getPayload } from 'payload';
+import config from '@payload-config';
 
 export async function getAuthenticatedUser() {
-  const session = await getSession();
-  
-  if (!session?.user) {
+  try {
+    const payload = await getPayload({ config });
+    const cookieStore = await cookies();
+    const token = cookieStore.get('payload-token')?.value;
+
+    if (!token) {
+      return null;
+    }
+
+    const { user } = await payload.auth({ headers: new Headers({ Authorization: `JWT ${token}` }) });
+
+    if (!user) {
+      return null;
+    }
+
+    return user;
+  } catch (error) {
+    console.error('Error getting authenticated user:', error);
     return null;
   }
-
-  // Get user from database using Auth0 sub
-  const user = await prisma.user.findUnique({
-    where: { sub: session.user.sub },
-    select: {
-      id: true,
-      sub: true,
-      email: true,
-      name: true,
-      nickname: true,
-      picture: true,
-      bio: true,
-      location: true,
-      website: true,
-      createdAt: true,
-      updatedAt: true
-    }
-  });
-
-  return user;
 }
 
 export async function requireAuthenticatedUser() {

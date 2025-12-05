@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { useUser } from "@auth0/nextjs-auth0/client";
+import { useUser, useAuth } from "@/providers/AuthProvider";
 import { useTranslations } from "next-intl";
 import { useTheme } from "next-themes";
 import {
@@ -35,6 +35,7 @@ import AppLogoCompact from "../../config/logo/AppLogoCompact ";
 export default function Sidebar() {
   const t = useTranslations("sidebar");
   const { user, isLoading } = useUser();
+  const { logout } = useAuth();
 
   const [isHovered, setIsHovered] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -170,7 +171,10 @@ export default function Sidebar() {
                           key="logout"
                           className="text-danger"
                           color="danger"
-                          href={siteConfig.links.logout}
+                          onPress={() => {
+                            logout();
+                            window.location.href = '/';
+                          }}
                           startContent={<LogoutIcon />}
                           showDivider
                         >{t("logout")}</DropdownItem>

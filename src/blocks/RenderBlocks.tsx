@@ -10,7 +10,6 @@ import { MediaBlock } from '@/blocks/MediaBlock/Component'
 import { SignupCTA } from '@/blocks/SignupCTA/Component'
 import { TwoColumnTextImage } from '@/blocks/TwoColumnTextImage/Component'
 
-
 const blockComponents = {
   archive: ArchiveBlock,
   content: ContentBlock,

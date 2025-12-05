@@ -1,12 +1,32 @@
 import type { CollectionConfig } from 'payload'
 
 import { authenticated } from '../../access/authenticated'
+import { anyone } from '../../access/anyone'
+import { generateVerificationEmailHTML, generateVerificationEmailSubject } from '../../utilities/email/templates/verificationEmail'
 
 export const Users: CollectionConfig = {
   slug: 'users',
+  auth: {
+    tokenExpiration: 259200, // 3 days (72 hours)
+    verify: {
+      generateEmailHTML: ({ token, user }) => {
+        return generateVerificationEmailHTML({ 
+          token, 
+          user: { 
+            name: user.name as string | undefined, 
+            email: user.email 
+          } 
+        })
+      },
+      generateEmailSubject: () => generateVerificationEmailSubject(),
+    },
+    maxLoginAttempts: 5,
+    lockTime: 600000, // 10 minutes
+    useAPIKey: false,
+  },
   access: {
     admin: authenticated,
-    create: authenticated,
+    create: anyone, // Allow public registration
     delete: authenticated,
     read: authenticated,
     update: authenticated,
@@ -15,7 +35,6 @@ export const Users: CollectionConfig = {
     defaultColumns: ['name', 'email', 'nickname', 'roles'],
     useAsTitle: 'email',
   },
-  auth: true,
   fields: [
     {
       name: 'name',

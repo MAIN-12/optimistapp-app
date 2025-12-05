@@ -6,7 +6,7 @@ import * as React from "react";
 import { HeroUIProvider, ToastProvider } from '@heroui/react'
 import { useRouter } from "next/navigation";
 import { ThemeProvider as NextThemesProvider } from "next-themes";
-import { UserProvider } from '@auth0/nextjs-auth0/client';
+import { AuthProvider } from "@/providers/AuthProvider";
 import { SupportModalProvider } from "@/components/feedback/FeedBackProvider";
 
 export interface ProvidersProps {
@@ -27,7 +27,7 @@ export function Providers({ children, themeProps }: ProvidersProps) {
 
   return (
     <React.StrictMode>
-      <UserProvider>
+      <AuthProvider>
         <HeroUIProvider navigate={router.push}>
           <ToastProvider />
           <NextThemesProvider {...themeProps}>
@@ -36,7 +36,7 @@ export function Providers({ children, themeProps }: ProvidersProps) {
             </SupportModalProvider>
           </NextThemesProvider>
         </HeroUIProvider>
-      </UserProvider>
+      </AuthProvider>
     </React.StrictMode>
   );
 }
