@@ -3,7 +3,7 @@
 import type { StaticImageData } from 'next/image'
 import React, { useEffect, useState } from 'react'
 import { cn } from '@/utilities/ui'
-import { Media } from '../../components/Media'
+import { Media } from '@/components/Media'
 import type { Media as MediaType } from '@/payload-types'
 
 type Props = {

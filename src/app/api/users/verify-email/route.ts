@@ -36,6 +36,13 @@ export async function GET(request: NextRequest) {
 
     const user = users.docs[0];
 
+    if (!user) {
+      return NextResponse.json(
+        { success: false, message: 'Invalid or expired verification token.' },
+        { status: 400 }
+      );
+    }
+
     // Update user to mark as verified
     await payload.update({
       collection: 'users',

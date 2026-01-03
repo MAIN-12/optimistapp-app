@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react'
 import { Button } from '@heroui/react'
 
-import { subscribeUser, unsubscribeUser, sendNotification } from '@/app/actions'
+import { subscribeUser, unsubscribeUser, sendNotification } from '@/app/(app)/actions'
 
 function urlBase64ToUint8Array(base64String: string) {
     const padding = '='.repeat((4 - (base64String.length % 4)) % 4)

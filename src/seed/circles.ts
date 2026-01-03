@@ -148,7 +148,12 @@ export async function seedCircles(payload: Payload): Promise<void> {
     if (existing.docs.length === 0) {
       await payload.create({
         collection: 'circles',
-        data: circle,
+        data: {
+          ...circle,
+          owner: circle.owner,
+          category: circle.category,
+        },
+        draft: false,
       })
       payload.logger.info(`Created circle: ${circle.name}`)
     }

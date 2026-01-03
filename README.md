@@ -46,7 +46,7 @@ A comprehensive mental wellness and positive community platform built with Next.
 - Privacy-first user data handling
 
 ### Database Architecture (Hybrid)
-- [Prisma](https://prisma.io/) – Type-safe ORM with PostgreSQL
+- [Payload CMS](https://payloadcms.com/) – Headless CMS with type-safe database operations
 - [PostgreSQL](https://postgresql.org/) – Primary database for persistent data
 - [Redis](https://redis.io/) – High-performance caching and real-time features
 - Hybrid data strategy for optimal performance
@@ -103,14 +103,8 @@ Make sure you have the following installed:
 
 4. **Set up the database**
    ```bash
-   # Generate Prisma client
-   pnpm dlx prisma generate
-   
-   # Apply database schema
-   pnpm dlx prisma db push
-   
-   # (Optional) Seed with sample data
-   pnpm dlx prisma db seed
+   # Run Payload migrations
+   pnpm payload migrate
    ```
 
 5. **Set up Redis (for real-time features)**
@@ -145,8 +139,6 @@ pnpm start
 ├── docs/                   # Project documentation
 │   ├── business-rules-and-functionality.md
 │   └── hybrid-architecture-guidelines.md
-├── prisma/                 # Database schema and migrations
-│   └── schema.prisma      # Comprehensive data model
 ├── public/                 # Static assets and PWA files
 ├── src/
 │   ├── app/               # Next.js App Router
@@ -172,7 +164,6 @@ pnpm start
 │   ├── config/            # Configuration files
 │   ├── i18n/              # Internationalization
 │   ├── lib/               # Utility libraries
-│   │   ├── prisma.ts      # Database client
 │   │   ├── redis.ts       # Cache client
 │   │   └── auth.ts        # Auth configuration
 │   ├── styles/            # Global styles and themes
@@ -281,20 +272,14 @@ Optimist App uses a **hybrid database approach** for optimal performance and use
 
 ### Database Commands
 ```bash
-# Generate Prisma client with wellness models
-pnpm dlx prisma generate
+# Run Payload migrations
+pnpm payload migrate
 
-# Apply schema changes (includes wellness tables)
-pnpm dlx prisma db push
+# Generate Payload types
+pnpm payload generate:types
 
-# Seed with sample wellness data
-pnpm dlx prisma db seed
-
-# Open Prisma Studio for data management
-pnpm dlx prisma studio
-
-# Database migration for production
-pnpm dlx prisma migrate deploy
+# Open Payload admin panel for data management
+# Available at /admin after starting the dev server
 ```
 
 ### Schema Highlights
@@ -317,11 +302,8 @@ pnpm dlx prisma migrate deploy
 - `pnpm preview` - Preview production build locally
 
 ### Database Management
-- `pnpm db:generate` - Generate Prisma client
-- `pnpm db:push` - Apply schema changes to database
-- `pnpm db:seed` - Seed with sample wellness data
-- `pnpm db:studio` - Open Prisma Studio
-- `pnpm db:migrate` - Run database migrations
+- `pnpm payload migrate` - Run Payload migrations
+- `pnpm payload generate:types` - Generate Payload types
 
 ### Code Quality
 - `pnpm lint` - Run ESLint with wellness-focused rules

@@ -354,6 +354,7 @@ export async function seedJournalPrompts(payload: Payload): Promise<void> {
       await payload.create({
         collection: 'journal-prompts',
         data: prompt,
+        draft: false,
       })
       payload.logger.info(`Created journal prompt: ${prompt.title}`)
     }

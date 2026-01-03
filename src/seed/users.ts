@@ -74,6 +74,7 @@ export async function seedUsers(payload: Payload): Promise<void> {
       await payload.create({
         collection: 'users',
         data: user,
+        draft: false,
       })
       payload.logger.info(`Created user: ${user.name}`)
     }

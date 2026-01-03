@@ -10,6 +10,7 @@ import { fileURLToPath } from 'url'
 
 import { Categories } from './collections/Categories'
 import { Media } from './collections/Media'
+import { Pages } from './collections/Pages'
 import { Users } from './collections/Users'
 import { Circles } from './collections/Circles'
 import { Messages } from './collections/Messages'
@@ -18,7 +19,9 @@ import { JournalEntries } from './collections/JournalEntries'
 import { JournalPrompts } from './collections/JournalPrompts'
 import { MoodLogs } from './collections/MoodLogs'
 import { Notifications } from './collections/Notifications'
+import { DailyMessages } from './collections/DailyMessages'
 import { Posts } from './collections/Posts'
+import { ProfilePictures } from './collections/ProfilePictures'
 import brevoAdapter from './utilities/brevoAdapter'
 import { seed } from './seed'
 
@@ -82,7 +85,9 @@ export default buildConfig({
   collections: [
     Users,
     Media,
+    ProfilePictures,
     Categories,
+    Pages,
     Circles,
     Messages,
     Comments,
@@ -90,6 +95,7 @@ export default buildConfig({
     JournalPrompts,
     MoodLogs,
     Notifications,
+    DailyMessages,
     Posts,
   ],
   // globals: [Header, Footer, SiteSettings],
@@ -98,6 +104,9 @@ export default buildConfig({
       collections: {
         media: {
           prefix: process.env.PROJECT_ID ? `${process.env.PROJECT_ID}/media` : 'media',
+        },
+        'profile-pictures': {
+          prefix: process.env.PROJECT_ID ? `${process.env.PROJECT_ID}/profile-pictures` : 'profile-pictures',
         },
       },
       token: process.env.BLOB_READ_WRITE_TOKEN,

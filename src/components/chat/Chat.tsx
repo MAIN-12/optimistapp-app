@@ -144,7 +144,7 @@ export default function ChatInterface() {
     }, [messages]);
 
     const handleSend = async () => {
-        if (input.trim() && !isLoading) {
+        if (input.trim() && !isLoading && currentChatModel) {
             setIsLoading(true);
             const userMessage: Message = { role: "user", content: input };
             setMessages((prev) => [...prev, userMessage]);
@@ -306,7 +306,7 @@ export default function ChatInterface() {
                         {isLoading && (
                             <div className="absolute bottom-full left-0 w-full flex p-4">
                                 <div className="flex flex-row items-start">
-                                    <Avatar showFallback src={currentChatModel.icon_url} className="mx-2 min-w-10" />
+                                    <Avatar showFallback src={currentChatModel?.icon_url} className="mx-2 min-w-10" />
 
                                     <motion.h2
                                         className="text-default-500 flex items-center h-10"
@@ -335,9 +335,9 @@ export default function ChatInterface() {
                                         // label="Favorite Animal"
                                         variant="flat"
                                         onOpenChange={setIsOpen}
-                                        selectedKeys={[currentChatModel.key]}
+                                        selectedKeys={currentChatModel ? [currentChatModel.key] : []}
                                         selectionMode="single"
-                                        defaultSelectedKeys={agents[0].key}
+                                        defaultSelectedKeys={agents[0]?.key ? [agents[0].key] : []}
                                         onSelectionChange={(keys) => {
                                             const selectedKey = Array.from(keys)[0];
                                             const selectedAgent = agents.find(agent => agent.key === selectedKey);

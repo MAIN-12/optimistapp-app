@@ -31,5 +31,91 @@
         "iosInstructions": "Para instalar esta aplicación en tu dispositivo iOS:\n1. Toca el botón Compartir (□↗)\n2. Desplázate hacia abajo y toca \"Añadir a pantalla de inicio\"\n3. Toca \"Añadir\" para confirmar",
         "androidInstructions": "Para instalar esta aplicación en tu dispositivo Android:\n1. Toca el botón de menú (⋮)\n2. Toca \"Añadir a pantalla de inicio\" o \"Instalar aplicación\"\n3. Sigue las instrucciones para instalar",
         "desktopInstructions": "Para instalar esta aplicación:\n1. Busca un icono de instalación en la barra de direcciones de tu navegador\n2. O ve al menú del navegador > \"Instalar Optimist\"\n3. Sigue las instrucciones para instalar"
+    },
+    "Onboarding": {
+        "slide1": {
+            "title": "¡Bienvenido a Optimist!",
+            "description": "Tu compañero personal para el bienestar mental y la superación personal. Estamos aquí para ayudarte en tu camino hacia una vida más feliz y saludable."
+        },
+        "slide2": {
+            "title": "Registra tu Viaje",
+            "description": "Mantén un diario personal, registra tus estados de ánimo y reflexiona sobre tus experiencias diarias. Desarrolla hábitos saludables con guías e insights personalizados."
+        },
+        "slide3": {
+            "title": "Conecta con Otros",
+            "description": "Únete a círculos de apoyo, comparte tus experiencias y encuentra comunidad con personas afines en caminos similares."
+        },
+        "birthday": {
+            "title": "¿Cuándo es tu cumpleaños?",
+            "description": "¡Nos encantaría celebrar contigo! Esto nos ayuda a personalizar tu experiencia.",
+            "label": "Fecha de nacimiento",
+            "day": "Día",
+            "month": "Mes",
+            "year": "Año",
+            "months": {
+                "january": "Enero",
+                "february": "Febrero",
+                "march": "Marzo",
+                "april": "Abril",
+                "may": "Mayo",
+                "june": "Junio",
+                "july": "Julio",
+                "august": "Agosto",
+                "september": "Septiembre",
+                "october": "Octubre",
+                "november": "Noviembre",
+                "december": "Diciembre"
+            }
+        },
+        "gender": {
+            "title": "¿Cómo te identificas?",
+            "description": "Esto nos ayuda a adaptar el contenido que resuene contigo.",
+            "label": "Género"
+        },
+        "genderOptions": {
+            "male": "Masculino",
+            "female": "Femenino",
+            "nonBinary": "No binario",
+            "preferNotToSay": "Prefiero no decir",
+            "other": "Otro"
+        },
+        "heardAbout": {
+            "title": "¿Cómo nos encontraste?",
+            "description": "¡Tenemos curiosidad por saber cómo descubriste Optimist!",
+            "label": "¿Cómo supiste de nosotros?"
+        },
+        "heardAboutOptions": {
+            "socialMedia": "Redes Sociales",
+            "friendFamily": "Amigo o Familiar",
+            "searchEngine": "Motor de Búsqueda",
+            "appStore": "Tienda de Apps",
+            "advertisement": "Publicidad",
+            "blogArticle": "Blog o Artículo",
+            "other": "Otro"
+        },
+        "profilePicture": {
+            "title": "Añade una foto de perfil",
+            "description": "Ayuda a otros a reconocerte en la comunidad.",
+            "uploadPhoto": "Subir Foto",
+            "changePhoto": "Cambiar Foto"
+        },
+        "success": {
+            "title": "¡Perfil Creado Exitosamente!",
+            "description": "¡Bienvenido a Optimist! Estamos emocionados de tenerte en este viaje."
+        },
+        "buttons": {
+            "next": "Siguiente",
+            "back": "Atrás",
+            "skip": "Omitir",
+            "skipAll": "Omitir por ahora",
+            "complete": "Comenzar"
+        },
+        "skipMessage": "Siempre puedes completar tu perfil más tarde desde la configuración de tu perfil."
+    },
+    "Profile": {
+        "photoUpdated": "¡Foto de perfil actualizada con éxito!",
+        "photoError": "Error al subir la foto. Por favor, inténtalo de nuevo.",
+        "saved": "¡Perfil guardado con éxito!",
+        "saveError": "Error al guardar el perfil. Por favor, inténtalo de nuevo."
     }
 }

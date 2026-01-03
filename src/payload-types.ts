@@ -69,7 +69,9 @@ export interface Config {
   collections: {
     users: User;
     media: Media;
+    'profile-pictures': ProfilePicture;
     categories: Category;
+    pages: Page;
     circles: Circle;
     messages: Message;
     comments: Comment;
@@ -77,6 +79,7 @@ export interface Config {
     'journal-prompts': JournalPrompt;
     'mood-logs': MoodLog;
     notifications: Notification;
+    'daily-messages': DailyMessage;
     posts: Post;
     'payload-kv': PayloadKv;
     'payload-jobs': PayloadJob;
@@ -88,7 +91,9 @@ export interface Config {
   collectionsSelect: {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
+    'profile-pictures': ProfilePicturesSelect<false> | ProfilePicturesSelect<true>;
     categories: CategoriesSelect<false> | CategoriesSelect<true>;
+    pages: PagesSelect<false> | PagesSelect<true>;
     circles: CirclesSelect<false> | CirclesSelect<true>;
     messages: MessagesSelect<false> | MessagesSelect<true>;
     comments: CommentsSelect<false> | CommentsSelect<true>;
@@ -96,6 +101,7 @@ export interface Config {
     'journal-prompts': JournalPromptsSelect<false> | JournalPromptsSelect<true>;
     'mood-logs': MoodLogsSelect<false> | MoodLogsSelect<true>;
     notifications: NotificationsSelect<false> | NotificationsSelect<true>;
+    'daily-messages': DailyMessagesSelect<false> | DailyMessagesSelect<true>;
     posts: PostsSelect<false> | PostsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-jobs': PayloadJobsSelect<false> | PayloadJobsSelect<true>;
@@ -151,9 +157,28 @@ export interface User {
   lastName?: string | null;
   nickname?: string | null;
   picture?: (number | null) | Media;
+  /**
+   * Profile picture uploaded during onboarding
+   */
+  profilePicture?: (number | null) | ProfilePicture;
   bio?: string | null;
   location?: string | null;
   website?: string | null;
+  /**
+   * User birthday for personalized content
+   */
+  birthday?: string | null;
+  gender?: ('male' | 'female' | 'non-binary' | 'prefer-not-to-say' | 'other') | null;
+  /**
+   * How did the user hear about this app
+   */
+  heardAboutUs?:
+    | ('social-media' | 'friend-family' | 'search-engine' | 'app-store' | 'advertisement' | 'blog-article' | 'other')
+    | null;
+  /**
+   * Whether the user has completed the onboarding process
+   */
+  onboardingCompleted?: boolean | null;
   roles: ('admin' | 'user')[];
   updatedAt: string;
   createdAt: string;
@@ -162,8 +187,6 @@ export interface User {
   resetPasswordExpiration?: string | null;
   salt?: string | null;
   hash?: string | null;
-  _verified?: boolean | null;
-  _verificationToken?: string | null;
   loginAttempts?: number | null;
   lockUntil?: string | null;
   sessions?:
@@ -269,6 +292,63 @@ export interface Media {
   };
 }
 /**
+ * Profile pictures uploaded during user onboarding
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "profile-pictures".
+ */
+export interface ProfilePicture {
+  id: number;
+  alt?: string | null;
+  uploadedBy?: (number | null) | User;
+  prefix?: string | null;
+  updatedAt: string;
+  createdAt: string;
+  url?: string | null;
+  thumbnailURL?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width?: number | null;
+  height?: number | null;
+  focalX?: number | null;
+  focalY?: number | null;
+  sizes?: {
+    thumbnail?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    small?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    medium?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    large?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+  };
+}
+/**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "categories".
  */
@@ -290,6 +370,368 @@ export interface Category {
   bgColor?: string | null;
   updatedAt: string;
   createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "pages".
+ */
+export interface Page {
+  id: number;
+  title: string;
+  hero: {
+    type: 'none' | 'highImpact' | 'mediumImpact' | 'lowImpact';
+    richText?: {
+      root: {
+        type: string;
+        children: {
+          type: any;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    } | null;
+    links?:
+      | {
+          link: {
+            type?: ('reference' | 'custom') | null;
+            newTab?: boolean | null;
+            reference?:
+              | ({
+                  relationTo: 'pages';
+                  value: number | Page;
+                } | null)
+              | ({
+                  relationTo: 'posts';
+                  value: number | Post;
+                } | null);
+            url?: string | null;
+            label: string;
+            /**
+             * Choose how the link should be rendered.
+             */
+            appearance?: ('default' | 'outline') | null;
+          };
+          id?: string | null;
+        }[]
+      | null;
+    media?: (number | null) | Media;
+  };
+  layout: (
+    | CallToActionBlock
+    | ContentBlock
+    | MediaBlock
+    | ArchiveBlock
+    | {
+        /**
+         * Main heading text for the signup CTA section
+         */
+        title: string;
+        /**
+         * Optional subtitle text above the main title
+         */
+        subtitle?: string | null;
+        buttons?:
+          | {
+              type?: ('reference' | 'custom') | null;
+              reference?: {
+                relationTo: 'pages';
+                value: number | Page;
+              } | null;
+              url?: string | null;
+              label: string;
+              style?: ('default' | 'primary' | 'secondary' | 'outline' | 'link') | null;
+              /**
+               * Icon to display in secondary buttons
+               */
+              icon?: ('none' | 'google' | 'email') | null;
+              id?: string | null;
+            }[]
+          | null;
+        /**
+         * Display overlapping user avatar images above the title
+         */
+        showUserAvatars?: boolean | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'signupCTA';
+      }
+    | {
+        richText: {
+          root: {
+            type: string;
+            children: {
+              type: any;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        };
+        media: number | Media;
+        /**
+         * Choose whether the image appears on the left or right side of the text
+         */
+        imagePosition?: ('left' | 'right') | null;
+        links?:
+          | {
+              type?: ('reference' | 'custom') | null;
+              reference?: {
+                relationTo: 'pages';
+                value: number | Page;
+              } | null;
+              url?: string | null;
+              label: string;
+              appearance?: ('default' | 'primary' | 'secondary' | 'outline' | 'link') | null;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'twoColumnTextImage';
+      }
+  )[];
+  meta?: {
+    title?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
+    image?: (number | null) | Media;
+    description?: string | null;
+  };
+  publishedAt?: string | null;
+  slug?: string | null;
+  slugLock?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "posts".
+ */
+export interface Post {
+  id: number;
+  title: string;
+  heroImage?: (number | null) | Media;
+  content: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  relatedPosts?: (number | Post)[] | null;
+  categories?: (number | Category)[] | null;
+  meta?: {
+    title?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
+    image?: (number | null) | Media;
+    description?: string | null;
+  };
+  publishedAt?: string | null;
+  authors?: (number | User)[] | null;
+  populatedAuthors?:
+    | {
+        id?: string | null;
+        name?: string | null;
+      }[]
+    | null;
+  slug?: string | null;
+  slugLock?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CallToActionBlock".
+ */
+export interface CallToActionBlock {
+  richText?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  links?:
+    | {
+        link: {
+          type?: ('reference' | 'custom') | null;
+          newTab?: boolean | null;
+          reference?:
+            | ({
+                relationTo: 'pages';
+                value: number | Page;
+              } | null)
+            | ({
+                relationTo: 'posts';
+                value: number | Post;
+              } | null);
+          url?: string | null;
+          label: string;
+          /**
+           * Choose how the link should be rendered.
+           */
+          appearance?: ('default' | 'outline') | null;
+        };
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'cta';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ContentBlock".
+ */
+export interface ContentBlock {
+  columns?:
+    | {
+        size?: ('oneThird' | 'half' | 'twoThirds' | 'full') | null;
+        richText?: {
+          root: {
+            type: string;
+            children: {
+              type: any;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
+        enableLink?: boolean | null;
+        link?: {
+          type?: ('reference' | 'custom') | null;
+          newTab?: boolean | null;
+          reference?:
+            | ({
+                relationTo: 'pages';
+                value: number | Page;
+              } | null)
+            | ({
+                relationTo: 'posts';
+                value: number | Post;
+              } | null);
+          url?: string | null;
+          label: string;
+          /**
+           * Choose how the link should be rendered.
+           */
+          appearance?: ('default' | 'outline') | null;
+        };
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'content';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "MediaBlock".
+ */
+export interface MediaBlock {
+  media: number | Media;
+  width?: {
+    /**
+     * Choose whether the image should span the full width or be constrained to a maximum width
+     */
+    type?: ('full' | 'max') | null;
+    /**
+     * Choose a preset width or select custom to enter a specific pixel value
+     */
+    preset?: ('custom' | '1/2' | '1/3' | '2/3' | '1/4' | '3/4') | null;
+    /**
+     * Maximum width in pixels when using custom preset
+     */
+    maxWidth?: number | null;
+    /**
+     * Choose the horizontal alignment of the image
+     */
+    alignment?: ('left' | 'center' | 'right') | null;
+  };
+  /**
+   * Choose the aspect ratio for the image. Auto preserves the original ratio.
+   */
+  aspectRatio?: ('auto' | '16/9' | '4/3' | '1/1' | '3/2' | '2/3' | '21/9') | null;
+  /**
+   * Choose the shadow size for the image
+   */
+  shadow?: ('none' | 'small' | 'medium' | 'large') | null;
+  /**
+   * Toggle the border around the image
+   */
+  showBorder?: boolean | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'mediaBlock';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ArchiveBlock".
+ */
+export interface ArchiveBlock {
+  introContent?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  populateBy?: ('collection' | 'selection') | null;
+  relationTo?: 'posts' | null;
+  categories?: (number | Category)[] | null;
+  limit?: number | null;
+  selectedDocs?:
+    | {
+        relationTo: 'posts';
+        value: number | Post;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'archive';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -594,51 +1036,48 @@ export interface Notification {
   createdAt: string;
 }
 /**
+ * Daily inspirational messages shown to users each day
+ *
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "posts".
+ * via the `definition` "daily-messages".
  */
-export interface Post {
+export interface DailyMessage {
   id: number;
+  /**
+   * A short title for the daily message (for admin reference)
+   */
   title: string;
-  heroImage?: (number | null) | Media;
-  content: {
-    root: {
-      type: string;
-      children: {
-        type: any;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  };
-  relatedPosts?: (number | Post)[] | null;
-  categories?: (number | Category)[] | null;
-  meta?: {
-    title?: string | null;
-    /**
-     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
-     */
-    image?: (number | null) | Media;
-    description?: string | null;
-  };
-  publishedAt?: string | null;
-  authors?: (number | User)[] | null;
-  populatedAuthors?:
-    | {
-        id?: string | null;
-        name?: string | null;
-      }[]
-    | null;
-  slug?: string | null;
-  slugLock?: boolean | null;
+  /**
+   * The main message content to display to users
+   */
+  content: string;
+  /**
+   * Emoji icon to display with the message
+   */
+  icon?: string | null;
+  category: 'motivation' | 'inspiration' | 'gratitude' | 'mindfulness' | 'positivity' | 'wellness' | 'faith' | 'growth';
+  /**
+   * The date this message should be displayed as the daily message
+   */
+  scheduledDate: string;
+  /**
+   * Only active messages will be shown on their scheduled date
+   */
+  isActive?: boolean | null;
+  /**
+   * Optional: Author or source of the quote
+   */
+  author?: string | null;
+  /**
+   * Optional: URL to an audio reading of this message
+   */
+  audioUrl?: string | null;
+  /**
+   * Background theme for the modal display
+   */
+  backgroundTheme?: ('blue-purple' | 'pink-orange' | 'green-teal' | 'purple-pink') | null;
   updatedAt: string;
   createdAt: string;
-  _status?: ('draft' | 'published') | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -765,8 +1204,16 @@ export interface PayloadLockedDocument {
         value: number | Media;
       } | null)
     | ({
+        relationTo: 'profile-pictures';
+        value: number | ProfilePicture;
+      } | null)
+    | ({
         relationTo: 'categories';
         value: number | Category;
+      } | null)
+    | ({
+        relationTo: 'pages';
+        value: number | Page;
       } | null)
     | ({
         relationTo: 'circles';
@@ -795,6 +1242,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'notifications';
         value: number | Notification;
+      } | null)
+    | ({
+        relationTo: 'daily-messages';
+        value: number | DailyMessage;
       } | null)
     | ({
         relationTo: 'posts';
@@ -851,9 +1302,14 @@ export interface UsersSelect<T extends boolean = true> {
   lastName?: T;
   nickname?: T;
   picture?: T;
+  profilePicture?: T;
   bio?: T;
   location?: T;
   website?: T;
+  birthday?: T;
+  gender?: T;
+  heardAboutUs?: T;
+  onboardingCompleted?: T;
   roles?: T;
   updatedAt?: T;
   createdAt?: T;
@@ -862,8 +1318,6 @@ export interface UsersSelect<T extends boolean = true> {
   resetPasswordExpiration?: T;
   salt?: T;
   hash?: T;
-  _verified?: T;
-  _verificationToken?: T;
   loginAttempts?: T;
   lockUntil?: T;
   sessions?:
@@ -970,6 +1424,70 @@ export interface MediaSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "profile-pictures_select".
+ */
+export interface ProfilePicturesSelect<T extends boolean = true> {
+  alt?: T;
+  uploadedBy?: T;
+  prefix?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  url?: T;
+  thumbnailURL?: T;
+  filename?: T;
+  mimeType?: T;
+  filesize?: T;
+  width?: T;
+  height?: T;
+  focalX?: T;
+  focalY?: T;
+  sizes?:
+    | T
+    | {
+        thumbnail?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+        small?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+        medium?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+        large?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+      };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "categories_select".
  */
 export interface CategoriesSelect<T extends boolean = true> {
@@ -980,6 +1498,179 @@ export interface CategoriesSelect<T extends boolean = true> {
   bgColor?: T;
   updatedAt?: T;
   createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "pages_select".
+ */
+export interface PagesSelect<T extends boolean = true> {
+  title?: T;
+  hero?:
+    | T
+    | {
+        type?: T;
+        richText?: T;
+        links?:
+          | T
+          | {
+              link?:
+                | T
+                | {
+                    type?: T;
+                    newTab?: T;
+                    reference?: T;
+                    url?: T;
+                    label?: T;
+                    appearance?: T;
+                  };
+              id?: T;
+            };
+        media?: T;
+      };
+  layout?:
+    | T
+    | {
+        cta?: T | CallToActionBlockSelect<T>;
+        content?: T | ContentBlockSelect<T>;
+        mediaBlock?: T | MediaBlockSelect<T>;
+        archive?: T | ArchiveBlockSelect<T>;
+        signupCTA?:
+          | T
+          | {
+              title?: T;
+              subtitle?: T;
+              buttons?:
+                | T
+                | {
+                    type?: T;
+                    reference?: T;
+                    url?: T;
+                    label?: T;
+                    style?: T;
+                    icon?: T;
+                    id?: T;
+                  };
+              showUserAvatars?: T;
+              id?: T;
+              blockName?: T;
+            };
+        twoColumnTextImage?:
+          | T
+          | {
+              richText?: T;
+              media?: T;
+              imagePosition?: T;
+              links?:
+                | T
+                | {
+                    type?: T;
+                    reference?: T;
+                    url?: T;
+                    label?: T;
+                    appearance?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+      };
+  meta?:
+    | T
+    | {
+        title?: T;
+        image?: T;
+        description?: T;
+      };
+  publishedAt?: T;
+  slug?: T;
+  slugLock?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CallToActionBlock_select".
+ */
+export interface CallToActionBlockSelect<T extends boolean = true> {
+  richText?: T;
+  links?:
+    | T
+    | {
+        link?:
+          | T
+          | {
+              type?: T;
+              newTab?: T;
+              reference?: T;
+              url?: T;
+              label?: T;
+              appearance?: T;
+            };
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ContentBlock_select".
+ */
+export interface ContentBlockSelect<T extends boolean = true> {
+  columns?:
+    | T
+    | {
+        size?: T;
+        richText?: T;
+        enableLink?: T;
+        link?:
+          | T
+          | {
+              type?: T;
+              newTab?: T;
+              reference?: T;
+              url?: T;
+              label?: T;
+              appearance?: T;
+            };
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "MediaBlock_select".
+ */
+export interface MediaBlockSelect<T extends boolean = true> {
+  media?: T;
+  width?:
+    | T
+    | {
+        type?: T;
+        preset?: T;
+        maxWidth?: T;
+        alignment?: T;
+      };
+  aspectRatio?: T;
+  shadow?: T;
+  showBorder?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ArchiveBlock_select".
+ */
+export interface ArchiveBlockSelect<T extends boolean = true> {
+  introContent?: T;
+  populateBy?: T;
+  relationTo?: T;
+  categories?: T;
+  limit?: T;
+  selectedDocs?: T;
+  id?: T;
+  blockName?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1152,6 +1843,23 @@ export interface NotificationsSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "daily-messages_select".
+ */
+export interface DailyMessagesSelect<T extends boolean = true> {
+  title?: T;
+  content?: T;
+  icon?: T;
+  category?: T;
+  scheduledDate?: T;
+  isActive?: T;
+  author?: T;
+  audioUrl?: T;
+  backgroundTheme?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "posts_select".
  */
 export interface PostsSelect<T extends boolean = true> {
@@ -1260,10 +1968,15 @@ export interface TaskSchedulePublish {
   input: {
     type?: ('publish' | 'unpublish') | null;
     locale?: string | null;
-    doc?: {
-      relationTo: 'posts';
-      value: number | Post;
-    } | null;
+    doc?:
+      | ({
+          relationTo: 'pages';
+          value: number | Page;
+        } | null)
+      | ({
+          relationTo: 'posts';
+          value: number | Post;
+        } | null);
     global?: string | null;
     user?: (number | null) | User;
   };
@@ -1293,57 +2006,6 @@ export interface BannerBlock {
   id?: string | null;
   blockName?: string | null;
   blockType: 'banner';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "CodeBlock".
- */
-export interface CodeBlock {
-  language?: ('typescript' | 'javascript' | 'css') | null;
-  code: string;
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'code';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "MediaBlock".
- */
-export interface MediaBlock {
-  media: number | Media;
-  width?: {
-    /**
-     * Choose whether the image should span the full width or be constrained to a maximum width
-     */
-    type?: ('full' | 'max') | null;
-    /**
-     * Choose a preset width or select custom to enter a specific pixel value
-     */
-    preset?: ('custom' | '1/2' | '1/3' | '2/3' | '1/4' | '3/4') | null;
-    /**
-     * Maximum width in pixels when using custom preset
-     */
-    maxWidth?: number | null;
-    /**
-     * Choose the horizontal alignment of the image
-     */
-    alignment?: ('left' | 'center' | 'right') | null;
-  };
-  /**
-   * Choose the aspect ratio for the image. Auto preserves the original ratio.
-   */
-  aspectRatio?: ('auto' | '16/9' | '4/3' | '1/1' | '3/2' | '2/3' | '21/9') | null;
-  /**
-   * Choose the shadow size for the image
-   */
-  shadow?: ('none' | 'small' | 'medium' | 'large') | null;
-  /**
-   * Toggle the border around the image
-   */
-  showBorder?: boolean | null;
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'mediaBlock';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

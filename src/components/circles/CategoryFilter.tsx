@@ -53,7 +53,7 @@ export default function CategoryFilter({
 
   // Touch events for mobile
   const handleTouchStart = (e: React.TouchEvent) => {
-    if (!containerRef.current) return;
+    if (!containerRef.current || !e.touches[0]) return;
     
     setIsDragging(true);
     setStartX(e.touches[0].pageX - containerRef.current.offsetLeft);
@@ -61,7 +61,7 @@ export default function CategoryFilter({
   };
 
   const handleTouchMove = (e: React.TouchEvent) => {
-    if (!isDragging || !containerRef.current) return;
+    if (!isDragging || !containerRef.current || !e.touches[0]) return;
     
     const x = e.touches[0].pageX - containerRef.current.offsetLeft;
     const walk = (x - startX) * 2;

@@ -39,6 +39,13 @@ export async function POST(request: NextRequest) {
 
     const user = users.docs[0];
 
+    if (!user) {
+      return NextResponse.json({
+        success: true,
+        message: 'If an account with that email exists, a verification email has been sent.',
+      });
+    }
+
     // Check if already verified
     if (user._verified) {
       return NextResponse.json({

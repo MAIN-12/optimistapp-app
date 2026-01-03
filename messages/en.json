@@ -31,5 +31,91 @@
         "iosInstructions": "To install this app on your iOS device:\n1. Tap the Share button (□↗)\n2. Scroll down and tap \"Add to Home Screen\"\n3. Tap \"Add\" to confirm",
         "androidInstructions": "To install this app on your Android device:\n1. Tap the menu button (⋮)\n2. Tap \"Add to Home screen\" or \"Install app\"\n3. Follow the prompts to install",
         "desktopInstructions": "To install this app:\n1. Look for an install icon in your browser address bar\n2. Or go to browser menu > \"Install Optimist\"\n3. Follow the prompts to install"
+    },
+    "Onboarding": {
+        "slide1": {
+            "title": "Welcome to Optimist!",
+            "description": "Your personal companion for mental wellness and self-improvement. We're here to help you on your journey to a happier, healthier you."
+        },
+        "slide2": {
+            "title": "Track Your Journey",
+            "description": "Keep a personal journal, log your moods, and reflect on your daily experiences. Build healthy habits with guided prompts and insights."
+        },
+        "slide3": {
+            "title": "Connect with Others",
+            "description": "Join supportive circles, share your experiences, and find community with like-minded individuals on similar journeys."
+        },
+        "birthday": {
+            "title": "When's your birthday?",
+            "description": "We'd love to celebrate with you! This helps us personalize your experience.",
+            "label": "Birthday",
+            "day": "Day",
+            "month": "Month",
+            "year": "Year",
+            "months": {
+                "january": "January",
+                "february": "February",
+                "march": "March",
+                "april": "April",
+                "may": "May",
+                "june": "June",
+                "july": "July",
+                "august": "August",
+                "september": "September",
+                "october": "October",
+                "november": "November",
+                "december": "December"
+            }
+        },
+        "gender": {
+            "title": "How do you identify?",
+            "description": "This helps us tailor content that resonates with you.",
+            "label": "Gender"
+        },
+        "genderOptions": {
+            "male": "Male",
+            "female": "Female",
+            "nonBinary": "Non-binary",
+            "preferNotToSay": "Prefer not to say",
+            "other": "Other"
+        },
+        "heardAbout": {
+            "title": "How did you find us?",
+            "description": "We're curious how you discovered Optimist!",
+            "label": "How did you hear about us?"
+        },
+        "heardAboutOptions": {
+            "socialMedia": "Social Media",
+            "friendFamily": "Friend or Family",
+            "searchEngine": "Search Engine",
+            "appStore": "App Store",
+            "advertisement": "Advertisement",
+            "blogArticle": "Blog or Article",
+            "other": "Other"
+        },
+        "profilePicture": {
+            "title": "Add a profile picture",
+            "description": "Help others recognize you in the community.",
+            "uploadPhoto": "Upload Photo",
+            "changePhoto": "Change Photo"
+        },
+        "success": {
+            "title": "Profile Created Successfully!",
+            "description": "Welcome to Optimist! We're excited to have you on this journey."
+        },
+        "buttons": {
+            "next": "Next",
+            "back": "Back",
+            "skip": "Skip",
+            "skipAll": "Skip for now",
+            "complete": "Get Started"
+        },
+        "skipMessage": "You can always complete your profile later from your profile settings."
+    },
+    "Profile": {
+        "photoUpdated": "Profile photo updated successfully!",
+        "photoError": "Failed to upload photo. Please try again.",
+        "saved": "Profile saved successfully!",
+        "saveError": "Failed to save profile. Please try again."
     }
 }

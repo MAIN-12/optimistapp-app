@@ -28,8 +28,8 @@ import ArrowOutward from "@/components/icons/ArrowOutward";
 import Avatar from "@/components/Auth/Avatar";
 import UserName from "@/components/Auth/UserName";
 import { siteConfig } from "@/config/site";
-import AppLogoExpanded from "../../config/logo/AppLogoExpanded";
-import AppLogoCompact from "../../config/logo/AppLogoCompact ";
+import AppLogoExpanded from "@/components/logo/AppLogoExpanded";
+import AppLogoCompact from "@/components/logo/AppLogoCompact";
 
 
 export default function Sidebar() {

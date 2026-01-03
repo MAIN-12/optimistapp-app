@@ -20,6 +20,7 @@ export const COLLECTION_SLUGS = {
   JOURNAL_ENTRIES: 'journal-entries',
   JOURNAL_PROMPTS: 'journal-prompts',
   MOOD_LOGS: 'mood-logs',
+  DAILY_MESSAGES: 'daily-messages',
   
   // System
   NOTIFICATIONS: 'notifications',

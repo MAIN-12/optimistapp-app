@@ -1,24 +1,11 @@
 import type React from "react"
 import type { Media } from "@/payload-types"
+import type { DefaultTypedEditorState } from "@payloadcms/richtext-lexical"
 
 import { AnimatedTwoColumn } from './Component.client'
 
 type TwoColumnTextImageProps = {
-  richText: {
-    root: {
-      type: string
-      children: {
-        type: string
-        version: number
-        [k: string]: unknown
-      }[]
-      direction: ("ltr" | "rtl") | null
-      format: "left" | "start" | "center" | "right" | "end" | "justify" | ""
-      indent: number
-      version: number
-    }
-    [k: string]: unknown
-  }
+  richText: DefaultTypedEditorState
   media: number | Media
   imagePosition?: ("left" | "right") | null
   links?:

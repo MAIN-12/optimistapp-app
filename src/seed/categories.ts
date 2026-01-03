@@ -90,6 +90,7 @@ export async function seedCategories(payload: Payload): Promise<void> {
       await payload.create({
         collection: 'categories',
         data: category,
+        draft: false,
       })
       payload.logger.info(`Created category: ${category.name}`)
     }

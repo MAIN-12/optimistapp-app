@@ -186,7 +186,12 @@ export async function seedMessages(payload: Payload): Promise<void> {
     if (existing.docs.length === 0) {
       await payload.create({
         collection: 'messages',
-        data: message,
+        data: {
+          ...message,
+          category: message.category,
+          author: message.author,
+        },
+        draft: false,
       })
       payload.logger.info('Created message')
     }

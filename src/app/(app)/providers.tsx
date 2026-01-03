@@ -7,7 +7,9 @@ import { HeroUIProvider, ToastProvider } from '@heroui/react'
 import { useRouter } from "next/navigation";
 import { ThemeProvider as NextThemesProvider } from "next-themes";
 import { AuthProvider } from "@/providers/AuthProvider";
+import { OnboardingProvider } from "@/providers/OnboardingProvider";
 import { SupportModalProvider } from "@/components/feedback/FeedBackProvider";
+import { OnboardingModal } from "@/components/onboarding";
 
 export interface ProvidersProps {
   children: React.ReactNode;
@@ -28,14 +30,17 @@ export function Providers({ children, themeProps }: ProvidersProps) {
   return (
     <React.StrictMode>
       <AuthProvider>
-        <HeroUIProvider navigate={router.push}>
-          <ToastProvider />
-          <NextThemesProvider {...themeProps}>
-            <SupportModalProvider>
-              {children}
-            </SupportModalProvider>
-          </NextThemesProvider>
-        </HeroUIProvider>
+        <OnboardingProvider>
+          <HeroUIProvider navigate={router.push}>
+            <ToastProvider />
+            <NextThemesProvider {...themeProps}>
+              <SupportModalProvider>
+                {children}
+                <OnboardingModal />
+              </SupportModalProvider>
+            </NextThemesProvider>
+          </HeroUIProvider>
+        </OnboardingProvider>
       </AuthProvider>
     </React.StrictMode>
   );

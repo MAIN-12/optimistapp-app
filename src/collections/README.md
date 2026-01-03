@@ -89,7 +89,7 @@ User notification system:
 ## Key Optimizations
 
 ### 1. **Embedded Reactions** (vs. Separate Collections)
-**Before (Prisma approach):**
+**Before (traditional ORM approach):**
 ```
 MessageReact (separate table)
 ├── id
@@ -187,25 +187,21 @@ Potential additions to consider:
 
 ---
 
-## Migration from Prisma
+## Collection Structure Reference
 
-This Payload CMS structure replaces the Prisma schema while optimizing data relationships:
+This Payload CMS structure provides optimized data relationships:
 
-| Prisma Model | Payload Collection | Changes |
-|--------------|-------------------|----------|
-| User | Users | Enhanced with profile fields |
-| Circle | Circles | ✅ Created |
-| CircleMember | (embedded in Circles) | Optimized as array |
-| Category | Categories | ✅ Updated |
-| Message | Messages | ✅ Created |
-| MessageReact | (embedded in Messages) | Optimized as array |
-| Comment | Comments | ✅ Created |
-| CommentReact | (embedded in Comments) | Optimized as array |
-| FavoriteMessage | (embedded in Messages) | Optimized as array |
-| JournalEntry | JournalEntries | ✅ Created |
-| JournalPrompt | JournalPrompts | ✅ Created |
-| MoodLog | MoodLogs | ✅ Created |
-| Notification | Notifications | ✅ Created |
+| Collection | Description |
+|------------|----------|
+| Users | Enhanced with profile fields |
+| Circles | Support groups with embedded members |
+| Categories | Content categorization |
+| Messages | Community messages with embedded reactions |
+| Comments | Message comments with embedded reactions |
+| JournalEntries | Private journaling |
+| JournalPrompts | Guided prompts |
+| MoodLogs | Mood tracking |
+| Notifications | User notifications |
 
 ---
 

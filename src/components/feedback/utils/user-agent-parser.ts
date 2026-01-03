@@ -47,23 +47,23 @@ export function parseUserAgent(userAgentString: string): UserAgentInfo {
     if (ua.includes("firefox")) {
         result.browser.name = "Firefox"
         const match = ua.match(/firefox\/([\d.]+)/)
-        if (match) result.browser.version = match[1]
+        if (match && match[1]) result.browser.version = match[1]
     } else if (ua.includes("edg")) {
         result.browser.name = "Edge"
         const match = ua.match(/edg\/([\d.]+)/)
-        if (match) result.browser.version = match[1]
+        if (match && match[1]) result.browser.version = match[1]
     } else if (ua.includes("chrome")) {
         result.browser.name = "Chrome"
         const match = ua.match(/chrome\/([\d.]+)/)
-        if (match) result.browser.version = match[1]
+        if (match && match[1]) result.browser.version = match[1]
     } else if (ua.includes("safari") && !ua.includes("chrome")) {
         result.browser.name = "Safari"
         const match = ua.match(/version\/([\d.]+)/)
-        if (match) result.browser.version = match[1]
+        if (match && match[1]) result.browser.version = match[1]
     } else if (ua.includes("opr") || ua.includes("opera")) {
         result.browser.name = "Opera"
         const match = ua.match(/(?:opr|opera)\/([\d.]+)/)
-        if (match) result.browser.version = match[1]
+        if (match && match[1]) result.browser.version = match[1]
     }
 
     result.browser.fullName = `${result.browser.name} ${result.browser.version}`
@@ -106,11 +106,11 @@ export function parseUserAgent(userAgentString: string): UserAgentInfo {
     } else if (ua.includes("macintosh") || ua.includes("mac os x")) {
         result.os.name = "macOS"
         const match = ua.match(/mac os x (\d+[._]\d+[._]\d+)/)
-        if (match) {
+        if (match && match[1]) {
             result.os.version = match[1].replace(/_/g, ".")
         } else {
             const versionMatch = ua.match(/mac os x (\d+[._]\d+)/)
-            if (versionMatch) {
+            if (versionMatch && versionMatch[1]) {
                 result.os.version = versionMatch[1].replace(/_/g, ".")
             }
         }
@@ -121,7 +121,7 @@ export function parseUserAgent(userAgentString: string): UserAgentInfo {
     } else if (ua.includes("android")) {
         result.os.name = "Android"
         const match = ua.match(/android (\d+(?:\.\d+)*)/)
-        if (match) result.os.version = match[1]
+        if (match && match[1]) result.os.version = match[1]
         result.isMobile = true
         if (ua.includes("tablet") || (typeof screen !== "undefined" && screen.width > 768)) {
             result.isTablet = true
@@ -130,13 +130,13 @@ export function parseUserAgent(userAgentString: string): UserAgentInfo {
     } else if (ua.includes("iphone")) {
         result.os.name = "iOS"
         const match = ua.match(/os (\d+[._]\d+[._]?\d*)/)
-        if (match) result.os.version = match[1].replace(/_/g, ".")
+        if (match && match[1]) result.os.version = match[1].replace(/_/g, ".")
         result.isMobile = true
         result.device = "iPhone"
     } else if (ua.includes("ipad")) {
         result.os.name = "iOS"
         const match = ua.match(/os (\d+[._]\d+[._]?\d*)/)
-        if (match) result.os.version = match[1].replace(/_/g, ".")
+        if (match && match[1]) result.os.version = match[1].replace(/_/g, ".")
         result.isTablet = true
         result.device = "iPad"
     }
@@ -169,20 +169,20 @@ function detectWindows11(userAgentString: string): boolean {
     const chromeMatch = userAgentString.match(/Chrome\/(\d+)/i)
     const edgeMatch = userAgentString.match(/Edg\/(\d+)/i)
 
-    if (chromeMatch && Number.parseInt(chromeMatch[1]) >= 94) {
+    if (chromeMatch && chromeMatch[1] && Number.parseInt(chromeMatch[1]) >= 94) {
         // Chrome 94+ was released around the same time as Windows 11
         // Higher chance of being Windows 11, but not guaranteed
         return true
     }
 
-    if (edgeMatch && Number.parseInt(edgeMatch[1]) >= 94) {
+    if (edgeMatch && edgeMatch[1] && Number.parseInt(edgeMatch[1]) >= 94) {
         // Edge 94+ was released around the same time as Windows 11
         return true
     }
 
     // 2. Look for Windows build number in the UA string (if available)
     const buildMatch = userAgentString.match(/Windows NT 10.0;.*Build\/(\d+)/i)
-    if (buildMatch && Number.parseInt(buildMatch[1]) >= 22000) {
+    if (buildMatch && buildMatch[1] && Number.parseInt(buildMatch[1]) >= 22000) {
         // Windows 11 starts with build 22000
         return true
     }
