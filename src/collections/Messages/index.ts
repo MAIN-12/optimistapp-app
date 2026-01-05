@@ -3,6 +3,14 @@ import type { CollectionConfig } from 'payload'
 import { authenticated } from '../../access/authenticated'
 import { anyone } from '../../access/anyone'
 
+// Field-level access: only author can update
+const authorOnly = ({ req: { user }, doc }: any) => {
+  if (!user) return false
+  // Allow if user is the author
+  const authorId = typeof doc?.author === 'object' ? doc?.author?.id : doc?.author
+  return user.id === authorId
+}
+
 export const Messages: CollectionConfig = {
   slug: 'messages',
   access: {
@@ -16,18 +24,9 @@ export const Messages: CollectionConfig = {
       }
     },
     read: anyone,
-    update: ({ req: { user } }) => {
-      // Only authors or admins can update
-      return {
-        or: [
-          {
-            'author.id': {
-              equals: user?.id,
-            },
-          },
-        ],
-      }
-    },
+    // Allow any authenticated user to update (for reactions/favorites)
+    // Field-level access will protect author-only fields
+    update: authenticated,
   },
   admin: {
     useAsTitle: 'content',
@@ -39,12 +38,18 @@ export const Messages: CollectionConfig = {
       type: 'textarea',
       required: true,
       maxLength: 2000,
+      access: {
+        update: authorOnly,
+      },
     },
     {
       name: 'type',
       type: 'select',
       required: true,
       defaultValue: 'positive',
+      access: {
+        update: authorOnly,
+      },
       options: [
         {
           label: 'Positive',
@@ -82,12 +87,20 @@ export const Messages: CollectionConfig = {
       relationTo: 'users',
       required: true,
       hasMany: false,
+      access: {
+        update: () => false, // Author cannot be changed
+      },
     },
     {
       name: 'circle',
-      type: 'text',
+      type: 'relationship',
+      relationTo: 'circles',
+      hasMany: false,
+      access: {
+        update: authorOnly,
+      },
       admin: {
-        description: 'Circle ID - Leave empty for global messages',
+        description: 'Circle this message belongs to - Leave empty for global messages',
       },
     },
     {
@@ -95,11 +108,17 @@ export const Messages: CollectionConfig = {
       type: 'relationship',
       relationTo: 'categories',
       hasMany: false,
+      access: {
+        update: authorOnly,
+      },
     },
     {
       name: 'isAnonymous',
       type: 'checkbox',
       defaultValue: false,
+      access: {
+        update: authorOnly,
+      },
       admin: {
         description: 'Hide author name from other users',
       },
@@ -108,6 +127,9 @@ export const Messages: CollectionConfig = {
       name: 'isDaily',
       type: 'checkbox',
       defaultValue: false,
+      access: {
+        update: authorOnly,
+      },
       admin: {
         description: 'Daily inspirational message',
       },
@@ -116,6 +138,9 @@ export const Messages: CollectionConfig = {
       name: 'isPinned',
       type: 'checkbox',
       defaultValue: false,
+      access: {
+        update: authorOnly,
+      },
       admin: {
         description: 'Pin this message to the top',
       },

@@ -94,21 +94,6 @@ export default function DailyMessage() {
         </p>
       </div>
 
-      {/* Mood Tracker */}
-      <div className="flex items-center justify-between py-4">
-        <div className="flex items-center gap-3">
-          <Smile className="w-6 h-6 text-gray-600 dark:text-gray-400" />
-          <span className="text-gray-700 dark:text-gray-300 font-medium">{userMood.question}</span>
-          <div className="flex items-center gap-1 text-sm text-gray-500 dark:text-gray-400">
-            <span>📊</span>
-            <span>{userMood.averageRating} avg</span>
-          </div>
-        </div>
-        <button className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium">
-          {userMood.buttonText}
-        </button>
-      </div>
-
       {/* Daily Message Modal */}
       <DailyMessageModal
         isOpen={isOpen}

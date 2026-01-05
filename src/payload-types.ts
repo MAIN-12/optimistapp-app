@@ -803,9 +803,9 @@ export interface Message {
   type: 'positive' | 'prayer' | 'encouragement' | 'gratitude' | 'motivation' | 'support' | 'announcement';
   author: number | User;
   /**
-   * Circle ID - Leave empty for global messages
+   * Circle this message belongs to - Leave empty for global messages
    */
-  circle?: string | null;
+  circle?: (number | null) | Circle;
   category?: (number | null) | Category;
   /**
    * Hide author name from other users
