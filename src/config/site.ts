@@ -28,7 +28,8 @@ export const siteConfig = {
       label: "Add New",
       icon: Add,
       path: "/send-vives",
-      section: ["main", "mobile"],
+      section: [ "mobile"],
+      context: ["general"],
       mobile: 1,
       className: "bg-primary hover:bg-primary-300"
     },
@@ -47,6 +48,7 @@ export const siteConfig = {
       icon: MessageCircle,
       path: "/messages",
       section: ["main", "mobile"],
+      context: ["general"],
       mobile: 2,
     },
     // {
@@ -63,6 +65,7 @@ export const siteConfig = {
       icon: Grid,
       path: "/categories",
       section: ["main", "mobile"],
+      context: ["general"],
       mobile: 4,
     },
     {
@@ -71,6 +74,7 @@ export const siteConfig = {
       icon: StarIcon,
       path: "/favorites",
       section: ["main", "mobile"],
+      context: ["general"],
       mobile: 5,
     },
     {
@@ -79,6 +83,7 @@ export const siteConfig = {
       icon: Users,
       path: "/circles",
       section: ["main", "mobile"],
+      context: ["general"],
       mobile: 6,
     },
     // {

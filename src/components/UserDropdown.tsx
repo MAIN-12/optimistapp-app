@@ -40,13 +40,13 @@ export default function UserDropdown({ children }: { children?: React.ReactNode 
                 </span>
             </DropdownTrigger>
             <DropdownMenu aria-label="Static Actions">
-                <DropdownItem
+                {/* <DropdownItem
                     key="settings"
                     onPress={() => router.push('/settings')}
                     startContent={<SettingsIcon />}
                 >
                     {t("settings")}
-                </DropdownItem>
+                </DropdownItem> */}
 
                 <DropdownItem
                     key="profile"

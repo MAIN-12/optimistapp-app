@@ -22,7 +22,7 @@ export default function SignupPage() {
   const t = useTranslations();
   const router = useRouter();
   
-  const { register, isLoading } = useAuth();
+  const { register, login, isLoading } = useAuth();
   
   const [formData, setFormData] = useState({
     name: '',
@@ -146,8 +146,20 @@ export default function SignupPage() {
       });
       
       if (result.success) {
-        // Redirect to email verification pending page
-        router.push(`/verify-email-pending?email=${encodeURIComponent(result.email || formData.email)}`);
+        // Auto-login the user after successful registration
+        const loginResult = await login(formData.email, formData.password);
+        
+        if (loginResult.success) {
+          // Redirect to messages page where onboarding will appear automatically
+          router.push('/messages');
+          router.refresh();
+        } else {
+          // If auto-login fails, redirect to login page
+          setError('Account created successfully. Please log in.');
+          setTimeout(() => {
+            router.push('/login');
+          }, 2000);
+        }
       } else {
         setError(result.error || 'Registration failed. Please try again.');
       }

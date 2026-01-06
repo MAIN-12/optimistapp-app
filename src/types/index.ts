@@ -9,9 +9,12 @@ export type IconSvgProps = SVGProps<SVGSVGElement> & {
 export interface MenuItem {
   id: string
   label: string
-  icon: LucideIcon
+  icon: LucideIcon | any
   path: string
   section?: Array<"main" | "bottom" | "mobile">;
   mobile?: number;
   className?: string
+  context?: string[];
+  useLocal?: boolean;
+  as?: string;
 }

@@ -1,220 +1,131 @@
 "use client"
 
-import { useState } from "react";
-import Link from "next/link";
-import { motion } from "framer-motion";
-import { useUser, useAuth } from "@/providers/AuthProvider";
 import { useTranslations } from "next-intl";
-import { useTheme } from "next-themes";
-import {
-  Dropdown, DropdownTrigger, DropdownMenu,
-  DropdownItem, Skeleton, Tooltip,
-  useDisclosure
-} from "@heroui/react";
-import LoginIcon from "@mui/icons-material/Login";
-import KeyboardDoubleArrowLeftIcon from "@mui/icons-material/KeyboardDoubleArrowLeft";
-import PushPinIcon from "@mui/icons-material/PushPin";
-import LogoutIcon from "@mui/icons-material/Logout";
-import SettingsIcon from "@mui/icons-material/Settings";
-import SupportIcon from "@mui/icons-material/Support";
+import { Tooltip, Tabs, Tab } from "@heroui/react";
+import { usePathname, useRouter } from "next/navigation";
+import { getResolvedMenuItems, MenuContext } from "@/lib/menu-utils";
 
-import SupportModal from "../feedback/FeedBackModal";
-import SettingstModal from "../SettingasModal";
+interface SidebarProps {
+  context?: MenuContext;
+  dynamicParams?: Record<string, string>;
+}
 
-import MenuButtonWithIcon from "./sidebarMenuBtn";
-
-import { SunFilledIcon, MoonFilledIcon } from "@/components/icons";
-import ArrowOutward from "@/components/icons/ArrowOutward";
-import Avatar from "@/components/Auth/Avatar";
-import UserName from "@/components/Auth/UserName";
-import { siteConfig } from "@/config/site";
-import AppLogoExpanded from "@/components/logo/AppLogoExpanded";
-import AppLogoCompact from "@/components/logo/AppLogoCompact";
-
-
-export default function Sidebar() {
+export default function Sidebar({ context = "general", dynamicParams = {} }: SidebarProps) {
   const t = useTranslations("sidebar");
-  const { user, isLoading } = useUser();
-  const { logout } = useAuth();
+  const pathname = usePathname();
+  const router = useRouter();
 
-  const [isHovered, setIsHovered] = useState(false);
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const { mainMenuItems, bottomMenuItems } = getResolvedMenuItems(context, dynamicParams);
 
-  const mainMenuItems = siteConfig.menuItems.filter((item) => item.section?.includes("main"));
-  const bottomMenuItems = siteConfig.menuItems.filter((item) => item.section?.includes("bottom"));
+  // Get current active tab based on pathname
+  const getActiveTab = () => {
+    if (!pathname) return undefined;
 
-  const { theme, setTheme } = useTheme();
-  const switchTheme = () => { theme === "light" ? setTheme("dark") : setTheme("light"); };
+    // Find the menu item that best matches the current pathname
+    let activeItem = null;
 
-  const settingsModal = useDisclosure();
-  const supportModal = useDisclosure();
+    // First try exact match
+    activeItem = mainMenuItems.find(item => pathname === item.path);
 
-  // Settings Modal Handlers
-  const handleOpenSettingsModal = settingsModal.onOpen;
-  // const handleCloseSettingsModal = settingsModal.onClose;
+    if (!activeItem) {
+      // Then try to find the best matching path by checking which menu item path
+      // the current pathname starts with, preferring longer matches
+      const matchingItems = mainMenuItems.filter(item => {
+        if (item.path === '/') {
+          return pathname === '/';
+        }
+        return pathname.startsWith(item.path);
+      });
 
-  // Feedback Modal Handlers
-  const handleOpenSupportModalModal = supportModal.onOpen;
-  // const handleCloseSupportkModal = supportModal.onClose;
+      // Sort by path length (longest first) to get the most specific match
+      matchingItems.sort((a, b) => b.path.length - a.path.length);
+      activeItem = matchingItems[0];
+    }
+
+    // Return undefined if no match found (no item should be active)
+    return activeItem?.id || undefined;
+  };
+
+  const handleTabChange = (key: string) => {
+    const item = mainMenuItems.find(item => item.id === key);
+    if (item?.path) {
+      router.push(item.path);
+    }
+  };
 
   return (
     <>
-      <aside
-        suppressHydrationWarning
-        className="h-screen p-6"
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
-      >
-        <div
-          className={`bg-sidebarlightBackground dark:bg-sidebardarkBackground h-full ${isSidebarOpen || isHovered ? "w-[250px]" : "w-16"} transition-width duration-200 text-black dark:text-white rounded-lg flex flex-col`}
-        >
-          {/* Logo */}
-          <div className="px-4 py-6">
-            <Link href="/">{isHovered || isSidebarOpen ? <AppLogoExpanded /> : <AppLogoCompact />}</Link>
-          </div>
-
-          {/* Toggle Sidebar Button */}
-          {isHovered && (
-            <motion.button
-              className="absolute top-4 left-60 px-4 py-2  text-black dark:text-white rounded-full"
-              onClick={() => {
-                setIsSidebarOpen((prev) => !prev);
-                setIsHovered(false);
-              }}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ opacity: { delay: 0.3, duration: 0.3 }, }}
-            >
-              {isSidebarOpen ?
-                <Tooltip content={t("colapseSidebar")} placement="right"><KeyboardDoubleArrowLeftIcon /></Tooltip> :
-                <Tooltip content={t("pinSidebar")} placement="right"><PushPinIcon fontSize="small" /></Tooltip>
-              }
-            </motion.button>
-          )}
-
-          {/* Main Navigation */}
-          <nav className="flex-1">
-            <div className="space-y-1">
-              {mainMenuItems.map((item) => (<MenuButtonWithIcon key={item.id} item={item} isExpanded={isSidebarOpen || isHovered} />))}
-            </div>
-          </nav>
-
-          {/* Bottom Navigation */}
-          <div className=" pt-2 pb-4 flex justify-center w-full">
-            <div className="space-y-1 w-full">
-              {bottomMenuItems.map((item) => (<MenuButtonWithIcon key={item.id} item={item} isExpanded={isSidebarOpen || isHovered} />))}
-              {
-                isLoading ? (
-                  <span className="flex items-center mx-3 text-base rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 hover:font-semibold cursor-pointer select-none">
-                    <div>
-                      <Skeleton className="flex rounded-full w-10 h-10" />
-                    </div>
-                    {
-                      isSidebarOpen || isHovered && (
-                        <div className="w-full flex flex-col gap-2 pl-3">
-                          <Skeleton className="h-3 w-3/5 rounded-lg" />
-                          <Skeleton className="h-3 w-4/5 rounded-lg" />
+      <div className="hidden md:block z-[50] sticky top-0">
+        <aside className="pr-4">
+          <div className="pt-4 w-20 text-black dark:text-white rounded-lg flex flex-col relative">
+            
+            {/* Main Navigation using HERO UI Tabs */}
+            <nav className="flex-1 px-2">
+              <Tabs
+                selectedKey={getActiveTab() || ""}
+                onSelectionChange={(key) => handleTabChange(key as string)}
+                isVertical={true}
+                variant="light"
+                color="primary"
+                className="w-full h-full"
+                classNames={{
+                  base: "w-full h-full flex",
+                  tabList: "gap-1 w-full flex-col bg-transparent p-0",
+                  cursor: "w-full shadow-md bg-primary rounded-lg",
+                  tab: "w-full h-12 px-0 data-[hover-unselected=true]:opacity-80",
+                  tabContent: `w-full group-data-[selected=true]:text-primary-foreground text-black dark:text-white font-light`
+                }}
+              >
+                {mainMenuItems.map((item) => (
+                  <Tab
+                    key={item.id}
+                    title={
+                      <Tooltip content={item.label} placement="right">
+                        <div className="flex items-center justify-center w-full">
+                          <item.icon className="w-5 h-5 pointer-events-none flex-shrink-0" />
                         </div>
-                      )
+                      </Tooltip>
                     }
-                  </span>
-                ) : (
-                  user ? (
-                    <Dropdown>
-                      <DropdownTrigger>
-                        <span className="flex items-center mx-3 text-base rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 hover:font-semibold cursor-pointer select-none">
-                          <Avatar />
-                          {
-                            isSidebarOpen ? (
-                              <span className={`opacity-100  block ml-3 whitespace-nowrap `}><UserName /></span>
-                            ) : (
-                              isHovered && (
-                                <motion.span
-                                  initial={{ opacity: 0 }}
-                                  animate={{ opacity: 1 }}
-                                  exit={{ opacity: 0 }}
-                                  transition={{ duration: 0.6 }}
-                                  className={`ml-3 whitespace-nowrap `}
-                                >
-                                  <UserName />
-                                </motion.span>
-                              )
-                            )
-                          }
-                        </span>
-                      </DropdownTrigger>
-                      <DropdownMenu aria-label="Static Actions">
-                        {/* <DropdownItem
-                          key="settings"
-                          onPress={handleOpenSettingsModal}
-                          startContent={<SettingsIcon />}
-                        >
-                          {t("settings")}
-                        </DropdownItem> */}
+                  />
+                ))}
+              </Tabs>
+            </nav>
 
-                        {/* <DropdownItem
-                          key="theme"
-                          onPress={switchTheme}
-                          startContent={theme === "light" ? <MoonFilledIcon /> : <SunFilledIcon />}
-                        >
-                          {theme === "light" ? t("darkMode") : t("lightMode")}
-                        </DropdownItem> */}
-
-                        <DropdownItem
-                          key="help"
-                          onPress={handleOpenSupportModalModal}
-                          startContent={<SupportIcon />}
-                        >
-                          {t("helpFeedback")}
-                        </DropdownItem>
-                        <DropdownItem
-                          key="logout"
-                          className="text-danger"
-                          color="danger"
-                          onPress={() => {
-                            logout();
-                            window.location.href = '/';
-                          }}
-                          startContent={<LogoutIcon />}
-                          showDivider
-                        >{t("logout")}</DropdownItem>
-                        <DropdownItem key="legal" isReadOnly style={{ cursor: "default", backgroundColor: "transparent" }}>
-                          <span className="flex justify-between space-x-2 text-gray-500 text-xs">
-                            <a href={`${siteConfig.links.privacy}`} target="_blank" rel="noreferrer" className="hover:underline">
-                              {t("Privacy Policy")}{" "}
-                              <ArrowOutward
-                                width="1rem"
-                                className="fill-gray-500 dark:fill-gray-500"
-                              />
-                            </a>
-                            <span>|</span>
-                            <a href={`${siteConfig.links.terms}`} target="_blank" rel="noreferrer" className="hover:underline">
-                              {t("Terms of Service")}{" "}
-                              <ArrowOutward
-                                width="1rem"
-                                className="fill-gray-500 dark:fill-gray-500"
-                              />
-                            </a>
-                          </span>
-                        </DropdownItem>
-                      </DropdownMenu>
-                    </Dropdown>
-                  ) : (
-                    <MenuButtonWithIcon
-                      title="login"
-                      icon={<LoginIcon />}
-                      href={siteConfig.links.login}
-                      isExpanded={isSidebarOpen || isHovered}
+            {/* Bottom Navigation */}
+            {bottomMenuItems.length > 0 && (
+              <div className="pt-2 pb-4 px-2 w-full">
+                <Tabs
+                  isVertical={true}
+                  variant="light"
+                  color="primary"
+                  className="w-full"
+                  classNames={{
+                    base: "w-full flex",
+                    tabList: "gap-1 w-full flex-col bg-transparent p-0",
+                    cursor: "w-full shadow-md bg-primary rounded-lg",
+                    tab: "w-full h-12 px-0 data-[hover-unselected=true]:opacity-80",
+                    tabContent: `w-full group-data-[selected=true]:text-primary-foreground text-black dark:text-white font-light`
+                  }}
+                >
+                  {bottomMenuItems.map((item) => (
+                    <Tab
+                      key={item.id}
+                      title={
+                        <Tooltip content={item.label} placement="right">
+                          <div className="flex items-center justify-center w-full">
+                            <item.icon className="w-5 h-5 pointer-events-none flex-shrink-0" />
+                          </div>
+                        </Tooltip>
+                      }
                     />
-                  ))
-              }
-            </div>
+                  ))}
+                </Tabs>
+              </div>
+            )}
           </div>
-        </div>
-      </aside >
-
-      <SettingstModal isOpen={settingsModal.isOpen} onOpenChange={settingsModal.onOpenChange} />
-      <SupportModal isOpen={supportModal.isOpen} onOpenChange={supportModal.onOpenChange} />
+        </aside >
+      </div>
+      <div className="hidden md:block " />
     </>
   )
 }

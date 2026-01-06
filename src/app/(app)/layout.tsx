@@ -64,14 +64,13 @@ export default async function RootLayout({
           `}
         </Script>
         <NextIntlClientProvider messages={messages}>
-          <Providers themeProps={{
-            attribute: "class",
-            defaultTheme: "light",
-            forcedTheme: "light"
-          }}>
-            <SideBarWrapper>
-              <main className="hidden-scrollbar">{children}</main>
-            </SideBarWrapper>
+          <Providers
+            themeProps={{
+              attribute: "class",
+              defaultTheme: "light",
+              forcedTheme: "light"
+            }}>
+            <main className="hidden-scrollbar">{children}</main>
           </Providers>
         </NextIntlClientProvider>
       </body>

@@ -6,6 +6,127 @@ import { generateVerificationEmailHTML, generateVerificationEmailSubject } from 
 
 export const Users: CollectionConfig = {
   slug: 'users',
+  hooks: {
+    beforeDelete: [
+      async ({ req, id }) => {
+        // Delete all related records before deleting the user
+        const collections = [
+          'journal-entries',
+          'mood-logs',
+          'messages',
+          'notifications',
+          'comments',
+          'posts',
+        ]
+
+        for (const collection of collections) {
+          try {
+            // Find all records for this user
+            const results = await req.payload.find({
+              collection: collection as any,
+              where: {
+                author: {
+                  equals: id,
+                },
+              },
+              limit: 1000,
+            })
+
+            // Delete each record
+            if (results.docs.length > 0) {
+              await Promise.all(
+                results.docs.map(doc =>
+                  req.payload.delete({
+                    collection: collection as any,
+                    id: doc.id,
+                  })
+                )
+              )
+            }
+          } catch (error) {
+            // Log error but continue with other collections
+            console.error(`Error deleting ${collection} for user ${id}:`, error)
+          }
+        }
+
+        // Delete profile pictures
+        try {
+          const profilePics = await req.payload.find({
+            collection: 'profile-pictures',
+            where: {
+              user: {
+                equals: id,
+              },
+            },
+            limit: 100,
+          })
+
+          if (profilePics.docs.length > 0) {
+            await Promise.all(
+              profilePics.docs.map(doc =>
+                req.payload.delete({
+                  collection: 'profile-pictures',
+                  id: doc.id,
+                })
+              )
+            )
+          }
+        } catch (error) {
+          console.error(`Error deleting profile pictures for user ${id}:`, error)
+        }
+
+        // Remove user from circles
+        try {
+          const circles = await req.payload.find({
+            collection: 'circles',
+            where: {
+              or: [
+                {
+                  createdBy: {
+                    equals: id,
+                  },
+                },
+                {
+                  members: {
+                    contains: id,
+                  },
+                },
+              ],
+            },
+            limit: 100,
+          })
+
+          if (circles.docs.length > 0) {
+            await Promise.all(
+              circles.docs.map(async (circle) => {
+                // If user is the owner, delete the circle
+                if ((circle.owner as any)?.id === id || (circle.owner as any) === id) {
+                  await req.payload.delete({
+                    collection: 'circles',
+                    id: circle.id,
+                  })
+                } else {
+                  // Otherwise, just remove them from members
+                  const updatedMembers = (circle.members as any[]).filter(
+                    (member) => member !== id && member?.id !== id
+                  )
+                  await req.payload.update({
+                    collection: 'circles',
+                    id: circle.id,
+                    data: {
+                      members: updatedMembers,
+                    },
+                  })
+                }
+              })
+            )
+          }
+        } catch (error) {
+          console.error(`Error handling circles for user ${id}:`, error)
+        }
+      },
+    ],
+  },
   auth: {
     tokenExpiration: 259200, // 3 days (72 hours)
     // verify: {
