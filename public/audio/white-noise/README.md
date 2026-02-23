@@ -2,14 +2,14 @@
 
 Place your audio files in this folder with the following names:
 
-| File Name      | Description                    | Recommended Format |
-|----------------|--------------------------------|--------------------|
-| `rain.mp3`     | Rain sounds                    | MP3 or WAV         |
-| `ocean.mp3`    | Ocean waves                    | MP3 or WAV         |
-| `forest.mp3`   | Forest ambience (birds, etc.)  | MP3 or WAV         |
-| `wind.mp3`     | Wind sounds                    | MP3 or WAV         |
-| `fireplace.mp3`| Crackling fireplace            | MP3 or WAV         |
-| `cafe.mp3`     | Café background ambience       | MP3 or WAV         |
+| File Name       | Description                   | Recommended Format |
+| --------------- | ----------------------------- | ------------------ |
+| `rain.mp3`      | Rain sounds                   | MP3 or WAV         |
+| `ocean.mp3`     | Ocean waves                   | MP3 or WAV         |
+| `forest.mp3`    | Forest ambience (birds, etc.) | MP3 or WAV         |
+| `wind.mp3`      | Wind sounds                   | MP3 or WAV         |
+| `fireplace.mp3` | Crackling fireplace           | MP3 or WAV         |
+| `cafe.mp3`      | Café background ambience      | MP3 or WAV         |
 
 ## Recommended Sources for Royalty-Free Audio
 
@@ -21,26 +21,31 @@ Place your audio files in this folder with the following names:
 ## Audio Format Guide
 
 ### Supported Formats
+
 - ✅ **MP3** - Best choice (small size, universal support)
 - ✅ **WAV** - Works but larger files (10-20x bigger than MP3)
 - ✅ **OGG** - Good alternative, but less universal support
 
 ### Format Comparison
+
 | Format | File Size | Quality | Browser Support | Recommendation |
-|--------|-----------|---------|-----------------|----------------|
-| MP3    | Small     | Good    | Excellent       | ⭐ Recommended  |
+| ------ | --------- | ------- | --------------- | -------------- |
+| MP3    | Small     | Good    | Excellent       | ⭐ Recommended |
 | WAV    | Large     | Best    | Excellent       | Convert to MP3 |
 | OGG    | Small     | Good    | Good            | Alternative    |
 
 ### Converting WAV to MP3
 
 **Online Tools (Free, No Installation):**
+
 - [CloudConvert](https://cloudconvert.com/wav-to-mp3) - Easy, fast
 - [Online-Convert](https://audio.online-convert.com/convert-to-mp3)
 - [FreeConvert](https://www.freeconvert.com/wav-to-mp3)
 
 **Desktop Software:**
+
 - **Audacity** (Free, Open Source)
+
   1. Download from [audacityteam.org](https://www.audacityteam.org/)
   2. Open WAV file
   3. File → Export → Export as MP3
@@ -76,6 +81,7 @@ To add more sound options:
 3. Add an appropriate icon from lucide-react
 
 Example:
+
 ```typescript
 {
     id: 'thunder',
