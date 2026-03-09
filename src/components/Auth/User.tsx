@@ -1,5 +1,5 @@
 "use client"
-import { useAuth } from "@/providers/AuthProvider";
+import { useAuth } from '@/providers/auth';
 
 // Re-export useAuth as useUser for backward compatibility
 const useUser = () => {

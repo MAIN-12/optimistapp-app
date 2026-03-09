@@ -13,7 +13,7 @@ import {
 import { CheckCircle2, XCircle, Mail } from 'lucide-react';
 
 import AppLogoExpanded from '@/components/logo/AppLogoExpanded';
-import { useAuth } from '@/providers/AuthProvider';
+import { useAuth } from '@/providers/auth';
 
 function VerifyEmailContent() {
   const router = useRouter();

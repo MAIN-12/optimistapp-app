@@ -1,6 +1,6 @@
 'use client';
 
-import { useUser } from '@/providers/AuthProvider';
+import { useUser } from '@/providers/auth';
 import { Skeleton } from "@heroui/react";
 
 

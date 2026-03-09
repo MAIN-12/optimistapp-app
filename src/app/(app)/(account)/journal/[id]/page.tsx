@@ -1,7 +1,7 @@
 import { JournalEntryView } from '@/components/journal';
 import configPromise from '@payload-config';
 import { getPayload } from 'payload';
-import { getMeUser } from '@/utilities/getMeUser';
+import { getCurrentUser } from '@/providers/auth/server';
 import { notFound, redirect } from 'next/navigation';
 
 async function getJournalEntry(entryId: string) {
@@ -26,7 +26,7 @@ export default async function JournalEntryPage({
 }) {
   const { id } = await params;
   
-  const { user } = await getMeUser({
+  const { user } = await getCurrentUser({
     nullUserRedirect: '/login?redirect=/journal',
   });
 

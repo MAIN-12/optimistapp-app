@@ -4,7 +4,7 @@ import { useTranslations } from "next-intl";
 import Loading from "./loading";
 
 import { redirect } from "next/navigation"
-import { useUser } from '@/providers/AuthProvider';
+import { useUser } from '@/providers/auth';
 
 export default function Home() {
   const t = useTranslations("HomePage");

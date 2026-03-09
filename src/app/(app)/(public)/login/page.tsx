@@ -14,7 +14,7 @@ import {
 } from "@heroui/react";
 import { EyeIcon, EyeOffIcon, Mail, Lock } from 'lucide-react';
 
-import { useAuth } from '@/providers/AuthProvider';
+import { useAuth } from '@/providers/auth';
 import AppLogoExpanded from '@/components/logo/AppLogoExpanded';
 
 export default function LoginPage() {

@@ -6,7 +6,7 @@ import * as React from "react";
 import { HeroUIProvider, ToastProvider } from '@heroui/react'
 import { useRouter } from "next/navigation";
 import { ThemeProvider as NextThemesProvider } from "next-themes";
-import { AuthProvider } from "@/providers/AuthProvider";
+import { AuthProvider } from '@/providers/auth';
 import { OnboardingProvider } from "@/providers/OnboardingProvider";
 import { SupportModalProvider } from "@/components/feedback/FeedBackProvider";
 import { OnboardingModal } from "@/components/onboarding";

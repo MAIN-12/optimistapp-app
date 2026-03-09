@@ -2,7 +2,7 @@ import { getPayload } from 'payload'
 import config from '@payload-config'
 import { Circles } from '@/components/circles'
 import type { Circle, Category } from '@/payload-types'
-import { getMeUser } from '@/utilities/getMeUser'
+import { getCurrentUser } from '@/providers/auth/server'
 
 async function getCircles() {
   const payload = await getPayload({ config })
@@ -28,7 +28,7 @@ async function getCategories() {
 }
 
 export default async function Page() {
-  const { user } = await getMeUser()
+  const { user } = await getCurrentUser()
   const circles = await getCircles()
   const categories = await getCategories()
 

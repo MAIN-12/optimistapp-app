@@ -1,7 +1,7 @@
 import { JournalEntryForm } from '@/components/journal';
 import configPromise from '@payload-config';
 import { getPayload } from 'payload';
-import { getMeUser } from '@/utilities/getMeUser';
+import { getCurrentUser } from '@/providers/auth/server';
 
 async function getPromptById(promptId: string) {
   const payload = await getPayload({ config: configPromise });
@@ -21,7 +21,7 @@ export default async function NewJournalEntryPage({
 }) {
   const resolvedSearchParams = await searchParams;
   
-  const { user } = await getMeUser({
+  const { user } = await getCurrentUser({
     nullUserRedirect: '/login?redirect=/journal/new',
   });
 

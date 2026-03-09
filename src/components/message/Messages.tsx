@@ -2,7 +2,7 @@
 
 import { Heart, Star, Share2, Trash2, MoreHorizontal } from 'lucide-react';
 import { Avatar, Spinner, Dropdown, DropdownTrigger, DropdownMenu, DropdownItem, Button } from '@heroui/react';
-import { useAuth } from '@/providers/AuthProvider';
+import { useAuth } from '@/providers/auth';
 import { Message, User } from '@/payload-types';
 import { useMessages } from './MessageContext';
 

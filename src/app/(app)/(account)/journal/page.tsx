@@ -3,7 +3,7 @@ import { JournalPromptCard } from '@/components/journal';
 import { NewEntryButton } from '@/components/journal';
 import configPromise from '@payload-config';
 import { getPayload } from 'payload';
-import { getMeUser } from '@/utilities/getMeUser';
+import { getCurrentUser } from '@/providers/auth/server';
 
 async function getJournalPrompts() {
   const payload = await getPayload({ config: configPromise });
@@ -40,7 +40,7 @@ async function getJournalEntries(userId: string) {
 }
 
 export default async function JournalPage() {
-  const { user } = await getMeUser({
+  const { user } = await getCurrentUser({
     nullUserRedirect: '/login?redirect=/journal',
   });
 

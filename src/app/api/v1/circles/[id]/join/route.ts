@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { getPayload } from 'payload'
 import config from '@payload-config'
-import { getMeUser } from '@/utilities/getMeUser'
+import { getCurrentUser } from '@/providers/auth/server'
 
 export async function POST(
   request: NextRequest,
@@ -9,7 +9,7 @@ export async function POST(
 ) {
   try {
     const { id } = await params
-    const { user } = await getMeUser()
+    const { user } = await getCurrentUser()
 
     if (!user) {
       return NextResponse.json({ message: 'Unauthorized' }, { status: 401 })

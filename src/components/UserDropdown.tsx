@@ -2,7 +2,7 @@
 
 import { User, Settings, LogOut, LogOutIcon, SettingsIcon, BookOpen } from 'lucide-react';
 import { useRouter } from 'next/navigation';
-import { useAuth } from "@/providers/AuthProvider";
+import { useAuth } from '@/providers/auth';
 import {
     Dropdown, DropdownTrigger, DropdownMenu,
     DropdownItem, Skeleton, Tooltip,

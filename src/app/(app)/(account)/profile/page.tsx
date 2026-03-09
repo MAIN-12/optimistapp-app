@@ -1,6 +1,6 @@
 'use client';
 
-import { useAuth } from '@/providers/AuthProvider';
+import { useAuth } from '@/providers/auth';
 import {
   Button,
   Card,
@@ -667,58 +667,6 @@ export default function ProfilePage() {
         </CardBody>
       </Card>
 
-      {/* Quick Actions */}
-      <Card>
-        <CardHeader>
-          <h2 className="text-lg font-semibold">Quick Actions</h2>
-        </CardHeader>
-        <CardBody className="pt-0">
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            <Button
-              color="primary"
-              variant="flat"
-              size="lg"
-              className="justify-start"
-              as={Link}
-              href="/send-vives"
-            >
-              <PlusIcon className="w-4 h-4" />
-              Send Positive Vibes
-            </Button>
-            <Button
-              color="success"
-              variant="flat"
-              size="lg"
-              className="justify-start"
-              as={Link}
-              href="/favorites"
-            >
-              View Favorites
-            </Button>
-            <Button
-              color="warning"
-              variant="flat"
-              size="lg"
-              className="justify-start"
-              as={Link}
-              href="/circles"
-            >
-              Join Circles
-            </Button>
-            <Button
-              color="secondary"
-              variant="flat"
-              size="lg"
-              className="justify-start"
-              as={Link}
-              href="/messages"
-            >
-              Browse Messages
-            </Button>
-          </div>
-        </CardBody>
-      </Card>
-
       {/* Settings & Preferences */}
       <Card>
         <CardHeader>
@@ -810,19 +758,7 @@ function ProfileSkeleton() {
         </CardBody>
       </Card>
 
-      {/* Quick Actions Skeleton */}
-      <Card>
-        <CardHeader>
-          <Skeleton className="h-5 w-32" />
-        </CardHeader>
-        <CardBody className="pt-0">
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            {[...Array(4)].map((_, i) => (
-              <Skeleton key={i} className="h-12 w-full" />
-            ))}
-          </div>
-        </CardBody>
-      </Card>
+
     </div>
   );
 }

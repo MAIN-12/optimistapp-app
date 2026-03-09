@@ -1,8 +1,8 @@
 import { getPayload } from 'payload'
 import config from '@payload-config'
 import { CircleDetail } from '@/components/circles'
-import { getMeUser } from '@/utilities/getMeUser'
 import { notFound } from 'next/navigation'
+import { getCurrentUser } from '@/providers/auth/server'
 
 async function getCircle(id: string) {
   const payload = await getPayload({ config })
@@ -22,8 +22,7 @@ async function getCircle(id: string) {
 
 export default async function Page({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
-  const { user } = await getMeUser()
-  const circle = await getCircle(id)
+  const [{ user }, circle] = await Promise.all([getCurrentUser(), getCircle(id)])
 
   if (!circle) {
     notFound()

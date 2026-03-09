@@ -4,7 +4,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { Send } from 'lucide-react';
 import { Select, SelectItem, Button, Avatar } from '@heroui/react';
-import { useAuth } from '@/providers/AuthProvider';
+import { useAuth } from '@/providers/auth';
 import { useMessages } from './MessageContext';
 
 const messageTypes = [
