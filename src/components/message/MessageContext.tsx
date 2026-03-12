@@ -1,6 +1,6 @@
 'use client';
 
-import React, { createContext, useContext, useState, useCallback } from 'react';
+import React, { createContext, useContext, useState, useCallback, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/providers/auth';
 import { Message } from '@/payload-types';
@@ -29,6 +29,11 @@ export function MessageProvider({ children, initialMessages = [] }: MessageProvi
   const [messages, setMessages] = useState<Message[]>(initialMessages);
   const [isLoading] = useState(false);
   const [error] = useState<string | null>(null);
+
+  // Sync messages state when initialMessages prop changes (e.g., after router.refresh())
+  useEffect(() => {
+    setMessages(initialMessages);
+  }, [initialMessages]);
 
   // Trigger a server-side refresh
   const refreshMessages = useCallback(() => {
