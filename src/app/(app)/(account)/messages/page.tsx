@@ -3,6 +3,10 @@ import configPromise from '@payload-config';
 import { DailyMessage, Messages, NewMessage, MessageProvider } from '@/components/message';
 import { Message } from '@/payload-types';
 
+// Force dynamic rendering to ensure fresh data on each request
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 async function getMessages(): Promise<Message[]> {
   const payload = await getPayload({ config: configPromise });
   
